@@ -19,6 +19,12 @@ Descarga la aplicación en https://github.com/joseortega/finance/downloads, vas 
 tar zxpf finance.tar.gz
 rm finance.tar.gz
 ```
+Con git:
+
+```
+git clone git@github.com:joseortega/finance.git
+```
+
 Para saber que tu configuración de PHP cumple con los requisitos necesarios ejecuta el script que viene con la aplicación desde la línea de comandos:
 
 ```
