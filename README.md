@@ -4,11 +4,12 @@ Finance es una aplicación totalmente funcional para instituciones financieras, 
 
 Requerimientos
 
-Configure los siguientes apartados antes ejecutar la aplicación.
-  PHP server (Apache 2.x o superior).
-  PHP 5.3 o superior.
-  Mysql server 5.1 o superior
-  Symfony 1.4.
+Configure los siguientes apartados antes ejecutar la aplicación:
+
+* PHP server (Apache 2.x o superior).
+* PHP 5.3 o superior.
+* Mysql server 5.1 o superior
+* Symfony 1.4.
 
 INSTALACIÓN
 
