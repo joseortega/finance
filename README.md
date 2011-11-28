@@ -13,11 +13,11 @@ Configure los siguientes apartados antes ejecutar la aplicación:
 
 INSTALACIÓN
 
-Descarga la aplicación en https://github.com/joseortega/finance/downloads, vas a encontrar el archivo en formato.tgz o en formato.zip. Descarga el archivo y colocarlo bajo el directorio /home y descomprímelo: 
+Descarga la aplicación en https://github.com/joseortega/finance/downloads, vas a encontrar el archivo en formato.tar.gz o en formato.zip. Descarga el archivo y colocarlo bajo el directorio /home y descomprímelo: 
 
 ```
-tar zxpf finance.tgz
-rm finance.tgz
+tar zxpf finance.tar.gz
+rm finance.tar.gz
 ```
 Para saber que tu configuración de PHP cumple con los requisitos necesarios ejecuta el script que viene con la aplicación desde la línea de comandos:
 
