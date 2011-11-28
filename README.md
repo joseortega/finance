@@ -1,4 +1,4 @@
-QUE ES FINANCE?
+Que es finance?
 ===============
 
 Finance es una aplicación totalmente funcional para instituciones financieras, específicamente para cooperativas de ahorro y crédito, incluye un sin número de funcionalidades para el manejos de socios, cuentas, inversiones y créditos.
@@ -13,7 +13,7 @@ Configure los siguientes apartados antes ejecutar la aplicación:
 * Mysql server 5.1 o superior
 * Symfony 1.4.
 
-INSTALACIÓN
+Instalación
 -----------
 
 ```
