@@ -35,7 +35,6 @@ Crea una base de datos:
 ```
 mysqladmin -uroot -p create finance
 Enter password: mYsEcret ## La clave se mostrará como ********
-
 ```
 Ahora configure la base de datos para el proyecto:
 
@@ -71,14 +70,14 @@ Alias /sf /home/finance/lib/vendor/symfony/data/web/sf
 Ejecutar los siguientes comandos:
 
 ```
-  php symfony propel:insert-sql
-  php symfony propel:data-load
-  php symfony plugin:publish-assets 
+php symfony propel:insert-sql
+php symfony propel:data-load
+php symfony plugin:publish-assets 
 ```
 Otorgar permisos para el directorio finance/data
 
 ```
-  sudo chmod -R 2775 /home/finance/data
-  sudo chgrp -R www-data /home/finance/data
+sudo chmod -R 2775 /home/finance/data
+sudo chgrp -R www-data /home/finance/data
 ```
 Reinicia Apache, y comprueba que ahora tienes acceso a la aplicación abriendo un navegador y escribiendo http://localhost:8080/index.php/ e ingresar a la aplicación, con nombre de usuario admin y tu contraseña secret.
