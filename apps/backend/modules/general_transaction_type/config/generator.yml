@@ -1,0 +1,41 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           TransactionType
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              transactionType
+    plural:                transactionTypes
+    route_prefix:          general_transaction_type
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: General Transaction Types
+        peer_count_method: doCountGeneral
+        peer_method: doSelectGeneral
+        display: [=concept, nature, created_at]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  
+        display: [concept, nature, created_at]
+      form:    
+        class: GeneralTransactionTypeForm
+      edit:    
+        title: Editing Transaction Type
+        actions:
+          _delete: ~
+          _save: {label: Save}
+          _list: ~
+      new:   
+        title: New Transaction Type
+        actions:
+          _save: {label: Save}
+          _list: ~

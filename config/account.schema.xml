@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.account">
+  
+    <table name="account_product">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="name" type="varchar" size="60" required="true" phpType="string"/>
+        <column name="capitalization_frequency" type="varchar" size="30" required="true" default="monthly"/>
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="account_product_interest_rate">
+        <column name="product_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="account_product" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="rate_unique_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="rate_unique" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="rate_unique_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+    <table name="account">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="product_id" type="bigint" required="true" />
+        <foreign-key foreignTable="account_product" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="number" type="bigint" required="true" />
+        <unique>
+            <unique-column name="number"/>
+        </unique>
+        <column name="balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="blocked_balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="available_balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="last_capitalization" type="date" required="false"/>
+        <column name="next_capitalization" type="date" required="false"/>
+        <column name="is_active" type="boolean" required="true" default="1" />
+        <behavior name="timestampable"/>
+    </table>
+    
+    <table name="balance_blocked_detail">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="account_id" type="bigint" required="true"/>
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="reason_block_id" type="bigint" required="true"/>
+        <foreign-key foreignTable="reason_block" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="reason_block_id" foreign="id" />
+        </foreign-key>
+        <column name="amount" type="decimal" size="18" scale="2" required="true"/>
+        <column name="blocked_at" type="timestamp" required="true" />
+        <column name="unblock_at" type="timestamp" required="false" />
+    </table>
+    
+    <table name="reason_block">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="description" type="varchar" size="60" required="true" />
+        <unique>
+            <unique-column name="description"/>
+        </unique>
+    </table>
+
+    <table name="bankbook">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="account_id" type="bigint" required="true"/>
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="is_active" type="boolean" required="true" default="1" />
+        <column name="was_printed_header" type="boolean" required="true" default="0" />
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="print_row" type="integer" required="true" defaul="0"/>      
+    </table>
+
+    <table name="account_product_transaction_type">
+        <column name="product_id" type="bigint" primaryKey="true" required="true"/>
+        <foreign-key foreignTable="account_product" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="transaction_type_id" type="bigint" primaryKey="true" required="true"/>
+        <foreign-key foreignTable="transaction_type" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="transaction_type_id" foreign="id" />
+        </foreign-key>
+    </table>
+    
+    <table name="account_transaction">
+        <column name="id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="id" foreign="id" />
+        </foreign-key>
+        <column name="account_id" type="bigint" required="true" />
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="bankbook_id" type="bigint" required="false" />
+        <foreign-key foreignTable="bankbook" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="bankbook_id" foreign="id" />
+        </foreign-key>
+        <column name="account_balance" type="decimal" size="18" scale="2" required="true" />
+    </table>
+    
+</database>

@@ -1,0 +1,33 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           InvestmentProduct
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              product
+    plural:                product
+    route_prefix:          investment_product
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Investment Products
+        display: [=name, tax_rate, created_at]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+      filter:  
+        display: [name, created_at]
+      form:    ~
+      edit:    
+        actions:
+          _save: {label: Save}
+          _list: ~
+      new:     
+        actions:
+          _save: {label: Save}
+          _list: ~

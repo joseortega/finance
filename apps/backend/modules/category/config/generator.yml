@@ -1,0 +1,31 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Category
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              category
+    plural:                categories
+    route_prefix:          category
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Categories
+        display: [=name]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     
+        actions:
+          _save: ~
+          _list: ~

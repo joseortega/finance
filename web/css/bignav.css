@@ -1,0 +1,57 @@
+/* 
+    Document   : bignav
+    Created on : 09/10/2011, 06:48:41 AM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+ul.bignav 
+{
+  margin: 0 0 -5px 0;
+}
+
+ul.bignav li 
+{
+  list-style-type: none;
+  margin: 0 0 5px 0;
+}
+
+ul.bignav li a 
+{
+  display: block;
+  padding: 8px 10px;
+  font-size: 14px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+ul.bignav li a:hover
+{
+  text-decoration: none;
+  background: #eee;
+}
+
+ul.bignav li a.selected 
+{
+  color: white;
+  background: #4183C4;
+}
+ul.bignav li a .count 
+{
+  float: right;
+  font-weight: bold;
+  color: #777;
+}
+
+ul.bignav li a.selected .count 
+{
+  color: white;
+}
+

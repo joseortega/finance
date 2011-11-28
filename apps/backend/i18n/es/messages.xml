@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : messages.xml
+    Created on : 1 de septiembre de 2010, 12:12 PM
+    Author     : claudio
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="es_EC" datatype="plaintext" original="messages" date="2010-09-13T18:52:48Z" product-name="messages">
+    <header/>
+    <body>
+       <!-- common Actions -->
+      <trans-unit>
+        <source>New</source>
+        <target>Nuevo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete</source>
+        <target>Eliminar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save</source>
+        <target>Guardar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create</source>
+        <target>Crear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update</source>
+        <target>Actualizar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save and add</source>
+        <target>Guardar y crear otro</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Show</source>
+        <target>Mostrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Are you sure?</source>
+        <target>¿Está seguro?</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cancel</source>
+        <target>Cancelar</target>
+      </trans-unit>      
+      <trans-unit>
+        <source>Choose an action</source>
+        <target>Seleccione una acción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>go</source>
+        <target>ok</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back to list</source>
+        <target>Listar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List</source>
+        <target>Listar</target>
+      </trans-unit>
+      
+       <!-- common Filters -->
+      <trans-unit>
+        <source>Reset</source>
+        <target>Restablecer</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Filter</source>
+        <target>Filtrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Filters</source>
+        <target>Filtrar</target>
+      </trans-unit>
+
+      <!-- common List -->
+      <trans-unit>
+        <source>No result</source>
+        <target>Sin resultados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>(page %%page%%/%%nb_pages%%)</source>
+        <target>(página %%page%%/%%nb_pages%%)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>asc</source>
+        <target>asc</target>
+      </trans-unit>
+      <trans-unit>
+        <source>desc</source>
+        <target>desc</target>
+      </trans-unit>
+      <trans-unit>
+        <source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+        <target>[0] sin resultados|[1] 1 resultado|(1,+Inf] %1% resultados</target>
+      </trans-unit>
+      
+      <!-- common Pagination -->
+      <trans-unit>
+        <source>First page</source>
+        <target>Primera página</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Previous page</source>
+        <target>Página anterior</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Next page</source>
+        <target>Página siguiente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Last page</source>
+        <target>Última página</target>
+      </trans-unit>
+
+      <!-- common Form -->
+      <trans-unit>
+        <source>The item was created successfully.</source>
+        <target>El elemento se ha creado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was updated successfully.</source>
+        <target>El elemento se ha actualizado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was created successfully. You can add another one below.</source>
+        <target>El elemento se ha creado correctamente y ahora puede crear otro elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was updated successfully. You can add another one below.</source>
+        <target>El elemento se ha actualizado correctamente y ahora puede crear otro elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item has not been saved due to some errors.</source>
+        <target>El elemento no se ha guardado porque se ha producido algún error.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was deleted successfully.</source>
+        <target>El elemento se ha borrado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The form submission cannot be processed. It probably means that you have uploaded a file that is too big.]]></source>
+        <target><![CDATA[El formulario no puede ser procesado. Problamente significa que ha cargado un archivo muy grande.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Unexpected extra form field named "%field%".]]></source>
+        <target><![CDATA[Campo extra no esperado "%field%".]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[CSRF attack detected.]]></source>
+        <target><![CDATA[Ataque CSRF detectado.]]></target>
+      </trans-unit>
+      
+      <!-- Batch Actions-->
+      <trans-unit>
+        <source>You must at least select one item.</source>
+        <target>Debe seleccionar al menos un elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You must select an action to execute on the selected items.</source>
+        <target>Seleccione la acción que quiera ejecutar sobre los elementos seleccionados.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A problem occurs when deleting the selected items as some items do not exist anymore.</source>
+        <target>Se ha producido un error al borrar los elementos seleccionados porque al menos uno de ellos ya no existe.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The selected items have been deleted successfully.</source>
+        <target>Los elementos seleccionados se han borrado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A problem occurs when deleting the selected items.</source>
+        <target>Se ha producido un error al borrar los elementos seleccionados.</target>
+      </trans-unit>
+      
+      <!-- Dates -->
+      <trans-unit>
+        <source><![CDATA[from %from_date% to %to_date%]]></source>
+        <target><![CDATA[de %from_date% a %to_date%]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[from %from_date%<br />to %to_date%]]></source>
+        <target><![CDATA[de %from_date%<br />a %to_date%]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" does not match the date format (%date_format%).]]></source>
+        <target><![CDATA["%value%" no coincide con el formato (%date_format%).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The date must be before %max%.]]></source>
+        <target><![CDATA[La fecha debe ser anterior a %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The date must be after %min%.]]></source>
+        <target><![CDATA[La fecha debe ser posterior a %min%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The begin date must be before the end date.]]></source>
+        <target><![CDATA[La fecha de inicio debe ser anterior a la fecha de finalización.]]></target>
+      </trans-unit>
+      
+      <!-- Files -->
+      <trans-unit>
+        <source><![CDATA[File is too large (maximum is %max_size% bytes).]]></source>
+        <target><![CDATA[El archivo es muy grande (máximo %max_size% bytes).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Invalid mime type (%mime_type%).]]></source>
+        <target><![CDATA[Tipo MIME inválido (%mime_type%).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The uploaded file was only partially uploaded.]]></source>
+        <target><![CDATA[Al archivo sólo se cargó parcialmente.]]></target>
+      </trans-unit>      
+      <trans-unit>
+        <source><![CDATA[Missing a temporary folder.]]></source>
+        <target><![CDATA[Falta la carpeta temporal.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Failed to write file to disk.]]></source>
+        <target><![CDATA[No se pudo guardar el archivo.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[File upload stopped by extension.]]></source>
+        <target><![CDATA[Se ha detenido la carga del archivo.]]></target>
+      </trans-unit>
+      
+      <!-- Widgets -->
+      <trans-unit>
+        <source><![CDATA["%value%" must be at most %max%.]]></source>
+        <target><![CDATA["%value%" debe ser a lo sumo %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" must be at least %min.]]></source>
+        <target><![CDATA["%value%" debe ser por lo menos %min%.]]></target>
+      </trans-unit>     
+      <trans-unit>
+        <source><![CDATA["%value%" must be less than %max%.]]></source>
+        <target><![CDATA["%value%" debe ser menor que %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" must be greater than %min%.]]></source>
+        <target><![CDATA["%value%" debe ser más grande que %min%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Checked</source>
+        <target>Marcado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>is empty</source>
+        <target>Vacío</target>
+      </trans-unit>
+      <trans-unit>
+        <source>yes or no</source>
+        <target>si o no</target>
+      </trans-unit>
+      <trans-unit>
+        <source>yes</source>
+        <target>si</target>
+      </trans-unit>
+      <trans-unit>
+        <source>no</source>
+        <target>no</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Required.</source>
+        <target>Obligatorio.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invalid.</source>
+        <target>Inválido.</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is not an integer.]]></source>
+        <target><![CDATA["%value%" no es un entero.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is not an number.]]></source>
+        <target><![CDATA["%value%" no es un número.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[At least %min% values must be selected (%count% values selected).]]></source>
+        <target><![CDATA[Por lo menos %min% elementos deben ser seleccionados (%count% elementos seleccionados).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[At most %max% values must be selected (%count% values selected).]]></source>
+        <target><![CDATA[A lo sumo %max% elementos deben ser seleccionados (%count% elementos seleccionados).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is too long (%max_length% characters max).]]></source>
+        <target><![CDATA["%value%" es muy largo (%max_length% caracteres máximo).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is too short (%min_length% characters min).]]></source>
+        <target><![CDATA["%value%" es muy pequeño (%min_length% caracteres mínimo).]]></target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source><![CDATA["%value%" does not match the time format (%time_format%).]]></source>
+        <target><![CDATA["%value%" no coincide con el formato (%time_format%).]]></target>
+      </trans-unit>
+
+      <trans-unit>
+        <source><![CDATA[An object with the same "%column%" already exist.]]></source>
+        <target><![CDATA[Un objeto con el mismo "%column%" ya existe.]]></target>
+      </trans-unit>
+      
+      <!-- Common label -->
+      
+      <trans-unit>
+        <source>Current</source>
+        <target>Vigente</target>
+      </trans-unit>
+
+      <!-- login -->
+
+      <trans-unit>
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password</source>
+        <target>contraseña</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remember</source>
+        <target>Recordar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sign in</source>
+        <target>Iniciar sesion</target>
+      </trans-unit>
+      
+      <!-- User box -->
+
+      <trans-unit>
+        <source>Configuration</source>
+        <target>Configuración</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Help</source>
+        <target>Ayuda</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Log Out</source>
+        <target>Cerrar sessión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Welcome</source>
+        <target>Bienvenido</target>
+      </trans-unit>
+
+      <!-- User nav -->
+      
+      <trans-unit>
+        <source>Associates</source>
+        <target>Socios</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Accounts</source>
+        <target>Cuentas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credits</source>
+        <target>Créditos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investments</source>
+        <target>Inversiones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Users</source>
+        <target>Usuarios</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tasks</source>
+        <target>Tareas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Location</source>
+        <target>Localización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Go to application</source>
+        <target>Ir a la aplicación</target>
+      </trans-unit>
+      
+      <!-- common other actions -->
+      
+      <trans-unit>
+        <source>Remove</source>
+        <target>Remover</target>
+      </trans-unit>
+      
+      <!-- common helps -->
+      
+      <trans-unit>
+        <source>Mark this item to delete</source>
+        <target>Marque esta opción para eliminar</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Note</source>
+        <target>Nota</target>
+      </trans-unit>
+      
+      <!-- common labels -->
+      
+      <trans-unit>
+        <source>Id</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Created at</source>
+        <target>Creado en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Updated at</source>
+        <target>Actualizado en</target>
+      </trans-unit>  
+      <trans-unit>
+        <source>current</source>
+        <target>vigente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Current at</source>
+        <target>Vigente en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value</source>
+        <target>Valor</target>
+      </trans-unit>
+      
+      <!--Account Configuration nav -->
+         
+      <trans-unit>
+        <source>Products</source>
+        <target>Productos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transaction Types</source>
+        <target>Tipos de Transacción</target>
+      </trans-unit>
+       
+       <!--Product-->
+      
+      <trans-unit>
+        <source>Tax rate</source>
+        <target>Tasa de impuesto</target>
+      </trans-unit>
+      
+      <!--Product Manage-->
+      <trans-unit>
+        <source>Delete Product</source>
+        <target>Eliminar Producto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once you delete an product, there is no going back. Please be certain.</source>
+        <target>Una vez que se elimina un producto, no hay vuelta atrás. Por favor, asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete this Product</source>
+        <target>Eliminar este Producto</target>
+      </trans-unit>     
+      
+      <!--Product actions-->
+      
+      <trans-unit>
+        <source>Create Product</source>
+        <target>Crear Producto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update Product</source>
+        <target>Actualizar Producto</target>
+      </trans-unit>    
+      
+      <!--Product configuration-->
+      
+      <trans-unit>
+        <source>Basic Information</source>
+        <target>Información Básica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest Rates</source>
+        <target>Tasas de Interés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Product Manage</source>
+        <target>Admin Producto</target>
+      </trans-unit>
+      
+      <!--Products accounts-->
+      
+      <trans-unit>
+        <source>Account Product</source>
+        <target>Producto Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account Products</source>
+        <target>Productos Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Account Product</source>
+        <target>Nuevo Producto Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Use bankbook</source>
+        <target>Usa libreta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest payment</source>
+        <target>Pago de intereses</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capitalization frequency</source>
+        <target>Frecuencia de Capitalización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Daily</source>
+        <target>Diario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Monthly</source>
+        <target>Mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Quarterly</source>
+        <target>Trimestral</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Biyearly</source>
+        <target>Semestral</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Yearly</source>
+        <target>Anual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Support for the calculation of interest daily on the balance the end day.</source>
+        <target>Soporte para el cálculo de intereses diario sobre el saldo final del día.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Last interest payment</source>
+        <target>Último pago de intereses</target>
+      </trans-unit>
+      
+      <!--Products Credit-->
+      
+      <trans-unit>
+        <source>Credit Product</source>
+        <target>Producto Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Products</source>
+        <target>Productos Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Credit Product</source>
+        <target>Nuevo Producto Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Maximum time months</source>
+        <target>Plazo máximo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amortization type</source>
+        <target>Tipo de amortización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>French</source>
+        <target>Francés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>German</source>
+        <target>Alemán</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Grace days</source>
+        <target>Dias de gracia</target>
+      </trans-unit>
+      
+      <!--Product Credit configuration-->
+      
+      <trans-unit>
+        <source>Rates Applied to Credit</source>
+        <target>Tasas Aplicado a Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Rates Applied to Arrear</source>
+        <target>Tasas Aplicado a Mora</target>
+      </trans-unit>
+      
+      
+      <!--Products Investment-->
+      
+      <trans-unit>
+        <source>Investment Product</source>
+        <target>Producto Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investment Products</source>
+        <target>Productos Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Investment Product</source>
+        <target>Nuevo Producto Inversión</target>
+      </trans-unit>
+      
+      <!--Transaction Types-->
+      
+      <trans-unit>
+        <source>Concept</source>
+        <target>Concepto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Nature</source>
+        <target>Naturaleza</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Debit</source>
+        <target>Débito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit</source>
+        <target>Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>debit</source>
+        <target>débito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>credit</source>
+        <target>crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cash balance is affect</source>
+        <target>Afecta saldo en caja</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Initials</source>
+        <target>Siglas</target>
+      </trans-unit>
+      
+      <!--Account Transaction Types nav-->
+      
+      <trans-unit>
+        <source>Account Transaction Types</source>
+        <target>Tipos de Transacción Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Custom Types</source>
+        <target>Tipos Personalizables</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Specific Types</source>
+        <target>Tipos Específicos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Transaction Type</source>
+        <target>Nuevo Tipo de Transacción</target>
+      </trans-unit>
+      
+      <!--Account Specific Transaction Types-->
+      
+      <trans-unit>
+        <source>Expiry of Investment</source>
+        <target>Vencimiento de Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transfer to Investment</source>
+        <target>Transferencia a Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Disbursement</source>
+        <target>Desembolso de Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Payment</source>
+        <target>Pago de Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest Capitalization</source>
+        <target>Capitalización de Interés</target>
+      </trans-unit>
+      
+       <!--Account product Transaction Types-->
+      
+      <trans-unit>
+        <source>Link the types of transaction to this product.</source>
+        <target>Enlace los tipos de transacciones a este producto.</target>
+      </trans-unit>
+      
+      <!--Credit Transaction Types nav-->
+      
+      <trans-unit>
+        <source>Credit Transaction Types</source>
+        <target>Tipos de Transacción Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Approval</source>
+        <target>Aprobación de Crédito</target>
+      </trans-unit>
+      
+      <!--Investment Transaction Types nav-->
+      
+      <trans-unit>
+        <source>Investment Transaction Types</source>
+        <target>Tipos de Transacción Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Debit from Account</source>
+        <target>Débito desde Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transfer to Account</source>
+        <target>Transferencia a Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Withholding Tax</source>
+        <target>Retención de Impuesto</target>
+      </trans-unit>
+
+      <!--Interest Rates-->
+      
+      <trans-unit>
+        <source>Interest Rates</source>
+        <target>Tasas de Interés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Arrear Rates</source>
+        <target>Tasas de Mora</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type</source>
+        <target>Tipo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Unique</source>
+        <target>Único</target>
+      </trans-unit>
+      <trans-unit>
+        <source>By amount</source>
+        <target>Por monto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Rate</source>
+        <target>Tasa</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Rate unique</source>
+        <target>Tasa única</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change</source>
+        <target>Cambiar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change Interest Rate</source>
+        <target>Cambio de Tasa de Interés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change Arrear Rate</source>
+        <target>Cambio de Tasa de Mora</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Rate amounts</source>
+        <target>Tasa por montos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Minimum amount</source>
+        <target>Monto mínimo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Maximum amount</source>
+        <target>Monto máximo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Detail</source>
+        <target>Detalle</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add other</source>
+        <target>Añadir Otro</target>
+      </trans-unit>
+      
+      <!--Interest Rates credit-->
+      
+      <trans-unit>
+        <source>Change Rate Applied to Credit</source>
+        <target>Cambio de Tasa Aplicado a Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change Rate Applied to Arrear</source>
+        <target>Cambio de Tasa Aplicado a Mora</target>
+      </trans-unit>    
+      
+      <!--Interest Rates investment-->
+      
+      <trans-unit>
+        <source>Rate times</source>
+        <target>Tasas por tiempo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Minimum time</source>
+        <target>Plazo mínimo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Maximum time</source>
+        <target>Plazo máximo</target>
+      </trans-unit>
+      
+      <!--Localization-->
+      
+      <trans-unit>
+        <source>Countries</source>
+        <target>Países</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Country</source>
+        <target>País</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Country</source>
+        <target>Nuevo País</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing Country "%%name%%"]]></source>
+        <target><![CDATA[Editando País "%%name%%"]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Provinces</source>
+        <target>Provincias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Province</source>
+        <target>Provincia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Province</source>
+        <target>Nueva Provincia</target>
+      </trans-unit>
+       <trans-unit>
+        <source><![CDATA[Editing Province "%%name%%"]]></source>
+        <target><![CDATA[Editando Provincia "%%name%%"]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cities</source>
+        <target>Ciudades</target>
+      </trans-unit>
+      <trans-unit>
+        <source>City</source>
+        <target>Ciudad</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New City</source>
+        <target>Nueva Ciudad</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing City "%%name%%"]]></source>
+        <target><![CDATA[Editando Ciudad "%%name%%"]]></target>
+      </trans-unit>
+      
+      <!--Agencies-->
+      
+      <trans-unit>
+        <source>Agencies</source>
+        <target>Agencias</target>
+      </trans-unit> 
+      <trans-unit>
+        <source>Agency</source>
+        <target>Agencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Agency</source>
+        <target>Nueva Agencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing Agency "%%name%%"]]></source>
+        <target><![CDATA[Editando Agencia "%%name%%"]]></target>
+      </trans-unit>
+      
+      <!--Cash-->
+      
+      <trans-unit>
+        <source>Cash</source>
+        <target>Cajas</target>
+      </trans-unit>      
+      <trans-unit>
+        <source>New Cash</source>
+        <target>Nueva Caja</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing Cash "%%name%%"]]></source>
+        <target><![CDATA[Editando Caja "%%name%%"]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Balance</source>
+        <target>Saldo</target>
+      </trans-unit>
+      
+      <!--General Transaction Types-->
+      
+      <trans-unit>
+        <source>General Transaction Types</source>
+        <target>Tipos de Transacción Generales</target>
+      </trans-unit>      
+      <trans-unit>
+        <source>New Transaction Type</source>
+        <target>Nuevo Tipo de Transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Editing Transaction Type</source>
+        <target>Editando Tipo de Transacción</target>
+      </trans-unit>
+      
+      <!--Users-->
+      
+      <trans-unit>
+        <source>Users</source>
+        <target>Usuarios</target>
+      </trans-unit> 
+      <trans-unit>
+        <source>User</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New User</source>
+        <target>Nuevo Usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing User "%%username%%"]]></source>
+        <target><![CDATA[Editando Usuario "%%username%%"]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password (again)</source>
+        <target>Contraseña (repetir)</target>
+      </trans-unit> 
+      <trans-unit>
+        <source>Is active</source>
+        <target>Está activo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Is super admin</source>
+        <target>Es super usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Permissions</source>
+        <target>Permisos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Groups</source>
+        <target>Grupos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Group</source>
+        <target>Grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Group</source>
+        <target>Nuevo Grupo</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Editing Group "%%name%%"]]></source>
+        <target><![CDATA[Editando Grupo "%%name%%"]]></target>
+      </trans-unit>
+      
+       <!--Configuration-->
+       
+      <trans-unit>
+        <source>Title report</source>
+        <target>Título para reporte</target>
+      </trans-unit>
+      
+      <!--Reason Block-->
+       
+      <trans-unit>
+        <source>Reasons Block</source>
+        <target>Motivos de Bloqueo</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Reasons Blocking of Balance</source>
+        <target>Motivos de Bloqueo de Saldo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Reason Block</source>
+        <target>Nuevo Motivo de Bloqueo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Editing Reason Block</source>
+        <target>Editando Motivo de bloqueo</target>
+      </trans-unit>
+      
+     <!--Category-->
+     
+     <trans-unit>
+        <source>Category</source>
+        <target>Categoría</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Categories</source>
+        <target>Categorías</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Category</source>
+        <target>Nuevo Categoría</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit Category</source>
+        <target>Editar Categoría</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

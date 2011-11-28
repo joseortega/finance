@@ -1,0 +1,69 @@
+/* 
+    Document   : main_nav
+    Created on : 03/07/2011, 12:07:41 PM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+ul.main_nav 
+{
+  font-size: 14px;
+}
+
+ul.main_nav li {
+  display: inline-block;
+  cursor: pointer;
+}
+
+ul.main_nav li.selected 
+{
+  font-weight: bold;
+  border-left: 1px solid #DDD;
+  border-top: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: white;
+}
+
+ul.main_nav li a 
+{
+  color: #666;
+  text-decoration: none;
+  padding: 8px 12px;
+  display: inline-block;
+  margin-bottom: -1px;
+}
+
+ul.main_nav li:first-child a 
+{
+  padding-left: 2px;
+}
+
+ul.main_nav li.selected:first-child a 
+{
+padding-left: 12px;
+}
+
+ul.main_nav li.selected a 
+{
+  color: #333;
+  background-color: white;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+

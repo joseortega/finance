@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.basic">
+    
+    <table name="configuration">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="name" type="varchar" size="30" required="true" />
+         <unique>
+            <unique-column name="name"/>
+        </unique>
+        <column name="value" type="varchar" size="60" required="true" />
+    </table>
+    
+    <table name="agency">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="name" type="varchar" size="60" required="true" />
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="cash">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="agency_id" type="bigint" required="true" />
+        <foreign-key foreignTable="agency" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="agency_id" foreign="id" />
+        </foreign-key>
+        <column name="name" type="varchar" size="60" required="true" />
+        <column name="ip_address" type="varchar" size="50" required="true" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" />
+        <column name="status" type="varchar" size="50" required="true" default="close" />
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+        <behavior name="timestampable"/>
+    </table>
+    
+    <table name="transaction_type">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="type" type="varchar" size="30" required="true" />
+        <column name="nature" type="varchar" size="30" required="true" />
+        <column name="cash_balance_is_affect" type="boolean"  required="true" default="0"/>
+        <column name="concept" type="varchar" size="30" required="true" />
+        <unique>
+            <unique-column name="concept"/>
+        </unique>
+        <unique>
+            <unique-column name="initials"/>
+        </unique>
+        <column name="initials" type="varchar" size="15" required="true" />
+        <column name="operation_type" type="varchar" size="50" required="true" default="null"/>
+        <behavior name="timestampable"/>
+    </table>
+    
+    <table name="transaction">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="cash_id" type="bigint" required="false" />
+        <foreign-key foreignTable="cash" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="cash_id" foreign="id" />
+        </foreign-key>
+        <column name="user_id" type="integer" required="true" />
+        <foreign-key foreignTable="sf_guard_user" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="User">
+            <reference local="user_id" foreign="id" />
+        </foreign-key>
+        <column name="transaction_type_id" type="bigint" required="true" />
+        <foreign-key foreignTable="transaction_type" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="transaction_type_id" foreign="id" />
+        </foreign-key>
+        <column name="type" type="varchar" size="30" required="true" default="general"/>
+        <column name="amount" type="decimal" size="18" scale="2" required="true" />
+        <column name="observation" type="longvarchar" required="false" />
+        <column name="created_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="rate_unique">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="value" type="decimal" size="8" scale="2" required="true"/>
+        <column name="created_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="rate_term">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />      
+        <column name="minimum_time" type="integer" required="true"/>
+        <column name="maximum_time" type="integer" required="true"/>
+        <column name="value" type="decimal" size="8" scale="2" required="true"/>
+        <column name="created_at" type="timestamp" required="true" />
+    </table>
+    
+</database>

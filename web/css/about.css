@@ -1,0 +1,34 @@
+/* 
+    Document   : about
+    Created on : 10/07/2011, 07:38:02 PM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#about 
+{
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+  background: #E8F0F5;
+  border: 1px solid #D2D9DE;
+  border-right-color: #E5E9ED;
+  border-bottom-color: #E5E9ED;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+#about .rule 
+{
+  width: 100%;
+  padding: 0 10px;
+  margin: 10px 0 10px -10px;
+  border-top: 1px solid #C6D5DF;
+  border-bottom: 1px solid white;
+}

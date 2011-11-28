@@ -1,0 +1,41 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           TransactionType
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              transactionType
+    plural:                transactionTypes
+    route_prefix:          transaction_type
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Account Transaction Types
+        peer_count_method: doCountAccountCustom
+        peer_method: doSelectAccountCustom
+        display: [=concept, nature, cash_balance_is_affect, initials]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions: {}
+      filter:  
+        display: [concept, nature, cash_balance_is_affect, initials]
+      form:
+        class: AccountTransactionTypeForm
+        display:
+          "Nature": [nature, cash_balance_is_affect]
+          "Content": [concept, initials]
+      edit: 
+        actions:
+          _delete: ~
+          _save: {label: Save}
+          _list: ~
+      new:     
+        actions:
+          _save: {label: Save}
+          _list: ~

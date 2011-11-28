@@ -1,0 +1,54 @@
+TransactionType:
+  deposito:
+    type: account
+    nature: credit
+    cash_balance_is_affect: 1;
+    concept: Desposito
+    initials: DEPOSITO
+    operation_type: custom
+  retiro:
+    type: account
+    nature: debit
+    cash_balance_is_affect: 1;
+    concept: Retiro
+    initials: RETIRO
+    operation_type: custom
+    
+  account_transfer_from_investment:
+    type: account
+    nature: credit
+    cash_balance_is_affect: 0;
+    concept: NC Vencimineto de inversion
+    initials: NC/VENC.PF
+    operation_type: account_transfer_from_investment
+  account_transfer_to_investment:
+    type: account
+    nature: debit
+    cash_balance_is_affect: 0;
+    concept: ND Inversion
+    initials: ND/DEP.PF
+    operation_type: account_transfer_to_investment
+    
+  account_payment_credit:
+    type: account
+    nature: debit
+    cash_balance_is_affect: 0;
+    concept: ND Pago de credito
+    initials: ND/PAGO.CR
+    operation_type: account_payment_credit
+  account_disbursement_credit:
+    type: account
+    nature: credit
+    cash_balance_is_affect: 0;
+    concept: NC Desembolso de credito
+    initials: NC/DES.CR
+    operation_type: account_disbursement_credit
+    
+  account_interest_capitalization:
+    type: account
+    nature: credit
+    cash_balance_is_affect: 0;
+    concept: NC Interes
+    initials: NC/INTERES
+    operation_type: account_interest_capitalization
+

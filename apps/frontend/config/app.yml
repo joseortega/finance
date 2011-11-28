@@ -1,0 +1,52 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  #config number offset
+  account_number_offset: 10100
+  associate_number_offset: 1010
+  
+  #i18n pdf...report
+  
+  #transaction detail en.
+  en_agency: Agency
+  en_account: Account
+  en_associate: Associate
+  en_transaction: Transaction
+  en_date: Date
+  en_amount: Amount
+  en_investment: Investment
+  en_credit: Credit
+  en_product: Product
+  en_interest_rate: Interest rate
+  en_tax_rate: Tax rate
+  en_interest: Interest
+  en_tax: Tax
+  en_final_amount: Final amount
+  en_balance: Balance
+  en_n: Nº
+  en_payment: Payment
+  en_bankbook_id: Bankbook.id
+  
+  #transaction detail es.
+  es_agency: Agencia
+  es_account: Cuenta
+  es_associate: Socio
+  es_transaction: Transacción
+  es_date: Fecha
+  es_amount: Monto
+  es_investment: Inversión
+  es_credit: Crédito
+  es_product: Producto
+  es_interest_rate: Tasa de interés
+  es_tax_rate: Tasa de impuesto
+  es_interest: Interés
+  es_tax: Impuesto
+  es_final_amount: Monto final
+  es_balance: Saldo
+  es_n: Nº
+  es_payment: Pago
+  es_bankbook_id: Lib.id
+  
+  

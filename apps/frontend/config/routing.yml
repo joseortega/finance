@@ -1,0 +1,434 @@
+
+user_update:
+  url:     /user.:sf_format
+  class:   sfPropelRoute
+  options: { model: sfGuardUser, type: object }
+  param:   { module: user, action: update, sf_format: html }
+  requirements: { sf_method: put }
+  
+user:
+  url:     /user.:sf_format
+  class:   sfPropelRoute
+  options: { model: sfGuardUser, type: object }
+  param:   { module: user, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+general_transaction:
+  class: sfPropelRouteCollection
+  options:
+    model:                Transaction
+    module:               general_transaction
+    prefix_path:          /general_transaction
+    column:               id
+    with_wildcard_routes: true
+  
+credit_payment:
+  url:     /credit/:id/credit_paymnet.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_payment, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+credit_transaction_history_show:
+  url:     /credit/:id/transaction/:transaction_id.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_transaction_history, action: show, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_transaction_history:
+  url:     /credit/:id/transaction.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_transaction_history, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_amortization:
+  url:     /credit/:id/payment_plan.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_amortization, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+account_bankbook:
+  class: sfPropelRouteCollection
+  options:
+    model:                Bankbook
+    module:               account_bankbook
+    prefix_path:          /account_bankbook
+    column:               id
+    with_wildcard_routes: true
+    
+credit_transaction:
+  class: sfPropelRouteCollection
+  options:
+    model:                CreditTransaction
+    module:               credit_transaction
+    prefix_path:          /credit_transaction
+    column:               id
+    with_wildcard_routes: true
+
+#personl guarantees
+
+credit_guarantee_real_update:
+  url:     /credit/:id/guarantee-real.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_guarantee_real, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+credit_guarantee_real_edit:
+  url:     /credit/:id/guarantee-real.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_guarantee_real, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_guarantee_personal:
+  url:     /credit/:id/guarantee_personal.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_guarantee_personal, action: index, sf_format: html }
+  requirements: { sf_method: get }
+    
+#credit_account
+
+credit_account_update:
+  url:     /credit/:id/account.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_account, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+credit_account_edit:
+  url:     /credit/:id/account.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_account, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+credit_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                CreditProduct
+    module:               credit_product
+    prefix_path:          /credit_product
+    column:               id
+    with_wildcard_routes: true
+
+credit_expired_payment:
+  url:     /credit_expired_payment.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: list }
+  param:   { module: credit_expired_payment, action: index, sf_format: html }
+  requirements: { sf_method: get }
+    
+credit:
+  class: sfPropelRouteCollection
+  options:
+    model:                Credit
+    module:               credit
+    prefix_path:          /credit
+    column:               id
+    with_wildcard_routes: true
+    
+investment_transaction_history_show:
+  url:     /investment/:id/transaction/:transaction_id.:sf_format
+  class:   sfPropelRoute
+  options: { model: Investment, type: object }
+  param:   { module: investment_transaction_history, action: show, sf_format: html }
+  requirements: { sf_method: get }
+  
+investment_transaction_history:
+  url:     /investment/:id/transaction.:sf_format
+  class:   sfPropelRoute
+  options: { model: Investment, type: object }
+  param:   { module: investment_transaction_history, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+investment_transaction:
+  class: sfPropelRouteCollection
+  options:
+    model:                Investment
+    module:               investment_transaction
+    prefix_path:          /investment_transaction
+    column:               id
+    with_wildcard_routes: true
+
+investment_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                InvestmentProduct
+    module:               investment_product
+    prefix_path:          /investment_product
+    column:               id
+    with_wildcard_routes: true
+
+investment_expired:
+  url:     /investment_expired.:sf_format
+  class:   sfPropelRoute
+  options: { model: Investment, type: list }
+  param:   { module: investment_expired, action: index, sf_format: html }
+  requirements: { sf_method: get }
+    
+investment:
+  class: sfPropelRouteCollection
+  options:
+    model:                Investment
+    module:               investment
+    prefix_path:          /investment
+    column:               id
+    with_wildcard_routes: true
+    
+account_transfer:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountTransaction
+    module:               account_transfer
+    prefix_path:          /account_transfer
+    column:               id
+    with_wildcard_routes: true
+    
+account_balance_blocked_new:
+  url:     /account/:id/balance_blocked/new.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_balance_blocked, action: new, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_balance_blocked_create:
+  url:     /account/:id/balance_blocked.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_balance_blocked, action: create, sf_format: html }
+  requirements: { sf_method: post }
+  
+account_balance_blocked:
+  url:     /account/:id/balance_blocked.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_balance_blocked, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_manage:
+  url:     /account/:id/manage.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_manage, action: index, sf_format: html }
+  requirements: { sf_method: get }
+    
+account_bankbook_history:
+  url:     /account/:id/bankbook.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_bankbook_history, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_transaction_history:
+  url:     /account/:id/transaction.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_transaction_history, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_transaction_history_show:
+  url:     /account/:id/transaction/:transaction_id.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: object }
+  param:   { module: account_transaction_history, action: show, sf_format: html }
+  requirements: { sf_method: get }
+
+account_transaction:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountTransaction
+    module:               account_transaction
+    prefix_path:          /account_transaction
+    column:               id
+    with_wildcard_routes: true
+    
+account_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountProduct
+    module:               account_product
+    prefix_path:          /account_product
+    column:               id
+    with_wildcard_routes: true
+
+account_expired_capitalization:
+  url:     /account_expired_capitalization.:sf_format
+  class:   sfPropelRoute
+  options: { model: Account, type: list }
+  param:   { module: account_expired_capitalization, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+account:
+  class: sfPropelRouteCollection
+  options:
+    model:                Account
+    module:               account
+    prefix_path:          /account
+    column:               id
+    with_wildcard_routes: true
+    
+associate_manage:
+  url:     /associate/:id/manage.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_manage, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+associate_investment:
+  url:     /associate/:id/investment.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_investment, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+associate_credit:
+  url:     /associate/:id/credit.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_credit, action: index, sf_format: html }
+  requirements: { sf_method: get }
+    
+associate_account:
+  url:     /associate/:id/account.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_account, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+#Routers for member
+
+associate_relationship_update:
+  url:     /associate/:id/relationship.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_relationship, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+associate_relationship_edit:
+  url:     /associate/:id/relationship.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_relationship, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+#routers for contact information
+
+associate_contact_update:
+  url:     /associate/:id/contact.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_contact, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+associate_contact_edit:
+  url:     /associate/:id/contact.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_contact, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+#Routers for picture
+
+email:
+  url:     /associate/:id/email.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: email, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+associate_picture_update:
+  url:     /associate/:id/picture.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_picture, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+associate_picture_edit:
+  url:     /associate/:id/picture.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_picture, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+#routers collection for associate_person
+
+associate_person:
+  class: sfPropelRouteCollection
+  options:
+    model:                Associate
+    module:               associate_person
+    prefix_path:          /associate_person
+    column:               id
+    with_wildcard_routes: true
+
+associate_person_update:
+  url:     /associate/:id/basic-person.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_person, action: update, sf_format: html }
+  requirements: { sf_method: put }
+  
+associate_person_edit:
+  url:     /associate/:id/basic-person.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_person, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+#routers collection for associate_company
+
+associate_organization:
+  class: sfPropelRouteCollection
+  options:
+    model:                Associate
+    module:               associate_organization
+    prefix_path:          /associate_organization
+    column:               id
+    with_wildcard_routes: true
+
+associate_organization_update:
+  url:     /associate/:id/basic_organization.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_organization, action: update, sf_format: html }
+  requirements: { sf_method: put }
+  
+associate_organization_edit:
+  url:     /associate/:id/basic_organization.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate_organization, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+
+associate_search:
+  url:   /search
+  param: { module: associate, action: search }
+  
+associate_show:
+  url:     /associate/:id.:sf_format
+  class:   sfPropelRoute
+  options: { model: Associate, type: object }
+  param:   { module: associate, action: show, sf_format: html }
+  requirements: { sf_method: get }
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: associate_person, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

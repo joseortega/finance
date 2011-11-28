@@ -1,0 +1,37 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           ReasonBlock
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              reasonBlock
+    plural:                reasonBlocks
+    route_prefix:          reason_block
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list: 
+        title: Reasons Blocking of Balance
+        display: [description]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  ~
+      form:    ~
+      edit:
+        title: Editing Reason Block
+        actions:
+          _delete: ~
+          _save: {label: Save}
+          _list: ~
+      new:   
+        title: New Reason Block
+        actions:
+          _save: {label: Save}
+          _list: ~

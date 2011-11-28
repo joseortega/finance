@@ -1,0 +1,22 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/08-Security
+#
+delete:
+  is_secure: true
+  credentials: admin
+  
+approve: 
+  is_secure: true
+  credentials: [[admin, loan_officer]]
+  
+annul: 
+  is_secure: true
+  credentials: [[admin, loan_officer]]
+  
+disburse: 
+  is_secure: true
+  credentials: [[admin, loan_officer]]
+  
+pay:
+  is_secure: true
+  credentials: [[ admin, cashier, loan_officer ]]  

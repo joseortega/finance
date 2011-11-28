@@ -1,0 +1,35 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           sfGuardGroup
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          sf_guard_group
+    with_propel_route:     1
+
+    config:
+      list:
+        title: Groups
+        display: [=name, description]
+        batch_actions: {}
+        actions:
+          _new: {label: New}
+        object_actions:
+          _edit: ~
+          
+      filter:  
+        display:  [name]
+      form:
+        class: GroupForm
+
+      edit:
+        title: Editing Group "%%name%%"
+
+      new:
+        title: New Group
+        actions:
+          _save: ~
+          _list: ~

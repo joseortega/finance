@@ -1,0 +1,4 @@
+CreditProduct:
+  consumo:
+    name: Consumo
+    amortization_type: german

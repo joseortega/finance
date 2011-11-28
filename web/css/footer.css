@@ -1,0 +1,49 @@
+/* 
+    Document   : footer
+    Created on : 18/03/2011, 10:13:01 AM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+  display: block;
+}
+
+#footer a{
+  margin-right: 10px;
+  text-decoration: none;
+  color: #4183c4;
+}
+#footer a:hover{
+  text-decoration: underline;
+}
+
+#footer a.sponsor{
+  float: right;
+  color: #555;
+}
+
+#footer a.sponsor:hover{
+  text-decoration: underline;
+  color: #000;
+}
+
+#footer ul.links{
+  margin:0 0 5px 0;
+  height:16px;
+}
+
+#footer ul.links li{
+  list-style-type:none;
+  float:left;margin:0 10px 0 0;
+}
+
+#footer ul.links li.blog{
+  font-weight:bold;
+}

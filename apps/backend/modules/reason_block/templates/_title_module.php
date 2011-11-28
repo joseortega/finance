@@ -1,0 +1,1 @@
+<h1><?php echo __('Reasons Blocking of Balance')?></h1>

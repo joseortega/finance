@@ -1,0 +1,2041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : messages.xml
+    Created on : 1 de septiembre de 2010, 12:12 PM
+    Author     : claudio
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="EN" target-language="fr" datatype="plaintext" original="messages" date="2010-09-13T18:52:48Z" product-name="messages">
+    <header/>
+    <body>
+       <!-- common Actions -->
+      <trans-unit>
+        <source>New</source>
+        <target>Nuevo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete</source>
+        <target>Borrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save</source>
+        <target>Guardar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create</source>
+        <target>Crear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update</source>
+        <target>Actualizar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save and add</source>
+        <target>Guardar y crear otro</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Show</source>
+        <target>Mostrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Are you sure?</source>
+        <target>¿Está seguro?</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cancel</source>
+        <target>Cancelar</target>
+      </trans-unit>      
+      <trans-unit>
+        <source>Choose an action</source>
+        <target>Seleccione una acción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>go</source>
+        <target>ok</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back to list</source>
+        <target>Listar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>List</source>
+        <target>Listar</target>
+      </trans-unit>
+      
+       <!-- common Filters -->
+      <trans-unit>
+        <source>Reset</source>
+        <target>Restablecer</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Filter</source>
+        <target>Filtrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Filters</source>
+        <target>Filtrar</target>
+      </trans-unit>
+
+      <!-- common List -->
+      <trans-unit>
+        <source>No result</source>
+        <target>Sin resultados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>(page %%page%%/%%nb_pages%%)</source>
+        <target>(página %%page%%/%%nb_pages%%)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>asc</source>
+        <target>asc</target>
+      </trans-unit>
+      <trans-unit>
+        <source>desc</source>
+        <target>desc</target>
+      </trans-unit>
+      <trans-unit>
+        <source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+        <target>[0] sin resultados|[1] 1 resultado|(1,+Inf] %1% resultados</target>
+      </trans-unit>
+      
+      <!-- common Pagination -->
+      <trans-unit>
+        <source>First page</source>
+        <target>Primera página</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Previous page</source>
+        <target>Página anterior</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Next page</source>
+        <target>Página siguiente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Last page</source>
+        <target>Última página</target>
+      </trans-unit>
+
+      <!-- common Form -->
+      <trans-unit>
+        <source>The item was created successfully.</source>
+        <target>El elemento se ha creado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was updated successfully.</source>
+        <target>El elemento se ha actualizado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was created successfully. You can add another one below.</source>
+        <target>El elemento se ha creado correctamente y ahora puede crear otro elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was updated successfully. You can add another one below.</source>
+        <target>El elemento se ha actualizado correctamente y ahora puede crear otro elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item has not been saved due to some errors.</source>
+        <target>El elemento no se ha guardado porque se ha producido algún error.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The item was deleted successfully.</source>
+        <target>El elemento se ha borrado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The form submission cannot be processed. It probably means that you have uploaded a file that is too big.]]></source>
+        <target><![CDATA[El formulario no puede ser procesado. Problamente significa que ha cargado un archivo muy grande.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Unexpected extra form field named "%field%".]]></source>
+        <target><![CDATA[Campo extra no esperado "%field%".]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[CSRF attack detected.]]></source>
+        <target><![CDATA[Ataque CSRF detectado.]]></target>
+      </trans-unit>
+      
+      <!-- Batch Actions-->
+      <trans-unit>
+        <source>You must at least select one item.</source>
+        <target>Debe seleccionar al menos un elemento.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>You must select an action to execute on the selected items.</source>
+        <target>Seleccione la acción que quiera ejecutar sobre los elementos seleccionados.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A problem occurs when deleting the selected items as some items do not exist anymore.</source>
+        <target>Se ha producido un error al borrar los elementos seleccionados porque al menos uno de ellos ya no existe.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The selected items have been deleted successfully.</source>
+        <target>Los elementos seleccionados se han borrado correctamente.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A problem occurs when deleting the selected items.</source>
+        <target>Se ha producido un error al borrar los elementos seleccionados.</target>
+      </trans-unit>
+      
+      <!-- Dates -->
+      <trans-unit>
+        <source><![CDATA[from %from_date% to %to_date%]]></source>
+        <target><![CDATA[de %from_date% a %to_date%]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[from %from_date%<br />to %to_date%]]></source>
+        <target><![CDATA[de %from_date%<br />a %to_date%]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" does not match the date format (%date_format%).]]></source>
+        <target><![CDATA["%value%" no coincide con el formato (%date_format%).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The date must be before %max%.]]></source>
+        <target><![CDATA[La fecha debe ser anterior a %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The date must be after %min%.]]></source>
+        <target><![CDATA[La fecha debe ser posterior a %min%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The begin date must be before the end date.]]></source>
+        <target><![CDATA[La fecha de inicio debe ser anterior a la fecha de finalización.]]></target>
+      </trans-unit>
+      
+      <!-- Files -->
+      <trans-unit>
+        <source><![CDATA[File is too large (maximum is %max_size% bytes).]]></source>
+        <target><![CDATA[El archivo es muy grande (máximo %max_size% bytes).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Invalid mime type (%mime_type%).]]></source>
+        <target><![CDATA[Tipo MIME inválido (%mime_type%).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[The uploaded file was only partially uploaded.]]></source>
+        <target><![CDATA[Al archivo sólo se cargó parcialmente.]]></target>
+      </trans-unit>      
+      <trans-unit>
+        <source><![CDATA[Missing a temporary folder.]]></source>
+        <target><![CDATA[Falta la carpeta temporal.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Failed to write file to disk.]]></source>
+        <target><![CDATA[No se pudo guardar el archivo.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[File upload stopped by extension.]]></source>
+        <target><![CDATA[Se ha detenido la carga del archivo.]]></target>
+      </trans-unit>
+      
+      <!-- Widgets -->
+      <trans-unit>
+        <source><![CDATA["%value%" must be at most %max%.]]></source>
+        <target><![CDATA["%value%" debe ser a lo sumo %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" must be at least %min.]]></source>
+        <target><![CDATA["%value%" debe ser por lo menos %min%.]]></target>
+      </trans-unit>     
+      <trans-unit>
+        <source><![CDATA["%value%" must be less than %max%.]]></source>
+        <target><![CDATA["%value%" debe ser menor que %max%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" must be greater than %min%.]]></source>
+        <target><![CDATA["%value%" debe ser más grande que %min%.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Checked</source>
+        <target>Marcado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>is empty</source>
+        <target>Vacío</target>
+      </trans-unit>
+      <trans-unit>
+        <source>yes or no</source>
+        <target>si o no</target>
+      </trans-unit>
+      <trans-unit>
+        <source>yes</source>
+        <target>si</target>
+      </trans-unit>
+      <trans-unit>
+        <source>no</source>
+        <target>no</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Required.</source>
+        <target>Obligatorio.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Invalid.</source>
+        <target>Inválido.</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is not an integer.]]></source>
+        <target><![CDATA["%value%" no es un entero.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is not an number.]]></source>
+        <target><![CDATA["%value%" no es un número.]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[At least %min% values must be selected (%count% values selected).]]></source>
+        <target><![CDATA[Por lo menos %min% elementos deben ser seleccionados (%count% elementos seleccionados).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[At most %max% values must be selected (%count% values selected).]]></source>
+        <target><![CDATA[A lo sumo %max% elementos deben ser seleccionados (%count% elementos seleccionados).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is too long (%max_length% characters max).]]></source>
+        <target><![CDATA["%value%" es muy largo (%max_length% caracteres máximo).]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA["%value%" is too short (%min_length% characters min).]]></source>
+        <target><![CDATA["%value%" es muy pequeño (%min_length% caracteres mínimo).]]></target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source><![CDATA["%value%" does not match the time format (%time_format%).]]></source>
+        <target><![CDATA["%value%" no coincide con el formato (%time_format%).]]></target>
+      </trans-unit>
+
+      <trans-unit>
+        <source><![CDATA[An object with the same "%column%" already exist.]]></source>
+        <target><![CDATA[Un objeto con el mismo "%column%" ya existe.]]></target>
+      </trans-unit>
+      
+      <!--Menssage Validators-->
+      
+      <trans-unit>
+        <source>The amount is higher than the balance in the account.</source>
+        <target>El monto es mayor al saldo disponible en la cuenta.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The account does not accept this type of transaction.</source>
+        <target>La cuenta no acepta este tipo de transacción.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The amount is higher than the balance available in cash.</source>
+        <target>El monto es mayor al saldo disponible en caja.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>This Connection is not configured, Admin.</source>
+        <target>Esta connexión no esta configurada, Admin.</target>
+      </trans-unit>    
+      <trans-unit>
+        <source>The frequency of payment is incompatible with the time.</source>
+        <target>La frecuencia de pago es incompatible con el tiempo.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The account does not belong to the associate.</source>
+        <target>La cuenta no pertenece al socio.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The interest rate does not support the given deadline.</source>
+        <target>La tasa de interés no es compatible con el plazo establecido.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investment: Transaction type is not configured, Admin.</source>
+        <target>Inversión: El tipo de transacción no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account: Transaction type is not configured, Admin</source>
+        <target>Inversión: El tipo de transacción no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The password is invalid.</source>
+        <target>La contraseña no es válida.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The interest rate not configured.</source>
+        <target>La tasa de interés no está configurado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The credit was passed successfully.</source>
+        <target>El crédito se aprobó con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The credit was canceled successfully.</source>
+        <target>El crédito fue cancelado con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>A persistence error occurred.</source>
+        <target>Se produjo un error de percistencia.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The amount is greater than the available balance.</source>
+        <target>La cantidad es mayor que el saldo disponible.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The amount is higher than the balance locked.</source>
+        <target>La cantidad es mayor que el saldo bloqueado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Was executed successfully.</source>
+        <target>Se ejecutó con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The value was blocked successfully.</source>
+        <target>El valor se bloqueó con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The value was unblocked successfully.</source>
+        <target>El valor se desbloqueó con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payments have been made successfully.</source>
+        <target>Los pagos se han realizado con éxito.</target>
+      </trans-unit>
+      
+      <!-- specific messages -->
+      
+      <trans-unit>
+        <source>Confirmation</source>
+        <target>Confirmación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once payment executed, there is no going back. Please be certain.</source>
+        <target>Una vez realizado el pago, no hay vuelta atrás. Por favor asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investments are made by debiting the respective partner account, Once you save an investment, there is no going back. Please be certain.</source>
+        <target>Las inversiones se realizan con débito a la cuenta del socio correspondiente, Una vez que guarda una inversión, no hay vuelta atrás. Por favor asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once you save an account, there is no going back. Please be certain.</source>
+        <target>Una vez que guarde una cuenta, no hay vuelta atrás. Por favor asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>These basic data to create a credit, later you can add more features individuals.</source>
+        <target>Estos datos básicos para crear un crédito, después usted puede agregar más características particulares.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>These basic data to create a associate, later you can add more features individuals.</source>
+        <target>Estos datos básicos para crear un socio, después usted puede agregar más características particulares.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The credit is ready to disburse, run the action to complete the process.</source>
+        <target>El crédito está listo a desembolsar, ejecute la acción para completar el proceso.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once annulled or approved the credit, there is no going back. Please be certain.</source>
+        <target>Una vez anulado o aprobado el crédito no hay vuelta atrás. Por favor asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once you delete an credit, there is no going back. Please be certain.</source>
+        <target>Una vez que se elimina un crédito, no hay vuelta atrás. Por favor estar seguro.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Execute Payment</source>
+        <target>Ejecutar Pago</target>
+      </trans-unit>
+      
+      <!-- login -->
+
+      <trans-unit>
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password</source>
+        <target>contraseña</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remember</source>
+        <target>Recordar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sign in</source>
+        <target>Iniciar sesion</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The username and/or password is invalid.</source>
+        <target>El nombre de usuario y / o la contraseña no es válida.</target>
+      </trans-unit>
+      
+      <!-- User box -->
+
+      <trans-unit>
+        <source>Configuration</source>
+        <target>Configuracion</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Help</source>
+        <target>Ayuda</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Log Out</source>
+        <target>Cerrar Sessión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Welcome</source>
+        <target>Bienvenido</target>
+      </trans-unit>
+
+      <!-- User nav -->
+      
+      <trans-unit>
+        <source>Associates</source>
+        <target>Socios</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Accounts</source>
+        <target>Cuentas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credits</source>
+        <target>Créditos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investments</source>
+        <target>Inversiones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>General Transactions</source>
+        <target>Transacciones Generales</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Find associate</source>
+        <target>Encontrar socio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Search</source>
+        <target>Buscar</target>
+      </trans-unit>
+       
+      <!-- manage Actions -->
+      
+      <trans-unit>
+        <source>Delete this associate</source>
+        <target>Eliminar este socio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once you delete an associate, there is no going back. Please be certain.</source>
+        <target>Una vez que se elimina un socio, no hay vuelta atrás. Por favor, asegúrese.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete this account</source>
+        <target>Eliminar esta cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Once you delete an account, there is no going back. Please be certain.</source>
+        <target>Una vez que se elimina una cuenta, no hay vuelta atrás. Por favor, asegúrese.</target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source>Delete this request</source>
+        <target>Eliminar esta solicitud</target>
+      </trans-unit>
+      
+      <!-- common other actions -->
+      
+      <trans-unit>
+        <source>Go to list</source>
+        <target>Ir a la lista</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Remove</source>
+        <target>Remover</target>
+      </trans-unit>
+      <trans-unit>
+        <source>view</source>
+        <target>ver</target>
+      </trans-unit>
+      <trans-unit>
+        <source>View</source>
+        <target>Ver</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back</source>
+        <target>Regresar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add</source>
+        <target>Añadir</target>
+      </trans-unit>
+      <trans-unit>
+        <source>or</source>
+        <target>o</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Edit other options</source>
+        <target>Editar otras opciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print</source>
+        <target>Imprimir</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add other</source>
+        <target>Añadir otro</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print the filtered list,</source>
+        <target>Imprimir la lista filtrada,</target>
+      </trans-unit>
+      
+      <!-- common helps -->
+      <trans-unit>
+        <source>Mark this item to delete</source>
+        <target>Marque esta opción para eliminar</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Note</source>
+        <target>Nota</target>
+      </trans-unit>
+      
+      <!-- common messages -->
+      
+      <trans-unit>
+        <source>No result</source>
+        <target>No hay resultados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>This field is optional</source>
+        <target>Este campo es opcional</target>
+      </trans-unit>
+      
+      <!-- common labels -->
+      
+      <trans-unit>
+        <source>Id</source>
+        <target>Código</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Type</source>
+        <target>Tipo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Manage</source>
+        <target>Administrar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Created at</source>
+        <target>Creado en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Updated at</source>
+        <target>Actualizado en</target>
+      </trans-unit>     
+      <trans-unit>
+        <source>Current at</source>
+        <target>vigente en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>current</source>
+        <target>vigente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Current</source>
+        <target>Vigente</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Expiration date</source>
+        <target>Fecha de vencimiento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All</source>
+        <target>Todos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Expired</source>
+        <target>Expirados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>View</source>
+        <target>Ver</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Value</source>
+        <target>Valor</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Customize</source>
+        <target>Personalizar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest</source>
+        <target>Interés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Tax</source>
+        <target>Impuesto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Term</source>
+        <target>Plazo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Time</source>
+        <target>Tiempo</target>
+      </trans-unit>
+      
+      <!-- module associate nav -->
+      
+      <trans-unit>
+        <source>Persons</source>
+        <target>Personas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Organizations</source>
+        <target>Organizaciones</target>
+      </trans-unit>
+      
+      <!-- module associate actions -->
+      
+      <trans-unit>
+        <source>New Person</source>
+        <target>Nueva Persona</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Organization</source>
+        <target>Nueva Organización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create person</source>
+        <target>Crear persona</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create organization</source>
+        <target>Crear organización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>View profile</source>
+        <target>Ver perfil</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create associate</source>
+        <target>Crear socio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update info</source>
+        <target>Actualizar información</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update picture</source>
+        <target>Actualizar foto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update contact</source>
+        <target>Actualizar contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update activities</source>
+        <target>Actualizar actividades</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update families</source>
+        <target>Actualizar familias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update personnel</source>
+        <target>Actualizar personal</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Delete this associate</source>
+        <target>Eliminar este socio</target>
+      </trans-unit>
+      
+      <!-- module associate edit nav -->
+      <!--  inheritance translation tags  -->
+      <trans-unit>
+        <source>Description associate</source>
+        <target>Descripción del socio</target>
+      </trans-unit>
+      
+      <!-- module associate htabs -->
+      
+      <trans-unit>
+        <source>Basic Information</source>
+        <target>Información Básica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Profile Picture</source>
+        <target>Foto de Perfil</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Contact Information</source>
+        <target>Información de Contacto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Email Addresses</source>
+        <target>Direcciones de Correo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Economic Activities</source>
+        <target>Actividades Económicas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Manage Associate</source>
+        <target>Administrar Socio</target>
+      </trans-unit>
+      <!-- associate person -->
+      <trans-unit>
+        <source>Family References</source>
+        <target>Referencias Familiares</target>
+      </trans-unit>
+      <!-- associate company -->
+      <trans-unit>
+        <source>Legal Representatives</source>
+        <target>Representantes Legales</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Members</source>
+        <target>Miembros</target>
+      </trans-unit>
+      
+      <!-- Associate Type -->
+      
+      <trans-unit>
+        <source>Person</source>
+        <target>Persona</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Organization</source>
+        <target>Organización</target>
+      </trans-unit>
+      
+      <!-- module associate tabs content-->
+      
+      <!--  Basic information -->
+      
+      <trans-unit>
+        <source>Category</source>
+        <target>Categoría</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Identification</source>
+        <target>Identificación</target>
+      </trans-unit>
+      <!-- labels specific the person  -->
+      <trans-unit>
+        <source>Full name</source>
+        <target>Nombre Completo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Gender</source>
+        <target>Sexo</target>
+      </trans-unit>
+      <!--  gender options  -->
+      <trans-unit>
+        <source>Male</source>
+        <target>Hombre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Female</source>
+        <target>Mujer</target>
+      </trans-unit>
+      <!--  end gender options  -->
+      <trans-unit>
+        <source>Birthday</source>
+        <target>Fecha de nacimiento</target>
+      </trans-unit>
+       <!-- end labels specific the person  -->
+       <!-- labels specific company  -->
+      <trans-unit>
+        <source>Tax identification</source>
+        <target>Identificación juridica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Organization name</source>
+        <target>Nombre de la organización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Juridical identification</source>
+        <target>Identificación jurídica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Organization type</source>
+        <target>Tipo de organización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Constituted at</source>
+        <target>Constituido en</target>
+      </trans-unit>
+      <!-- end labels specific company  -->
+      
+      <!-- picture -->
+      <!-- Labels -->
+      <trans-unit>
+        <source>Picture</source>
+        <target>Foto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>remove the current file</source>
+        <target>Eliminar el archivo actual </target>
+      </trans-unit>
+      
+      
+      <!--  Family References -->
+      
+      <!--  inheritance translation tags  -->
+      <trans-unit>
+        <source>Relationship status</source>
+        <target>Situacion sentimental</target>
+      </trans-unit>
+       <!-- Relationship status options -->
+       <trans-unit>
+        <source>Married</source>
+        <target>Casado(a)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Single</source>
+        <target>Soltero(a)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>In a relationship</source>
+        <target>Tiene una relación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Engaged</source>
+        <target>Comprometido(a)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>In a open relationship</source>
+        <target>Tiene una relacion abierta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Widowed</source>
+        <target>Viudo(a)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Separated</source>
+        <target>Separado(a)</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Divorced</source>
+        <target>Divorciado(a)</target>
+      </trans-unit>
+      <!-- end Relationship status options -->
+      <trans-unit>
+        <source>Families</source>
+        <target>Familias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add family</source>
+        <target>Añadir familia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Relation</source>
+        <target>Relación</target>
+      </trans-unit>
+      <!-- Relation options -->
+      <trans-unit>
+        <source>Daughter</source>
+        <target>Hija</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Son</source>
+        <target>Hijo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Mother</source>
+        <target>Madre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Father</source>
+        <target>Padre</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Sister</source>
+        <target>Hermana</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Brother</source>
+        <target>Hermano</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Uncle</source>
+        <target>Tio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Aunt</source>
+        <target>Tia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Niece</source>
+        <target>sobrina</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Nephew</source>
+        <target>Sobrino</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cousin (male)</source>
+        <target>Primo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cousin (female)</source>
+        <target>Prima</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Granddaughter</source>
+        <target>Nieta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Grandson</source>
+        <target>Nieto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Grandmother</source>
+        <target>Abuela</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Grandfather</source>
+        <target>Abuelo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Friend (male)</source>
+        <target>Amigo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Friend (female)</source>
+        <target>Amiga</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Husband</source>
+        <target>Esposo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Wife</source>
+        <target>Esposa</target>
+      </trans-unit>
+       <!-- end Relation options -->
+      
+      
+      <!--  Contact Information -->
+
+      <trans-unit>
+        <source>Email</source>
+        <target>Correo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Phones</source>
+        <target>Teléfonos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>City hometown</source>
+        <target>Ciudad de origen</target>
+      </trans-unit>
+      <trans-unit>
+        <source>City current</source>
+        <target>Ciudad actual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Neighborhood</source>
+        <target>Vecindario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Address</source>
+        <target>Dirección</target>
+      </trans-unit>
+     <trans-unit>
+        <source>Website</source>
+        <target>Sitio web</target>
+      </trans-unit>
+      <trans-unit>
+        <source>About</source>
+        <target>Acerca</target>
+      </trans-unit>
+      <!--  phone options  -->
+      <trans-unit>
+        <source>Mobile</source>
+        <target>Móvil</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Home</source>
+        <target>Casa</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Work</source>
+        <target>Trabajo</target>
+      </trans-unit>
+      <!--  end phone options  -->
+      <!--  actions contanct -->
+      <trans-unit>
+        <source>Add phone</source>
+        <target>Añadir teléfono</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add Email Address</source>
+        <target>Añadir Dirección de Correo</target>
+      </trans-unit>
+      <!--  end actions contact  -->      
+
+      <!-- Legal representatives -->
+      
+      <trans-unit>
+        <source>Position</source>
+        <target>Cargo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Expires at</source>
+        <target>Expira el</target>
+      </trans-unit>
+      <!-- Actions -->
+      <trans-unit>
+        <source>Add personnel</source>
+        <target>Añadir personal</target>
+      </trans-unit>
+      <!-- End actions -->
+      
+      <!--Account nav -->
+      <trans-unit>
+        <source>Transactions</source>
+        <target>Transacciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Bankbooks</source>
+        <target>Libretas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Products</source>
+        <target>Productos</target>
+      </trans-unit>
+        
+      <!--Account labels-->
+      <trans-unit>
+        <source>Transaction History</source>
+        <target>Historial de Transacciones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Bankbook History</source>
+        <target>Historial de Libretas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Associate</source>
+        <target>Socio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Product</source>
+        <target>Producto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Month interest</source>
+        <target>Interes mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Acumulated interest</source>
+        <target>Interes acumulado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Last capitalization</source>
+        <target>Última capitalización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Next capitalization</source>
+        <target>Próxima capitalización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Total balance</source>
+        <target>Saldo total</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Frozen balance</source>
+        <target>Saldo bloqueado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Available balance</source>
+        <target>Saldo disponible</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Status</source>
+        <target>Estado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capitalization frequency</source>
+        <target>Frecuencia de Capitalización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Daily</source>
+        <target>Diario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Monthly</source>
+        <target>Mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Quarterly</source>
+        <target>Trimestral</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Biyearly</source>
+        <target>Semestral</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Yearly</source>
+        <target>Anual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capitalize Interest</source>
+        <target>Capitalizar los Intereses</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Frequency</source>
+        <target>Frecuencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capitalization date</source>
+        <target>Fecha de capitalizacíon</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Expiration date</source>
+        <target>Fecha de vencimiento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Available</source>
+        <target>Disponible</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Blocked</source>
+        <target>Bloqueado</target>
+      </trans-unit>
+      
+      <!--Account actions-->
+      
+      <trans-unit>
+        <source>New Account</source>
+        <target>Nueva Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New account</source>
+        <target>Nueva cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create account</source>
+        <target>Crear cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account list</source>
+        <target>Listar cuentas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All acount</source>
+        <target>Todas las cuentas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Blocked Values</source>
+        <target>Valores Bloqueados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Manage Account</source>
+        <target>Administrar Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Ejecution</source>
+        <target>Ejecutar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Block</source>
+        <target>Bloquear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Unblock</source>
+        <target>Desbloquear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capitalize</source>
+        <target>Capitalizar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All capitalize</source>
+        <target>Capitalizar todos</target>
+      </trans-unit>
+      
+      <!--Account balance block details-->
+      
+      <trans-unit>
+        <source>Manage Balance</source>
+        <target>Administrar Saldo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New block</source>
+        <target>Nuevo bloqueo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Block</source>
+        <target>Bloquear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Unblock</source>
+        <target>Desbloquear</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Blocked at</source>
+        <target>Bloqueado en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Unblocked</source>
+        <target>Desbloqueado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Reason block</source>
+        <target>Motivo de bloqueo</target>
+      </trans-unit>
+      
+      <!-- Account messajes -->
+      
+      <trans-unit>
+        <source>There %%number%% accounts with expired capitalization,</source>
+        <target>Hay %%number%% cuentas con capitalización vencida,</target>
+      </trans-unit>
+
+      <!-- Transaction -->
+      
+      <trans-unit>
+        <source>Detail transaction</source>
+        <target>Detalle de la transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Document number</source>
+        <target>Número de documento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amount</source>
+        <target>Monto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Observation</source>
+        <target>Observación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Was printed</source>
+        <target>Fue impreso</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Agency</source>
+        <target>Agencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Hostname</source>
+        <target>Nombre maquina</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account</source>
+        <target>Cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transaction nature</source>
+        <target>Naturaleza de la transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transaction type</source>
+        <target>Tipo de transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transaction concept</source>
+        <target>Concepto de transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transaction id</source>
+        <target>Código de la transacción</target>
+      </trans-unit>
+
+      <!-- Transaction list -->
+      
+      <trans-unit>
+        <source>type</source>
+        <target>tipo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>amount</source>
+        <target>monto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>credit</source>
+        <target>crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>debit</source>
+        <target>débito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>account</source>
+        <target>cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>By user</source>
+        <target>Por el usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Office</source>
+        <target>Oficina</target>
+      </trans-unit>
+      
+      <!-- Transaction Actions -->
+      
+      <trans-unit>
+        <source>New transaction</source>
+        <target>Nueva transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save transaction</source>
+        <target>Guardar transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Document print</source>
+        <target>Imprimir documento</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print in bankbook</source>
+        <target>Imprimir en libreta</target>
+      </trans-unit>
+
+      <!--Bankbook-->
+      
+      <trans-unit>
+        <source>New bankbook</source>
+        <target>Nueva libreta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Bankbook</source>
+        <target>Nueva Libreta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create bankbook</source>
+        <target>Crear libreta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>bankbook</source>
+        <target>libreta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>status</source>
+        <target>estado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>active</source>
+        <target>activo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Is active</source>
+        <target>Está activo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>inactive</source>
+        <target>inactivo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>print row</source>
+        <target>fila impresa</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print row</source>
+        <target>Fila impresa</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print header</source>
+        <target>Imprimir cabezera</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print content</source>
+        <target>Imprimir contenido</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print all</source>
+        <target>Imprimir todo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Detail Bankbook</source>
+        <target>Detalle de Libreta</target>
+      </trans-unit>
+      
+      <!--Products-->
+      
+      <trans-unit>
+        <source>Tax rate</source>
+        <target>Tasa de impuesto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest rate</source>
+        <target>Tasa de interés</target>
+      </trans-unit>
+      
+      <!--Products accounts-->
+      
+       <trans-unit>
+        <source>Accounts linked</source>
+        <target>Cuentas vinculadas</target>
+      </trans-unit>
+      
+      <!--Credits Products-->
+      
+       <trans-unit>
+        <source>Credits linked</source>
+        <target>Créditos vinculados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Arrear rate</source>
+        <target>Tasa de mora</target>
+      </trans-unit>
+      
+      <!--Investment products-->
+      
+       <trans-unit>
+        <source>Investments linked</source>
+        <target>Invesriones vinculadas</target>
+      </trans-unit>
+      
+      <!--credits nav-->
+      
+      <trans-unit>
+        <source>Movements</source>
+        <target>Movimientos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Expired Payments</source>
+        <target>Pagos Expirados</target>
+      </trans-unit>
+      
+      <!--credits sub-nav-->
+      
+      <trans-unit>
+        <source>Currents</source>
+        <target>Vigentes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Approved</source>
+        <target>Aprobados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>In request</source>
+        <target>En solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Paid</source>
+        <target>Pagados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Annulled</source>
+        <target>Anulados</target>
+      </trans-unit>
+
+      <!--credits nav one-->
+      
+      <trans-unit>
+        <source>Information</source>
+        <target>Información</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payment Plan</source>
+        <target>Plan de Pagos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Make Payments</source>
+        <target>Realizar Pagos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Next Payment</source>
+        <target>Próximo Pago</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Movements History</source>
+        <target>Historial de Movimientos</target>
+      </trans-unit>
+      
+      
+       <!--credits actions-->
+      
+      <trans-unit>
+        <source>New request</source>
+        <target>Nueva solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create request</source>
+        <target>Crear solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Approve request</source>
+        <target>Approbar solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Annul request</source>
+        <target>Anular solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Disburse credit</source>
+        <target>Desembolsar crédito</target>
+      </trans-unit>
+      
+      <!--credits steps-->
+      
+      <trans-unit>
+        <source>Request credit</source>
+        <target>Solicitud de crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Approve credit</source>
+        <target>Aprobación de crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>disbursement</source>
+        <target>Desembolso</target>
+      </trans-unit>
+      
+      <!--credit form and detail-->
+      
+      <trans-unit>
+        <source>Credit</source>
+        <target>Crédito</target>
+      </trans-unit>
+      
+      <trans-unit>
+        <source>New Credit</source>
+        <target>Nuevo Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New credit</source>
+        <target>Nuevo crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Number</source>
+        <target>Número</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Time in months</source>
+        <target>Plazo en meses</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Pay frequency in months</source>
+        <target>Frecuencia de pago en meses</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Purpose</source>
+        <target>Propósito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit product</source>
+        <target>Producto de crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit amount</source>
+        <target>Monto de crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Balance in credit</source>
+        <target>Saldo en crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Basic Data</source>
+        <target>Datos Básicos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Linked Account</source>
+        <target>Cuenta Vinculada</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Personal Guarantees</source>
+        <target>Garantías Personales</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add Guarantee Personal</source>
+        <target>Añadir Garantía Personal</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Real Guarantees</source>
+        <target>Garantías Reales</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add guarantee</source>
+        <target>Añadir garantía</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save guarantees</source>
+        <target>Guardar garantías</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save linked account</source>
+        <target>Guardar cuenta vinculada</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Back to credit</source>
+        <target>Regresar al crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account for payment and disbursement operations.</source>
+        <target>Cuenta para las operaciones de pagos y desembolsos.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Name of the associate.</source>
+        <target>Nombre del asociado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit list</source>
+        <target>Listar créditos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Update credit</source>
+        <target>Actualizar crédito</target>
+      </trans-unit>
+      
+      <!--credits list-->
+      
+      <trans-unit>
+        <source>months</source>
+        <target>meses</target>
+      </trans-unit>
+      
+      <!--credits payment plan-->
+      
+      <trans-unit>
+        <source>Amortization table</source>
+        <target>Tabla de amortización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payment date</source>
+        <target>Fecha de pago</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Balance</source>
+        <target>Saldo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Capital</source>
+        <target>Capital</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Interest</source>
+        <target>Interés</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payment</source>
+        <target>Pago</target>
+      </trans-unit> 
+      <trans-unit>
+        <source>Total</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Effected</source>
+        <target>Efectuados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Pending</source>
+        <target>Pendientes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Print table</source>
+        <target>Imprimir tabla</target>
+      </trans-unit>
+      
+      <!--credit payment-->
+         
+      <trans-unit>
+        <source>Number payments</source>
+        <target>Número de Pagos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Payment #</source>
+        <target>Pago #</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account to debit</source>
+        <target>Cuenta a debitar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account to debit:</source>
+        <target>Cuenta a debitar:</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Arrear</source>
+        <target>Mora</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Days in arrear</source>
+        <target>Dias en mora</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amount payable</source>
+        <target>Monto a pagar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Effect payment</source>
+        <target>Efectuar pago</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Pay</source>
+        <target>Pagar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Pay all</source>
+        <target>Pagar todos</target>
+      </trans-unit>
+      
+      <!--credit transaction-->
+      
+      <trans-unit>
+        <source>Account reference</source>
+        <target>Referencia de cuenta</target>
+      </trans-unit>
+      
+      <!--credit status-->
+      
+      <trans-unit>
+        <source>in request</source>
+        <target>en solicitud</target>
+      </trans-unit>
+      <trans-unit>
+        <source>approved</source>
+        <target>aprobado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>paid</source>
+        <target>pagado</target>
+      </trans-unit>
+      
+      <!--Investment-->
+      
+      <trans-unit>
+        <source>Investment</source>
+        <target>Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All investment</source>
+        <target>Todas las invesiones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investments Expired</source>
+        <target>Inversiones Vencidas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New investment</source>
+        <target>Nueva inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>days</source>
+        <target>dias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Time in days</source>
+        <target>Tiempo en dias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Term in days</source>
+        <target>Plazo en dias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Days expired</source>
+        <target>Dias expirados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save investment</source>
+        <target>Guardar inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Effective rate %</source>
+        <target>Tasa effectiva %</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Withholding tax %</source>
+        <target>Retencion de impuesto %</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amount tax</source>
+        <target>Monto impuesto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amount interest</source>
+        <target>Monto de interes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Final amount</source>
+        <target>Monto final</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Information</source>
+        <target>Información</target>
+      </trans-unit>
+      <trans-unit>
+        <source>History Movement</source>
+        <target>Historial de Movimientos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investment list</source>
+        <target>Lista de inversiones</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Investment</source>
+        <target>Nueva Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account to accredit</source>
+        <target>Cuenta a acreditar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Accredit to account</source>
+        <target>Acreditar a la cuenta</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Days to expire</source>
+        <target>Días para expirar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Days expirated</source>
+        <target>Dias expirados</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Repay</source>
+        <target>Reembolsar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>All repay</source>
+        <target>Reembolsar todos</target>
+      </trans-unit>
+      
+      
+      <!-- Investment status -->
+      
+      <trans-unit>
+        <source>repaid</source>
+        <target>devuelto</target>
+      </trans-unit>
+      <trans-unit>
+        <source>expired</source>
+        <target>expirado</target>
+      </trans-unit>
+      
+      <!--Transactions -->
+      
+      <trans-unit>
+        <source>New Transaction</source>
+        <target>Nueva Transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Transaction</source>
+        <target>Nueva Transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Detail Transaction</source>
+        <target>Detalle de la Transacción</target>
+      </trans-unit>
+      <trans-unit>
+        <source>User</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Connection</source>
+        <target>Conexión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Investment</source>
+        <target>Nueva Inversión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Transactions</source>
+        <target>Transacciones</target>
+      </trans-unit>
+      
+      <!--Account Settings -->
+      
+      <trans-unit>
+        <source>Make sure it's something easy to remember, but difficult for others to guess. Try to include both letters and numbers or punctuation.</source>
+        <target>Asegúrese de que sea algo fácil de recordar, pero difícil de adivinar para los demás. Trate de incluir tanto letras como números o puntuacion.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Settings</source>
+        <target>Configuración</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change Password</source>
+        <target>Cambiar Contraseña</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Change your Password</source>
+        <target>Cambie su Contraseña</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Your current password</source>
+        <target>Su contraseña actual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Your new password</source>
+        <target>Su nueva contraseña</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Password again</source>
+        <target>Repetir contraseña</target>
+      </trans-unit>
+      
+      <!--cash-->
+      
+      <trans-unit>
+        <source>Cash</source>
+        <target>Caja</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cash name</source>
+        <target>Nombre de la caja </target>
+      </trans-unit>
+      <trans-unit>
+        <source>Cash Balance</source>
+        <target>Saldo en Caja</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Open</source>
+        <target>Abrir</target>
+      </trans-unit>
+       <trans-unit>
+        <source>Close</source>
+        <target>Cerrar</target>
+      </trans-unit>
+      
+      
+      <!--agency-->
+      
+      <trans-unit>
+        <source>Agency</source>
+        <target>Agencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Agency name</source>
+        <target>Nombre de la agencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Inicialize</source>
+        <target>Inicializar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Reconfigure</source>
+        <target>Reconfigure</target>
+      </trans-unit>
+      
+      <!--connection-->
+      
+      <trans-unit>
+        <source>Your connection</source>
+        <target>Su conexión</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Open cash</source>
+        <target>Abrir caja</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

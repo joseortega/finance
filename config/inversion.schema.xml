@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.investment">
+    
+    <table name="investment_product">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="name" type="varchar" size="60" required="true" />
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+        <column name="tax_rate" type="decimal" size="8" scale="2" required="true" default="0.00"/>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="investment_product_interest_rate">
+        <column name="product_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="investment_product" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="rate_term_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="rate_term" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="rate_term_id" foreign="id" />
+        </foreign-key>
+    </table>
+    
+    <table name="investment">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="account_id" type="bigint" required="true" />
+        <foreign-key foreignTable="account" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="product_id" type="bigint" required="true" />
+        <foreign-key foreignTable="investment_product" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="amount" type="decimal" size="18" scale="2" required="true" default="0.00" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="time_days" type="integer" required="true"/>
+        <column name="expiration_date" type="timestamp" required="true" />
+        <column name="interest_rate" type="decimal" size="8" scale="2" required="true" />
+        <column name="tax_rate" type="decimal" size="8" scale="2" required="true" />
+        <column name="is_current" type="boolean" required="true" default="0"/>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="investment_transaction">
+        <column name="id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="id" foreign="id" />
+        </foreign-key> 
+        <column name="investment_id" type="bigint" required="true" />
+        <foreign-key foreignTable="investment" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="investment_id" foreign="id" />
+        </foreign-key>
+    </table>
+    
+</database>

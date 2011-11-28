@@ -1,0 +1,35 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           CreditProduct
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              product
+    plural:                products
+    route_prefix:          credit_product
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Credit Products
+        display: [=name, created_at]
+        batch_actions: {}
+        actions:
+          _new: {label: New}
+        object_actions:
+          _edit: ~
+      filter:
+        display: [name, created_at]
+      form:    ~
+      edit:    
+        actions:
+          _save: {label: Save}
+          _list: ~
+      new:     
+        actions:
+          _save: {label: Save}
+          _list: ~

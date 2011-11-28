@@ -1,0 +1,16 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# default values
+all:
+  #i18n label transaction type: en
+  en_credit: credit
+  en_debit: debit
+  en_yes: yes
+  en_not: not
+  
+  #i18n label transaction type: es
+  es_credit: crédito
+  es_debit: débito
+  es_yes: si
+  es_not: no

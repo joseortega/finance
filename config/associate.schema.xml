@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.associate">
+
+    <table name="category">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="name" type="varchar" size="30" required="true" />
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+    </table>
+    
+    <table name="associate">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="category_id" type="bigint" required="true" />
+        <foreign-key foreignTable="category" onDelete="RESTRICT">
+            <reference local="category_id" foreign="id" />
+        </foreign-key>
+        <column name="city_hometown_id" type="bigint" required="false" />
+        <foreign-key foreignTable="city" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="CityHomeTown">
+            <reference local="city_hometown_id" foreign="id" />
+        </foreign-key>
+        <column name="city_current_id" type="bigint" required="false" />
+        <foreign-key foreignTable="city" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="CityCurrent">
+            <reference local="city_current_id" foreign="id" />
+        </foreign-key>
+        <column name="number" type="bigint" required="true" />
+        <unique>
+            <unique-column name="number"/>
+        </unique>
+        <column name="identification" type="varchar" size="15" required="false" />
+        <column name="name" type="varchar" size="100" required="true" />
+        <column name="type" type="varchar" size="30" required="true" />
+        <column name="is_active" type="boolean" required="true" default="1" />
+        <column name="picture" type="varchar" size="255" required="false" />
+        <column name="address" type="longvarchar" required="false" />
+        <column name="neighborhood" type="varchar" size="150" required="false" />
+        <column name="website" type="varchar" size="150" required="false" />
+        <column name="about" type="longvarchar" required="false" />
+        <column name="gender" type="varchar" size="15" required="false" />
+        <column name="relationship_status" type="varchar" size="30" required="false" />
+        <column name="birthday" type="date" required="false" />
+        <behavior name="timestampable"/>
+    </table>  
+
+    <table name="relationship">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="name" type="varchar" size="100" required="true"/>
+        <column name="type" type="varchar" size="100" required="true" />
+    </table>
+
+    <table name="email">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="address" type="varchar" size="60" required="true" default="null" />
+    </table>
+
+    <table name="phone">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="type" type="varchar" size="60" required="true" />
+        <column name="number" type="varchar" size="25" required="true"/>
+    </table>
+    
+</database>

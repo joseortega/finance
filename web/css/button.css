@@ -1,0 +1,258 @@
+/* 
+    Document   : button
+    Created on : 18/03/2011, 12:06:04 PM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+button.classy, a.button.classy{
+  height:34px;
+  padding:0;
+  position:relative;
+  top:1px;
+/*  margin-left:10px;*/
+  font-family:helvetica,arial,freesans,clean,sans-serif;
+  font-weight:bold;font-size:12px;color:#333;
+  text-shadow:1px 1px 0 #fff;
+  white-space:nowrap;
+  border:none;
+  overflow:visible;
+  background:#ddd;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ffffff',endColorstr='#e1e1e1');
+  background:-webkit-gradient(linear,0% 0,0% 100%,from(#fff),to(#e1e1e1));
+  background:-moz-linear-gradient(-90deg,#fff,#e1e1e1);
+  border-bottom:1px solid #ebebeb;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  -webkit-box-shadow:0 1px 4px rgba(0,0,0,0.3);
+  -moz-box-shadow:0 1px 4px rgba(0,0,0,0.3);
+  box-shadow:0 1px 4px rgba(0,0,0,0.3);
+  cursor:pointer;
+  -webkit-font-smoothing:subpixel-antialiased!important;
+}
+
+a.button.classy{
+  display:inline-block;
+}
+
+button.classy span, a.button.classy span{
+  display:block;
+  height:34px;
+  padding:0 13px;
+  line-height:36px;
+}
+
+button.classy.danger:hover, a.button.classy.danger:hover{
+  color:#fff;
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+  background:#b33630;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#dc5f59',endColorstr='#b33630');
+  background:-webkit-gradient(linear,0% 0,0% 100%,from(#dc5f59),to(#b33630));
+  background:-moz-linear-gradient(-90deg,#dc5f59,#b33630);
+  border-bottom-color:#cd504a;
+}
+button.classy.danger:active,a.button.classy.danger:active{
+  background:#b33630;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#b33630',endColorstr='#dc5f59');
+  background:-webkit-gradient(linear,0% 0,0% 100%,from(#b33630),to(#dc5f59));
+  background:-moz-linear-gradient(-90deg,#b33630,#dc5f59);
+  border-bottom-color:#dc5f59;
+}
+
+button.classy.danger, a.button.classy.danger{
+  color:#900;
+}
+
+button.classy:hover, a.button.classy:hover{
+  color:#fff;
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+  border-bottom-color:#0770a0;
+  background:#0770a0;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0ca6dd',endColorstr='#0770a0');
+  background:-webkit-gradient(linear,0% 0,0% 100%,from(#0ca6dd),to(#0770a0));
+  background:-moz-linear-gradient(-90deg,#0ca6dd,#0770a0);
+  text-decoration: none;
+}
+
+button.classy:active,a.button.classy:active{
+  color:#fff;
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+  background:#0ca6dd;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#0ca6dd',endColorstr='#0770a0');
+  background:-webkit-gradient(linear,0% 100%,0% 0,from(#0ca6dd),to(#0770a0));
+  background:-moz-linear-gradient(90deg,#0ca6dd,#0770a0);
+}
+
+button.classy:active span, a.button.classy:active span{
+  background-position:0 -120px;
+}
+
+button.classy::-moz-focus-inner{
+  margin:-1px -3px;
+}
+
+button.classy img, a.button.classy img{
+  position:relative;
+  top:-1px;
+  margin-right:3px;
+  vertical-align:middle;
+}
+
+button.classy:disabled, .button.classy.disabled{
+  opacity:.5;
+}
+
+.minibutton{
+  position:relative;
+  font-family:helvetica,arial,freesans,clean,sans-serif;
+  display:inline-block;
+  height:21px;
+  padding:0 0 0 3px;
+  font-size:11px;
+  font-weight:bold;
+  color:#333;
+  text-shadow:1px 1px 0 #fff;
+  white-space:nowrap;
+  border:none;
+  overflow:visible;
+  cursor:pointer;
+  border:1px solid #d4d4d4;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;background:#f4f4f4;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#f4f4f4',endColorstr='#ececec');
+  background:-webkit-gradient(linear,left top,left bottom,from(#f4f4f4),to(#ececec));
+  background:-moz-linear-gradient(top,#f4f4f4,#ececec);
+}
+
+
+.minibutton>span{
+  display:block;
+  height:21px;
+  padding:0 9px 0 7px;
+  line-height:21px;
+}
+
+ .minibutton:hover{
+  color:#fff;
+  text-decoration:none;
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.3);
+  border-color:#518cc6;
+  border-bottom-color:#2a65a0;
+  background:#599bdc;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#599bdc',endColorstr='#3072b3');
+  background:-webkit-gradient(linear,left top,left bottom,from(#599bdc),to(#3072b3));
+  background:-moz-linear-gradient(top,#599bdc,#3072b3);
+}
+
+.minibutton:active{
+  border-color: #2a65a0;
+  border-bottom-color: #518cc6;
+  background: #3072b3;
+  filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#3072b3',endColorstr='#599bdc');
+  background:-webkit-gradient(linear,left top,left bottom,from(#3072b3),to(#599bdc));
+  background:-moz-linear-gradient(top,#3072b3,#599bdc);
+  
+}
+
+.minibutton.medium
+{
+  font-size: 13px;
+  padding: 1px 1px 2px 3px;
+}
+
+.button.black{
+  cursor: pointer;
+  text-decoration:none;
+  border: 0px solid rgb(153, 153, 153);
+  padding: 5px 10px 5px 10px;
+  color:rgb(255, 255, 255);
+  font-size:11px;
+  font-family: helvetica,arial,freesans,clean,sans-serif;
+  text-shadow: -1px -1px 0px rgb(0, 0, 0);
+  font-weight: bold;
+  border-radius:3px 3px 3px 3px;
+  -moz-border-radius:3px 3px 3px 3px;
+  -webkit-border-radius:3px 3px 3px 3px;
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  background-image:linear-gradient(-90deg, rgb(153, 153, 153), rgb(51, 51, 51));
+  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(153, 153, 153)), to(rgb(51, 51, 51)));
+  background-image:-moz-linear-gradient(-90deg, rgb(153, 153, 153), rgb(51, 51, 51));
+}
+.button.black:hover{
+  cursor: pointer;
+  text-decoration:none;
+  border: 0px solid rgb(136, 136, 136);
+  padding: 5px 10px 5px 10px;
+  color:rgb(255, 255, 255);
+  text-shadow: -1px -1px 0px rgb(0, 0, 0);
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  background-image:linear-gradient(-90deg, rgb(119, 119, 119), rgb(17, 17, 17));
+  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(119, 119, 119)), to(rgb(17, 17, 17)));
+  background-image:-moz-linear-gradient(-90deg, rgb(119, 119, 119), rgb(17, 17, 17));
+}
+.button.black:active{
+  cursor: pointer;
+  text-decoration:none;
+  border: 0px solid rgb(153, 153, 153);
+  padding: 5px 10px 5px 10px;
+  color:rgb(255, 255, 255);
+  text-shadow: -1px -1px 0px rgb(0, 0, 0);
+  box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -moz-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  -webkit-box-shadow:0px 0px 0px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  background-image:linear-gradient(-90deg, rgb(17, 17, 17), rgb(119, 119, 119));
+  background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, from(rgb(17, 17, 17)), to(rgb(119, 119, 119)));
+  background-image:-moz-linear-gradient(-90deg, rgb(17, 17, 17), rgb(119, 119, 119));
+}
+
+.gobutton{
+  position:relative;
+  font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+  display:inline-block;
+  height:21px;
+  padding:0 0 0 3px;
+  font-size:11px;
+  font-weight:bold;
+  color:#555;
+  text-shadow:1px 1px 0 #fff;
+  white-space:nowrap;
+  border:none;
+  overflow:visible;
+  cursor:pointer;
+  border:1px solid #d4d4d4;
+  border-color: #D5DCDF;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  background: #F2F5F6;
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#f2f5f6',endColorstr='#e3eaed');
+  background: -webkit-gradient(linear,left top,left bottom,from(#F2F5F6),to(#E3EAED));
+  background: -moz-linear-gradient(top,#F2F5F6,#E3EAED);
+}
+
+.gobutton>span{
+  display:block;
+  height:21px;
+  padding:0 9px 0 7px;
+  line-height:21px;
+}
+
+ .gobutton:hover{
+  color:#333;
+  text-decoration:none;
+}

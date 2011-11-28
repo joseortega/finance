@@ -1,0 +1,14 @@
+AccountProductTransactionType:
+  deposito:
+    product_id: ahorros
+    transaction_type_id: deposito
+  retiro:
+    product_id: ahorros
+    transaction_type_id: retiro
+
+  deposito_aportacion:
+    product_id: aportacion
+    transaction_type_id: deposito
+  retiro_aportacion:
+    product_id: aportacion
+    transaction_type_id: retiro

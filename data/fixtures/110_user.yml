@@ -1,0 +1,14 @@
+sfGuardUser:
+
+  admin:
+    username: admin
+    password: secret
+    is_super_admin: true
+
+  claudio:
+    username: claudio
+    password: secret
+
+  jose:
+    username: jose
+    password: secret

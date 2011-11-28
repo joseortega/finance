@@ -1,0 +1,32 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Country
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              country
+    plural:                countries
+    route_prefix:          country
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Countries
+        display: [=name]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  ~
+      form:    ~
+      edit:    
+        title: Editing Country "%%name%%"
+      new:     
+        actions:
+          _save: ~
+          _list: ~

@@ -1,0 +1,7 @@
+sfGuardPermission:
+  admin:
+    name: admin
+  cashier:
+    name: cashier
+  loan_officer:
+    name: loan_officer

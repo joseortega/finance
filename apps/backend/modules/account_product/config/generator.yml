@@ -1,0 +1,35 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           AccountProduct
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              product
+    plural:                products
+    route_prefix:          account_product
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Account Products
+        display: [=name, created_at]
+        batch_actions: {}
+        actions:
+          _new: {label: New}
+        object_actions:
+          _edit: ~
+      filter:  
+        display: [name, created_at]
+      form:    ~
+      edit:
+        actions:
+          _save: ~
+          _list: ~
+      new:
+        actions:
+          _save: ~
+          _list: ~

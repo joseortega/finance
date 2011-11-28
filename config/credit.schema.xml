@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.credit">
+
+    <table name="credit_product">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="name" type="varchar" size="60" required="true" />
+        <unique>
+            <unique-column name="name"/>
+        </unique>
+        <column name="amortization_type" type="varchar" size="60" required="true" default="german"/>
+        <column name="grace_days" type="integer" required="true" default="0"/>
+        <behavior name="timestampable"/>
+    </table>
+    
+    <table name="credit_product_interest_rate">
+        <column name="product_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="credit_product" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="rate_unique_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="rate_unique" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="rate_unique_id" foreign="id" />
+        </foreign-key>
+    </table>
+    
+    <table name="credit_product_arrear_rate">
+        <column name="product_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="credit_product" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="rate_unique_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="rate_unique" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="rate_unique_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+    <table name="credit">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="product_id" type="bigint" required="true" />
+        <foreign-key foreignTable="credit_product" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="Product">
+            <reference local="product_id" foreign="id" />
+        </foreign-key>
+        <column name="associate_id" type="bigint" required="true" />
+        <foreign-key foreignTable="associate" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>
+        <column name="account_id" type="bigint" required="true" />
+        <foreign-key foreignTable="account" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="amount" type="decimal" size="18" scale="2" required="true" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" />
+        <column name="time_in_months" type="integer" required="true"/>
+        <column name="pay_frequency_in_months" type="integer" required="true" default="1"/>
+        <column name="amortization_type" type="varchar" size="60" required="true"/>
+        <column name="purpose" type="varchar" size="100" required="true" />
+        <column name="interest_rate" type="decimal" size="8" scale="2" required="true" />
+        <column name="status" type="varchar" size="30" required="true" default="in_request"/>
+        <behavior name="timestampable"/>
+    </table>
+
+    <table name="payment">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="credit_id" type="bigint" required="true" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+        <column name="transaction_id" type="bigint" required="false" />
+        <foreign-key foreignTable="credit_transaction" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Transaction">
+            <reference local="transaction_id" foreign="id" />
+        </foreign-key>
+        <unique>
+            <unique-column name="transaction_id"/>
+        </unique>
+        <column name="number" type="integer" required="true" />
+        <column name="date" type="date" required="true" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" />
+        <column name="capital" type="decimal" size="18" scale="2" required="true" />
+        <column name="interest" type="decimal" size="18" scale="2" required="true" />
+        <column name="status" type="varchar" size="30" required="true" />
+        <column name="days_in_arrear" type="integer" required="false"/>
+        <column name="arrear" type="decimal" size="8" scale="2" required="false"/> 
+    </table>
+
+    <table name="credit_transaction">
+        <column name="id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="id" foreign="id" />
+        </foreign-key>
+        <column name="credit_id" type="bigint" required="true" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+    </table>
+
+    <table name="guarantee_personal">
+        <column name="credit_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+        <column name="associate_id" type="bigint" primaryKey="true" required="true" />
+        <foreign-key foreignTable="associate" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="associate_id" foreign="id" />
+        </foreign-key>     
+    </table>
+
+    <table name="guarantee_real">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="credit_id" type="bigint" required="true" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+        <column name="name" type="varchar" size="30" required="true" />
+       <column name="description" type="longvarchar" required="false" />
+    </table>
+    
+</database>

@@ -1,0 +1,27 @@
+/* 
+    Document   : sidebar_new
+    Created on : 25/07/2011, 11:56:39 AM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.sidebar .new dl
+{
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .new dl dt
+{
+  margin: 0;
+  float: left;
+  color: #555;
+  width: 130px;
+}
+

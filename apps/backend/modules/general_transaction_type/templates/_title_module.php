@@ -1,0 +1,1 @@
+<h1><?php echo __('General Transaction Types')?></h1>

@@ -1,0 +1,32 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Province
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              province
+    plural:                provinces
+    route_prefix:          province
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:   
+        title: Provinces
+        display: [=name]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  ~
+      form:    ~
+      edit:    
+        title: Editing Province "%%name%%"
+      new:     
+        actions:
+          _save: ~
+          _list: ~

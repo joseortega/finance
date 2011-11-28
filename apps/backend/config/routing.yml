@@ -1,0 +1,278 @@
+category:
+  class: sfPropelRouteCollection
+  options:
+    model:                Category
+    module:               category
+    prefix_path:          /categories
+    column:               id
+    with_wildcard_routes: true
+
+cash:
+  class: sfPropelRouteCollection
+  options:
+    model:                Cash
+    module:               cash
+    prefix_path:          /cashies
+    column:               id
+    with_wildcard_routes: true
+
+reason_block:
+  class: sfPropelRouteCollection
+  options:
+    model:                ReasonBlock
+    module:               reason_block
+    prefix_path:          /reasonBlocks
+    column:               id
+    with_wildcard_routes: true
+
+general_transaction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                TransactionType
+    module:               general_transaction_type
+    prefix_path:          /generaltransactionTypes
+    column:               id
+    with_wildcard_routes: true
+
+transaction_type_other_transaction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                TransactionType
+    module:               other_transaction_type
+    prefix_path:          /othertransactionTypes
+    column:               id
+    with_wildcard_routes: true
+
+transaction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                TransactionType
+    module:               account_transaction_type
+    prefix_path:          /transactionTypes
+    column:               id
+    with_wildcard_routes: true
+    
+investment_product_interest_rate_update:
+  url:     /investment_product/:id/interest_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: InvestmentProduct, type: object }
+  param:   { module: investment_product_interest_rate, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+investment_product_interest_rate_edit:
+  url:     /investment_product/:id/interest_rate/edit.:sf_format
+  class:   sfPropelRoute
+  options: { model: InvestmentProduct, type: object }
+  param:   { module: investment_product_interest_rate, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+investment_product_manage:
+  url:     /investment_product/:id/manage.:sf_format
+  class:   sfPropelRoute
+  options: { model: InvestmentProduct, type: object }
+  param:   { module: investment_product_manage, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+investment_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                InvestmentProduct
+    module:               investment_product
+    prefix_path:          /investment_product
+    column:               id
+    with_wildcard_routes: true
+
+connection:
+  class: sfPropelRouteCollection
+  options:
+    model:                Connection
+    module:               connection
+    prefix_path:          /connections
+    column:               id
+    with_wildcard_routes: true
+
+cash_transaction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                CashTransactionType
+    module:               cash_transaction_type
+    prefix_path:          /cash_transaction_type
+    column:               id
+    with_wildcard_routes: true
+
+agency:
+  class: sfPropelRouteCollection
+  options:
+    model:                Agency
+    module:               agency
+    prefix_path:          /agencies
+    column:               id
+    with_wildcard_routes: true
+
+city:
+  class: sfPropelRouteCollection
+  options:
+    model:                City
+    module:               city
+    prefix_path:          /cities
+    column:               id
+    with_wildcard_routes: true
+
+province:
+  class: sfPropelRouteCollection
+  options:
+    model:                Province
+    module:               province
+    prefix_path:          /provinces
+    column:               id
+    with_wildcard_routes: true
+
+country:
+  class: sfPropelRouteCollection
+  options:
+    model:                Country
+    module:               country
+    prefix_path:          /countries
+    column:               id
+    with_wildcard_routes: true
+
+#for rate appliet to credit
+
+credit_product_arrear_rate_update:
+  url:     /credit_product/:id/arrear_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_arrear_rate, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+credit_product_arrear_rate_edit:
+  url:     /credit_product/:id/arrear_rate/change.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_arrear_rate, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_product_arrear_rate:
+  url:     /credit_product/:id/arrear_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_arrear_rate, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+#for rate appliet to arrear
+
+credit_product_interest_rate_update:
+  url:     /credit_product/:id/interest_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_interest_rate, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+credit_product_interest_rate_edit:
+  url:     /credit_product/:id/interest_rate/change.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_interest_rate, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_product_interest_rate:
+  url:     /credit_product/:id/interest_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_interest_rate, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+#credit manage
+  
+credit_product_manage:
+  url:     /credit_product/:id/manage.:sf_format
+  class:   sfPropelRoute
+  options: { model: CreditProduct, type: object }
+  param:   { module: credit_product_manage, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
+credit_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                CreditProduct
+    module:               credit_product
+    prefix_path:          /credit_product
+    column:               id
+    with_wildcard_routes: true
+  
+account_transaction_type:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountTransactionType
+    module:               account_transaction_type
+    prefix_path:          /transactionTypes
+    column:               id
+    with_wildcard_routes: true
+  
+account_product_transaction_type_update:
+  url:     /account_product/:id/transaction_type.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_transaction_type, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+account_product_transaction_type_edit:
+  url:     /account_product/:id/transaction_type.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_transaction_type, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_product_interest_rate_update:
+  url:     /account_product/:id/interest_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_interest_rate, action: update, sf_format: html }
+  requirements: { sf_method: put }
+
+account_product_interest_rate_edit:
+  url:     /account_product/:id/interest_rate/change.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_interest_rate, action: edit, sf_format: html }
+  requirements: { sf_method: get }
+  
+account_product_interest_rate:
+  url:     /account_product/:id/interest_rate.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_interest_rate, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+account_product_manage:
+  url:     /account_product/:id/manage.:sf_format
+  class:   sfPropelRoute
+  options: { model: AccountProduct, type: object }
+  param:   { module: account_product_manage, action: index, sf_format: html }
+  requirements: { sf_method: get }
+
+account_product:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountProduct
+    module:               account_product
+    prefix_path:          /account_product
+    column:               id
+    with_wildcard_routes: true
+
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# default rules
+homepage:
+  url:   /
+  param: { module: account_product, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

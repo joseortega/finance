@@ -1,0 +1,56 @@
+/* 
+    Document   : sidetabs
+    Created on : 21/03/2011, 01:50:29 PM
+    Author     : jose
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+ul.sidetabs{
+  float:left;
+  margin:0;
+  width:229px;
+  padding: 0;
+}
+
+ul.sidetabs li{
+  list-style-type:none;
+  margin:10px 0;
+}
+
+ul.sidetabs li a{
+  display:block;
+  padding:8px 10px 7px 10px;
+  font-size:14px;
+  text-decoration:none;
+  border:1px solid transparent;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-bottom-left-radius:4px;
+  -moz-border-radius-topleft:4px;
+  -moz-border-radius-bottomleft:4px;
+}
+
+ul.sidetabs li a:hover{
+  border-top-left-radius:4px;
+  border-bottom-left-radius:4px;
+  background:#f1f1f1;
+  text-decoration: none;
+}
+
+ul.sidetabs li a.loading{
+  background:url(/images/ajax/indicator.gif) 97% 50% no-repeat;
+}
+
+ul.sidetabs li a.selected{
+  color:#333;
+  font-weight:bold;
+  text-shadow:1px 1px 0 #fff;
+  border:1px solid #ddd;
+  border-right:none;
+  background:url(/images/sidebar/sidebar_selected.gif) 0 0 repeat-x;
+}

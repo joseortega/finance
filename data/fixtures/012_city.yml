@@ -1,0 +1,60 @@
+City:
+  #Ciudades de Loja, Ecuador
+  loja:
+    province_id: loja
+    name: Loja
+  catamayo:
+    province_id: loja
+    name: Catamayo
+  saraguro:
+    province_id: loja
+    name: Saraguro
+  cariamanga:
+    province_id: loja
+    name: Cariamanga
+  calvas:
+    province_id: loja
+    name: Calvas
+  chaguarpamba:
+    province_id: loja
+    name: Chaguarpamba
+  celica:
+    province_id: loja
+    name: Celica
+  gnzanama:
+    province_id: loja
+    name: Gonzanamá
+  espindola:
+    province_id: loja
+    name: Espíndola
+  macara:
+    province_id: loja
+    name: Macará
+  paltas:
+    province_id: loja
+    name: Paltas
+  puyango:
+    province_id: loja
+    name: Puyango
+  sozoranga:
+    province_id: loja
+    name: Sozoranga
+  zapotillo:
+    province_id: loja
+    name: Zapotillo
+  pindal:
+    province_id: loja
+    name: Pindal
+  quilanga:
+    province_id: loja
+    name: Quilanga
+  olmedo:
+    province_id: loja
+    name: Olmedo
+
+  cuenca:
+    province_id: azuay
+    name: Cuenca
+
+
+

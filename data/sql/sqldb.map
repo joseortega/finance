@@ -1,0 +1,8 @@
+# Sqlfile -> Database map
+lib.model.associate.schema.sql=propel
+lib.model.location.schema.sql=propel
+lib.model.account.schema.sql=propel
+plugins.sfGuardPlugin.lib.model.schema.sql=propel
+lib.model.basic.schema.sql=propel
+lib.model.investment.schema.sql=propel
+lib.model.credit.schema.sql=propel

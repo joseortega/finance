@@ -1,0 +1,191 @@
+/*
+    Document   : top_menu2
+    Created on : 10/08/2010, 12:37:55 PM
+    Author     : claudio
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/*
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*---------for-nav--------------*/
+
+#page_head{
+  width: 920px;
+  position: relative;
+  margin: -20px 0 15px -25px;
+  padding: 20px 25px 0;
+  background: url(/images/pagehead/background-white.png) 0 0 no-repeat;
+
+}
+
+#page_head.account_settings
+{
+  background: url(/images/pagehead/background-yellow.png) 0 0 no-repeat;
+}
+
+#page_head h1 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  font-weight: normal;
+  height: 28px;
+  line-height: 28px;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 0 white;
+  color: #495961;
+}
+
+#page_head h1 em {
+font-style: normal;
+font-weight: normal;
+color: #99A7AF;
+}
+
+#page_head .nav ul {
+  background:  url(/images/pagehead/tab_background.gif) repeat-x;
+  margin: 0;
+  padding: 6px 10px;
+  height: 26px;
+  border: 1px solid #ddd;
+  position: relative;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+#page_head .nav li {
+  display: inline;
+  list-style: none;
+  margin: 0;
+}
+
+#page_head .nav a {
+  color: #555;
+  float: left;
+  font-size: 14px;
+  height: 26px;
+  line-height: 26px;
+  margin-right: 10px;
+  padding: 0 8px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.698);
+  text-decoration: none;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#page_head .nav a:hover {
+  background-color: #ccc;
+  color: #333;
+  text-decoration: none;
+}
+
+#page_head .nav a.selected {
+  background: none repeat scroll 0 0 #fff;
+  border-color: #ccc #eee #eee #ccc;
+  border-style: solid;
+  border-width: 1px;
+  color: #333;
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+
+}
+
+#page_head.with_sub_nav .nav ul{
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-bottom-right-radius: 0px 0px;
+  border-bottom-left-radius: 0px 0px;
+}
+
+#page_head .title_actions_bar{
+  overflow: hidden;
+  margin-bottom: 10px;
+  height: 28px;
+}
+
+#page_head .title_actions_bar .actions{
+  height: 28px;
+  line-height: 28px;
+  float: right;
+
+}
+
+#page_head .title_actions_bar h1{
+  float: left;
+  margin: 0;
+}
+
+#page_head span.picture{
+  float: left;
+}
+
+#page_head h1 img {
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  margin-right: 5px;
+  padding: 2px;
+  border: 1px solid #DDD;
+}
+
+#page_head.info.associate .title_actions_bar{
+  height: 46px;
+  line-height: 46px;
+}
+
+#page_head.info.associate .title_actions_bar h1{
+  height: 46px;
+  line-height: 46px;
+}
+
+#page_head.info.associate .title_actions_bar .actions{
+  height: 46px;
+  line-height: 46px;
+}
+
+#page_head.info .title_actions_bar{
+  height: 35px;
+
+}
+
+#page_head.tasks h1{
+  font-size: 30px;
+}
+
+#page_head.tasks p{margin:-5px 0 0 0;font-size:14px;color:#777;}
+
+p.breadcrumb{
+  margin:10px 0 0 0;
+  padding:0 7px;
+  height:24px;
+  line-height:24px;
+  font-size:12px;
+  color:#555;
+  text-shadow:1px 1px 0 rgba(255,255,255,0.5);
+  background:url(/images/pagehead/breadcrumb_back.gif) 0 0 repeat-x;
+  border:1px solid #d1d1d1;
+  border-bottom-color:#bbb;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+}
+p.breadcrumb a{
+  color:#333;
+  font-weight:bold;
+}
+
+p.breadcrumb .separator{
+  display:inline-block;
+  margin:-1px 3px 0 3px;
+  height:8px;
+  width:8px;
+  text-indent:-9999px;
+  vertical-align:middle;
+  background:url(/images/pagehead/breadcrumb_separator.png) 0 0 no-repeat;
+}
