@@ -89,6 +89,7 @@ Ahora configure la base de datos para el proyecto:
  
 Configure tu servidor web:
 
+```
   # Asegúrate de tener sólo una vez esta línea en su configuración
   NameVirtualHost 127.0.0.1:8080
 
@@ -109,7 +110,7 @@ Configure tu servidor web:
     Allow from All
   </Directory>
   </VirtualHost>
-
+```
  
 Ejecutar los siguientes comandos:
  
