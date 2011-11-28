@@ -13,22 +13,15 @@ Configure los siguientes apartados antes ejecutar la aplicación:
 
 INSTALACIÓN
 
-Descarga la aplicación en https://github.com/joseortega/finance/downloads, vas a encontrar el archivo en formato.tar.gz o en formato.zip. Descarga el archivo y colocarlo bajo el directorio /home y descomprímelo: 
-
 ```
-tar zxpf finance.tar.gz
-rm finance.tar.gz
-```
-Con git:
-
-```
-git clone git@github.com:joseortega/finance.git
+mkdir /home/finance
+git clone git@github.com:joseortega/finance.git /home/finance
 ```
 
 Para saber que tu configuración de PHP cumple con los requisitos necesarios ejecuta el script que viene con la aplicación desde la línea de comandos:
 
 ```
-cd finance
+cd /home/finance
 php lib/vendor/symfony/data/bin/check_configuration.php
 ```
 Si hay algún problema, la salida te dará toda la información necesaria sobre cómo solucionarlo, También ejecuta el script desde un navegador, copia el archivo en algún lugar bajo el directorio raíz del servidor web y accede al archivo. No te olvides de quitar el archivo del directorio raíz web después:
@@ -57,20 +50,19 @@ NameVirtualHost 127.0.0.1:8080
 Listen 127.0.0.1:8080
 
 <VirtualHost 127.0.0.1:8080>
-DocumentRoot "/home/finance/web"
-DirectoryIndex index.php
-<Directory "/home/finance/web">
-  AllowOverride All
-  Allow from All
-</Directory>
+  DocumentRoot "/home/finance/web"
+  DirectoryIndex index.php
+  <Directory "/home/finance/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
 
-Alias /sf /home/finance/lib/vendor/symfony/data/web/sf
-<Directory "/home/finance/lib/vendor/symfony/data/web/sf">
-  AllowOverride All
-  Allow from All
-</Directory>
+  Alias /sf /home/finance/lib/vendor/symfony/data/web/sf
+  <Directory "/home/finance/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
 </VirtualHost>
-
 ```
  
 Ejecutar los siguientes comandos:
@@ -86,4 +78,10 @@ Otorgar permisos para el directorio finance/data
 sudo chmod -R 2775 /home/finance/data
 sudo chgrp -R www-data /home/finance/data
 ```
-Reinicia Apache, y comprueba que ahora tienes acceso a la aplicación abriendo un navegador y escribiendo http://localhost:8080/index.php/ e ingresar a la aplicación, con nombre de usuario admin y tu contraseña secret.
+Reinicia Apache:
+
+```
+sudo /etc/init.d/apache2 restart
+```
+
+Comprueba que ahora tienes acceso a la aplicación abriendo un navegador y escribiendo http://localhost:8080/index.php/ e ingresar a la aplicación, con nombre de usuario admin y tu contraseña secret.
