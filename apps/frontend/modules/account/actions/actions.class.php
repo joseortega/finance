@@ -174,7 +174,7 @@ class accountActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
+      $notice = 'The item was created successfully.';
       
       $account = $form->save();
 
