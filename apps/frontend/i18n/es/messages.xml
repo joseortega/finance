@@ -1914,7 +1914,11 @@
       
       <trans-unit>
         <source>repaid</source>
-        <target>devuelto</target>
+        <target>reembolsado</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Repaid</source>
+        <target>Reembolsado</target>
       </trans-unit>
       <trans-unit>
         <source>expired</source>

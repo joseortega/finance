@@ -21,7 +21,7 @@
           <th class="data"><?php echo __('Frequency')?></th>
           <th class="data"><?php echo __('Expiration date')?></th>
           <th class="data"><?php echo __('Interest')?></th>
-          <th class="actions"><a class="button black" onclick="return confirm('Are you sure?')" href="<?php echo url_for('account/allCapitalize')?>"><span><?php echo __('Capitalize')?></span></a></th>
+          <th class="actions"><a class="button black" onclick="return confirm('Are you sure?')" href="<?php echo url_for('account_expired_capitalization/allCapitalize')?>"><span><?php echo __('Capitalize')?></span></a></th>
         </tr>
         <tr class="sep">
           <td colspan="8"></td>
@@ -60,7 +60,7 @@
           <td class="data"><?php echo __(ucfirst($account->getCapitalizationFrequency()))?></td>
           <td class="data"><?php echo $account->getNextCapitalization()?></td>
           <td class="data"><?php echo $account->getInterestAccumulated()?></td>
-          <td class="td_actions"><a class="minibutton" onclick="return confirm('Are you sure?')" href="<?php echo url_for('account/capitalize?id='.$account->getId())?>"><span><?php echo __('Capitalize')?></span></a></td>
+          <td class="td_actions"><a class="minibutton" onclick="return confirm('Are you sure?')" href="<?php echo url_for('account_expired_capitalization/capitalize?id='.$account->getId())?>"><span><?php echo __('Capitalize')?></span></a></td>
         </tr>
         <tr>
           <td colspan="7"><?php echo __('Last capitalization')?> <?php echo $account->getLastCapitalization()?></td>

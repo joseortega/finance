@@ -184,6 +184,52 @@ class account_transactionActions extends sfActions
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
   }
+  
+  /**
+   * Print transaction detail in pdf
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function  executePrintDetail(sfWebRequest $request)
+  {  
+    $transaction = AccountTransactionPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($transaction);
+    
+    $pdf = Document::pdfAccountTransaction($transaction, $this->getUser()->getCulture());
+
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  } 
+  
+  /**
+   * Print the transactions based to current filter
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePrintList(sfWebRequest $request)
+  {
+    $orderBy = $request->getParameter('orderBy');
+
+    $criteria = $this->buildCriteria();
+    
+    if($orderBy == Criteria::ASC){
+      $criteria->clearOrderByColumns();
+      $criteria->addAscendingOrderByColumn(AccountTransactionPeer::ID);
+    }
+    
+    $transactions = AccountTransactionPeer::doSelectJoinAll($criteria);
+    
+    $pdf = Document::pdfAccountTransactions($transactions, $this->getUser()->getCulture());
+    
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  }
 
   /**
    * Get filters
@@ -233,51 +279,5 @@ class account_transactionActions extends sfActions
   protected function getPage()
   {
     return $this->getUser()->getAttribute('account_transaction.page', 1);
-  }
-
-  /**
-   * Print transaction detail in pdf
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function  executePrintDetail(sfWebRequest $request)
-  {  
-    $transaction = AccountTransactionPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($transaction);
-    
-    $pdf = Document::pdfAccountTransaction($transaction, $this->getUser()->getCulture());
-
-    $pdf->Output();
-
-    exit();
-
-    $this->setLayout(false);
-  } 
-  
-  /**
-   * Print the transactions based to current filter
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executePrintList(sfWebRequest $request)
-  {
-    $orderBy = $request->getParameter('orderBy');
-
-    $criteria = $this->buildCriteria();
-    
-    if($orderBy == Criteria::ASC){
-      $criteria->clearOrderByColumns();
-      $criteria->addAscendingOrderByColumn(AccountTransactionPeer::ID);
-    }
-    
-    $transactions = AccountTransactionPeer::doSelectJoinAll($criteria);
-    
-    $pdf = Document::pdfAccountTransactions($transactions, $this->getUser()->getCulture());
-    
-    $pdf->Output();
-
-    exit();
-
-    $this->setLayout(false);
   }
 }

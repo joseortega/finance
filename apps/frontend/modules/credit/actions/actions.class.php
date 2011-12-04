@@ -116,11 +116,11 @@ class creditActions extends sfActions
    */
   public function executeNew(sfWebRequest $request)
   {    
-    $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
-    
     $credit = new Credit();
     
-    if($associate){
+    if($request->getParameter('id')){
+      
+      $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
       $credit->setAssociate($associate);
     }
     

@@ -113,12 +113,12 @@ class investmentActions extends sfActions
    * @param sfWebRequest $request 
    */
   public function executeNew(sfWebRequest $request)
-  {
-    $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
-    
+  {  
     $investment = new Investment();
     
-    if($associate){
+    if($request->getParameter('id')){
+      
+      $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
       $investment->setAssociate($associate);
     }
     
@@ -183,16 +183,34 @@ class investmentActions extends sfActions
     {
       $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
       
-      $account = $form->save();
+      $investment = $form->save();
 
       $this->getUser()->setFlash('notice', $notice);
 
-      $this->redirect('investment/show?id='.$account->getId());
+      $this->redirect('investment/show?id='.$investment->getId());
     }
     else
     {
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
+  }
+  
+  /**
+   * Execute print investment detail in pdf
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePdf(sfWebRequest $request)
+  {
+    $investment = InvestmentPeer::retrieveByPK($request->getParameter('id'));
+    
+    $pdf = Document::pdfInvestmnet($investment, $this->getUser()->getAgency());
+    
+    $pdf->Output();
+    
+    exit();
+    
+    $this->setLayout(false);  
   }
 
   /**
@@ -243,166 +261,5 @@ class investmentActions extends sfActions
   protected function getPage()
   {
     return $this->getUser()->getAttribute('investment.page', 1);
-  }
-  
-  /**
-   * Execute repay investment
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executePayment(sfWebRequest $request)
-  {
-    $investment = InvestmentPeer::retrieveByPK($request->getParameter('id'));
-    
-    $this->forward404Unless($investment);
-    $this->forward404If(!$investment->isExpired());
-
-     //get investment transaction type
-    $invTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_TRANSFER_TO_ACCOUNT);
-    
-    if(!$invTransactionType){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('investment_show', $investment);
-    }
-    
-    //get Account transaction type
-    $actTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_TRANSFER_FROM_INVESTMENT);
-    
-    if(!$actTransactionType){
-      $this->getUser()->setFlash('error', 'Account: Transaction type is not configured, Admin.');
-      $this->redirect('investment_show', $investment);
-    }
-    
-    //get investment transaction type
-    $invTransactionTypeCapt = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_INTEREST_CAPITALIZATION);
-    
-    if(!$invTransactionTypeCapt){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('investment_show', $investment);
-    }
-    
-    //get investment transaction type
-    $invTransactionTypeWith = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_WITHHOLDING_TAX);
-    
-    if(!$invTransactionTypeWith){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('investment_show', $investment);
-    }
-    
-    $user  = $this->getUser()->getGuardUser();
-    
-
-    $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
- 
-   
-    $con->beginTransaction();
-    
-    try
-    {    
-      $investment->interestCapitalization($user, $invTransactionTypeCapt, $con);
-      $investment->withholdingTax($user, $invTransactionTypeWith, $con);
-      $investment->accreditToAccount($user, $invTransactionType, $actTransactionType, $con);
-      
-      $con->commit();
-    }
-    
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      
-      $this->getUser()->setFlash('error', 'A persistence error occurred.');
-      $this->redirect('investment_show', $investment);
-    }
-     $this->getUser()->setFlash('notice', 'Was executed successfully.');
-     $this->redirect('investment_show', $investment);  
-  }
-  
-  /**
-   * Execute all repay
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeAllPayment(sfWebRequest $request)
-  {
-    //get investment transaction type
-    $invTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_TRANSFER_TO_ACCOUNT);
-    
-    if(!$invTransactionType){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('@investment_expired');
-    }
-    
-    //get Account transaction type
-    $actTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_TRANSFER_FROM_INVESTMENT);
-    
-    if(!$actTransactionType){
-      $this->getUser()->setFlash('error', 'Account: Transaction type is not configured, Admin.');
-      $this->redirect('@investment_expired');
-    }
-    
-    //get investment transaction type
-    $invTransactionTypeCapt = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_INTEREST_CAPITALIZATION);
-    
-    if(!$invTransactionTypeCapt){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('@investment_expired');
-    }
-    
-    //get investment transaction type
-    $invTransactionTypeWith = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_WITHHOLDING_TAX);
-    
-    if(!$invTransactionTypeWith){
-      $this->getUser()->setFlash('error', 'Investment: Transaction type is not configured, Admin.');
-      $this->redirect('@investment_expired');
-    }
-    
-    $user  = $this->getUser()->getGuardUser();
-    
-
-    $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
- 
-   
-    $con->beginTransaction();
-    
-    try
-    {
-      foreach (InvestmentPeer::doSelectCurrentsExpired() as $investment){
-        
-        $investment->interestCapitalization($user, $invTransactionTypeCapt, $con);
-        $investment->withholdingTax($user, $invTransactionTypeWith, $con);
-        $investment->accreditToAccount($user, $invTransactionType, $actTransactionType, $con);
-      }
-
-      $con->commit();
-    }
-    
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      
-      $this->getUser()->setFlash('error', 'A persistence error occurred.');
-      $this->redirect('@investment_expired');
-    }
-    
-     $this->getUser()->setFlash('notice', 'Was executed successfully.');
-     $this->redirect('@investment_expired');
-  }
-
-  /**
-   * Execute print investment detail in pdf
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executePdf(sfWebRequest $request)
-  {
-    $investment = InvestmentPeer::retrieveByPK($request->getParameter('id'));
-    
-    $pdf = Document::pdfInvestmnet($investment, $this->getUser()->getAgency());
-    
-    $pdf->Output();
-    
-    exit();
-    
-    $this->setLayout(false);  
   }
 }

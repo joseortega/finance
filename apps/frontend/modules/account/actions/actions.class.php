@@ -9,7 +9,7 @@
  */
 class accountActions extends sfActions
 {
- /**
+  /**
   * Execute index account
   * 
   * @param sfWebRequest $request 
@@ -116,11 +116,11 @@ class accountActions extends sfActions
    */
   public function executeNew(sfWebRequest $request)
   {
-    $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
-    
     $account = new Account();
     
-    if($associate){
+    if($request->getParameter('id')){
+      
+      $associate = AssociatePeer::retrieveByPK($request->getParameter('id'));
       $account->setAssociate($associate);
     }
     
@@ -187,169 +187,7 @@ class accountActions extends sfActions
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
   }
-
-  /**
-   *  Get filters
-   * 
-   * @return array 
-   */
-  protected function getFilters()
-  {
-    return $this->getUser()->getAttribute('account.filters', $this->getFilterDefaults());
-    
-    $historial_alertas = $this->getUser()->getAttribute('historial_alertas');
-
-    $this->getUser()->getAttributeHolder()->remove($historial_alertas['100']['']);
-  }
-
-  /**
-   * Set filters
-   * 
-   * @param array $filters
-   * @return array 
-   */
-  protected function setFilters(array $filters)
-  {
-    $this->getUser()->setAttribute('account.filters', $filters);
-  }
-
-  /**
-   * Get filter defaults
-   * 
-   * @return type 
-   */
-  public function getFilterDefaults()
-  {
-    return array();
-  }
-
-  /**
-   * Set page
-   * 
-   * @param int $page 
-   */
-  protected function setPage($page)
-  {
-    $this->getUser()->setAttribute('account.page', $page);
-  }
-
-  /**
-   * Get page
-   * 
-   * @return int 
-   */
-  protected function getPage()
-  {
-    return $this->getUser()->getAttribute('account.page', 1);
-  }
   
-  /**
-   * Execute capitalize all accounts
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeCapitalize(sfWebRequest $request)
-  {
-    $account = AccountPeer::retrieveByPK($request->getParameter('id'));
-    
-    $this->forward404Unless($account);
-    $this->forward404Unless($account->isCapitalizacionExpired());
-    
-    $user  = $this->getUser()->getGuardUser();
-    $transactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_INTEREST_CAPITALIZATION);
-    
-    if(!$transactionType){
-      $this->getUser()->setFlash('error', 'Account transaction type, not contfiguration.');
-      $this->redirect('@account_expired_capitalization', $credit);
-    }
-    
-    try{
-      
-     $this->capitalizeInterest($account, $user, $transactionType);
-      
-    }catch(Exception $e){
-      
-      $this->getUser()->setFlash('error', 'A persistence error occurred.');
-    }
-    
-    $this->getUser()->setFlash('notice', 'The operation was successful.');
-    
-    $this->redirect('@account_expired_capitalization');
-  }
-  
-  /**
-   * Execute capitalize all accounts
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeAllCapitalize(sfWebRequest $request)
-  {
-    $user  = $this->getUser()->getGuardUser();
-    $transactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_INTEREST_CAPITALIZATION);
-    
-    if(!$transactionType){
-      $this->getUser()->setFlash('error', 'Account transaction type, not contfiguration.');
-      $this->redirect('@account_expired_capitalization', $credit);
-    }
-    
-    try{
-      
-      $accounts = AccountPeer::doSelectExpiredCapitalization();
-      
-      foreach ($accounts as $account){
-        $this->capitalizeInterest($account, $user, $transactionType);
-      }
-      
-    }catch(Exception $e){
-      
-      $this->getUser()->setFlash('error', 'A persistence error occurred.');
-    }
-    
-    $this->getUser()->setFlash('notice', 'The operation was successful.');
-    
-    $this->redirect('@account_expired_capitalization');
-  }
-  
-  /**
-   * Capitalize interest
-   * 
-   * @param Cash $connection
-   * @param sfGuardUser $user
-   * @param TransactionType $actTransactionType
-   * @param PropelPDO $con 
-   */
-  private function capitalizeInterest(Account $account, sfGuardUser $user, TransactionType $actTransactionType, PropelPDO $con = null)
-  {
-    if($con == null){
-      $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
-    }
-    
-    $amount = $account->getInterestAccumulated();
-    
-    $con->beginTransaction();
-    try
-    {      
-      $transaction = new Transaction($user, $actTransactionType, $amount);
-      $transaction->save($con);
-      
-      $accountTransaction = new AccountTransaction($transaction, $account);
-      $accountTransaction->save($con);
-      
-      $account->setLastCapitalization(time());
-      
-      $account->updateNextCapitalization($con);
-      
-      $account->save($con);
-      
-      $con->commit();
-    }
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      throw $e;
-    }
-  }
-
   /**
    * Print pending transactions in bankbook
    * 
@@ -466,5 +304,56 @@ class accountActions extends sfActions
     exit();
 
     $this->setLayout(false);
+  }
+
+  /**
+   *  Get filters
+   * 
+   * @return array 
+   */
+  protected function getFilters()
+  {
+    return $this->getUser()->getAttribute('account.filters', $this->getFilterDefaults());
+  }
+
+  /**
+   * Set filters
+   * 
+   * @param array $filters
+   * @return array 
+   */
+  protected function setFilters(array $filters)
+  {
+    $this->getUser()->setAttribute('account.filters', $filters);
+  }
+
+  /**
+   * Get filter defaults
+   * 
+   * @return type 
+   */
+  public function getFilterDefaults()
+  {
+    return array();
+  }
+
+  /**
+   * Set page
+   * 
+   * @param int $page 
+   */
+  protected function setPage($page)
+  {
+    $this->getUser()->setAttribute('account.page', $page);
+  }
+
+  /**
+   * Get page
+   * 
+   * @return int 
+   */
+  protected function getPage()
+  {
+    return $this->getUser()->getAttribute('account.page', 1);
   }
 }

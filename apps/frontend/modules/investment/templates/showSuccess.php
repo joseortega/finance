@@ -28,7 +28,7 @@
   <?php if($investment->isExpired()):?>
     <div class="rule"></div>
     <ul class="actions">
-      <li><a class="button classy" href="<?php echo url_for('investment/payment?id='.$investment->getId())?>"><span><?php echo __('Accredit to account')?></span></a></li>
+      <li><a class="button classy" href="<?php echo url_for('investment_expired/repay?id='.$investment->getId())?>"><span><?php echo __('Accredit to account')?></span></a></li>
     </ul>
   <?php endif;?>
 </div>
