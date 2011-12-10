@@ -7,7 +7,7 @@
       <div class="title">
         
         <a href="<?php echo url_for('investment_transaction_show', $transaction)?>"><?php echo $transaction->getTransactionType()?></a>
-        <span><?php echo $transaction->getTransactionType()->getNature()?></span>
+        <span><?php echo __($transaction->getTransactionType()->getNature())?></span>
         
         <?php echo __('amount')?>
         <span><?php echo $transaction->getAmount()?></span>
