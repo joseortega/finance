@@ -21,7 +21,7 @@
         <th class="data"><?php echo __('Interest')?></th>
         <th class="data"><?php echo __('Tax')?></th>
         <th class="data"><?php echo __('Total')?></th>
-        <th class="actions"><a class="button black" onclick="return confirm('Are you sure?')" href="<?php echo url_for('investment/allRepay')?>"><span><?php echo __('Repay')?></span></a></th>
+        <th class="actions"><a class="button black" onclick="return confirm('Are you sure?')" href="<?php echo url_for('investment_expired/allRepay')?>"><span><?php echo __('Repay')?></span></a></th>
       </tr>
       <tr class="sep">
         <td colspan="9"></td>

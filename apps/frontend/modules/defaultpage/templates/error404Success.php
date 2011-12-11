@@ -45,7 +45,7 @@
 
 
     <div id="shell">
-      <img src="/images/error404/plax_logo.png" width="136" height="70" id="plax-logo"/>
+      <img src="/images/error404/error_404.png" width="136" height="70" id="plax-logo"/>
       <img src="/images/error404/plax_sphere_small.png" width="93" height="92" id="plax-sphere-1"/>
       <img src="/images/error404/plax_sphere_large.png" width="215" height="215" id="plax-sphere-2"/>
       <img src="/images/error404/plax_sphere_small.png" width="93" height="92" id="plax-sphere-3"/>

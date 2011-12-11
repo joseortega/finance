@@ -47,7 +47,7 @@ class account_expired_capitalizationActions extends sfActions
     
     try{
       
-     $this->capitalizeInterest($account, $user, $transactionType);
+     $account->capitalizeInterest($user, $transactionType);
       
     }catch(Exception $e){
       
@@ -79,7 +79,7 @@ class account_expired_capitalizationActions extends sfActions
       $accounts = AccountPeer::doSelectExpiredCapitalization();
       
       foreach ($accounts as $account){
-        $this->capitalizeInterest($account, $user, $cptTransactionType);
+        $account->capitalizeInterest($user, $cptTransactionType);
       }
       
     }catch(Exception $e){
@@ -90,46 +90,6 @@ class account_expired_capitalizationActions extends sfActions
     $this->getUser()->setFlash('notice', 'The operation was successful.');
     
     $this->redirect('@account_expired_capitalization');
-  }
-  
-  /**
-   * Capitalize interest
-   * 
-   * @param Cash $connection
-   * @param sfGuardUser $user
-   * @param TransactionType $actTransactionType
-   * @param PropelPDO $con 
-   */
-  private function capitalizeInterest(Account $account, sfGuardUser $user, TransactionType $actTransactionType, PropelPDO $con = null)
-  {
-    if($con == null){
-      $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
-    }
-    
-    $amount = $account->getInterestAccumulated();
-    
-    $con->beginTransaction();
-    try
-    {      
-      $transaction = new Transaction($user, $actTransactionType, $amount);
-      $transaction->save($con);
-      
-      $accountTransaction = new AccountTransaction($transaction, $account);
-      $accountTransaction->save($con);
-      
-      $account->setLastCapitalization(time());
-      
-      $account->updateNextCapitalization($con);
-      
-      $account->save($con);
-      
-      $con->commit();
-    }
-    catch (Exception $e)
-    {
-      $con->rollBack();
-      throw $e;
-    }
   }
 }
 

@@ -401,6 +401,18 @@
         <source>Payments have been made successfully.</source>
         <target>Los pagos se han realizado con éxito.</target>
       </trans-unit>
+      <trans-unit>
+        <source>The operation was successful.</source>
+        <target>La operación se realizó con éxito.</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[There %%number%% account with expired capitalization,]]></source>
+        <target><![CDATA[Hay %%number%% cuenta con vencimiento de capitalización,]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[There %%number%% accounts with expired capitalization,]]></source>
+        <target><![CDATA[Hay %%number%% cuentas con vencimiento de capitalización,]]></target>
+      </trans-unit>      
       
       <!-- specific messages -->
       
