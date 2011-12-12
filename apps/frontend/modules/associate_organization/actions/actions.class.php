@@ -1,10 +1,10 @@
 <?php
 
 /**
- * associate_person actions.
+ * associate_organization actions.
  *
  * @package    finance
- * @subpackage associate_person
+ * @subpackage associate_organization
  * @author     Jose Ortega
  */
 class associate_organizationActions extends sfActions
