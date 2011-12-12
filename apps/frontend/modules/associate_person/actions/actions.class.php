@@ -43,6 +43,7 @@ class associate_personActions extends sfActions
     }
     //add person filter
     $this->criteria->add(AssociatePeer::TYPE, Associate::TYPE_PERSON);
+    $this->criteria->addDescendingOrderByColumn(AssociatePeer::UPDATED_AT);
     
     $pager = new sfPropelPager('Associate',20);
     $pager->setCriteria($this->criteria);
