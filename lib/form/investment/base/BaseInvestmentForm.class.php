@@ -41,8 +41,8 @@ abstract class BaseInvestmentForm extends BaseFormPropel
       'interest_rate'   => new sfValidatorNumber(),
       'tax_rate'        => new sfValidatorNumber(),
       'is_current'      => new sfValidatorBoolean(),
-      'created_at'      => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'      => new sfValidatorDateTime(array('required' => false)),
+      'created_at'      => new sfValidatorDateTime(),
+      'updated_at'      => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('investment[%s]');

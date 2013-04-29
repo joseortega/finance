@@ -32,6 +32,28 @@ class Cash extends BaseCash
   }
   
   /**
+   *
+   * @param type $amount
+   * @param PropelPDO $con 
+   */
+  public function accredit($amount, PropelPDO $con)
+  {
+    $this->setBalance($this->getBalance() + $amount);
+    $this->save($con);
+  }
+  
+  /**
+   *
+   * @param type $amount
+   * @param PropelPDO $con 
+   */
+  public function debit($amount, PropelPDO $con)
+  {
+    $this->setBalance($this->getBalance() - $amount);
+    $this->save($con); 
+  }
+
+    /**
    * Open this cash                                                       cc
    */
   public function open()

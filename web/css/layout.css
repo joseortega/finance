@@ -12,12 +12,6 @@ html{
   background: white url(/images/header/background.png) 0 0 repeat-x;
 }
 
-.site{
-  margin: 0 auto;
-  width: 920px;
-  padding: 0 15px;
-}
-
 #header .site{
   width: 958px;
   height: 91px;
@@ -31,6 +25,12 @@ html{
   font-size: 90%;
   border-top: 2px solid #eee;
   padding: 15px 0;
+}
+
+.site{
+  margin: 0 auto;
+  width: 920px;
+  padding: 0 15px;
 }
                              
 /*---------end-layout-------*/

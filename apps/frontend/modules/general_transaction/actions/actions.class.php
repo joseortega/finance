@@ -91,7 +91,7 @@ class general_transactionActions extends sfActions
     $cash = CashPeer::retrieveByPK($this->getUser()->getAttribute('cash_id'));
     
     $criteria = $this->filters->buildCriteria($this->getFilters());
-    $criteria->add(TransactionPeer::TYPE, Transaction::TYPE_GENERAL, Criteria::EQUAL);
+//    $criteria->add(TransactionPeer::CASH_ID, null, Criteria::NOT_EQUAL);
     $criteria->add(TransactionPeer::CASH_ID, $cash->getId(), Criteria::EQUAL);
     $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
     $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $criteria);
@@ -167,7 +167,28 @@ class general_transactionActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $transaction = $form->save();
+      $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
+      
+      try{
+          
+        $transaction = $form->UpdateObject();
+        $transaction->save($con);
+
+        $cash = $transaction->getCash();
+
+        if($transaction->getTransactionType()->getNature() == TransactionType::CREDIT){
+            $cash->accredit($transaction->getAmount(), $con);
+        }elseif ($transaction->getTransactionType()->getNature() == TransactionType::DEBIT) {
+            $cash->debit($transaction->getAmount(), $con);     
+        }
+        
+        $con->commit();
+          
+      }  catch (Exception $e){
+        $con->rollBack();
+        $this->getUser()->setFlash('error', 'A persistence error occurred.');
+      }
       
       $this->getUser()->setFlash('notice', 'The item was created successfully.');
 
@@ -177,6 +198,52 @@ class general_transactionActions extends sfActions
     {
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
+  }
+  
+  /**
+   * Print transaction detail in pdf
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function  executePrintDetail(sfWebRequest $request)
+  {  
+    $transaction = TransactionPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($transaction);
+    
+    $pdf = Document::pdfCashTransaction($transaction, $this->getUser()->getCulture());
+
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  } 
+  
+  /**
+   * Print the transactions based to current filter
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePrintList(sfWebRequest $request)
+  {
+    $orderBy = $request->getParameter('orderBy');
+
+    $criteria = $this->buildCriteria();
+    
+    if($orderBy == Criteria::ASC){
+      $criteria->clearOrderByColumns();
+      $criteria->addAscendingOrderByColumn(TransactionPeer::ID);
+    }
+    
+    $transactions = TransactionPeer::doSelectJoinAll($criteria);
+    
+    $pdf = Document::pdfCashTransactions($transactions, $this->getUser()->getCulture());
+    
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
   }
   
   /**

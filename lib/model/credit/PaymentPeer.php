@@ -90,6 +90,23 @@ class PaymentPeer extends BasePaymentPeer
   }
   
   /**
+   * Returns the sum of interest
+   * 
+   * @param array $payments
+   * @return decimal 
+   */
+  public static function sumDiscount($payments)
+  {
+    $amount = 0.00;
+    
+    foreach ($payments as $payment){
+      $amount = $amount + $payment->getDiscount();
+    }
+    
+    return $amount;
+  }
+  
+  /**
    * Returns the sum of (interest + arrear + capital)
    * 
    * @param array $payments
@@ -100,7 +117,7 @@ class PaymentPeer extends BasePaymentPeer
     $amount = 0.00;
     
     foreach ($payments as $payment){
-      $amount = $amount + $payment->getCapital() + $payment->getInterest() + $payment->getArrear();
+      $amount = $amount + $payment->getCapital() + $payment->getInterest() + $payment->getArrear() - $payment->getDiscount();
     }
     
     return $amount;
@@ -122,39 +139,65 @@ class PaymentPeer extends BasePaymentPeer
     
     return self::doSelect($criteria);
   }
-
+  
   /**
-   * Pay of payments
-   * 
+   *
    * @param sfGuardUser $user
-   * @param Cash $connection
-   * @param TransactionType $accountTransactionType
-   * @param TransactionType $creditTransactionType
-   * @param array $payments
-   * @param PropelPDO $con 
+   * @param Credit $credit
+   * @param type $numbers
+   * @param TransactionType $actTransactionType
+   * @param TransactionType $cdtTransactionType
+   * @param PropelPDO $con
+   * @return Transaction 
    */
-  public static function pay(sfGuardUser $user, TransactionType $accountTransactionType, TransactionType $creditTransactionType, $payments, PropelPDO $con = null)
+  public static function pay(sfGuardUser $user, Credit $credit, $numbers, TransactionType $actTransactionType, TransactionType $cdtTransactionType, PropelPDO $con = null)
   {
+    $payments = $credit->getPaymentsPending($numbers);
+    $account = $credit->getAccount();
+    
+    $amount = self::sumAll($payments);
+    
     if($con == null){
-      $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con = Propel::getConnection(PaymentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
     }
-    
-    $amount = $this->getInterestAccumulated();
-    
+   
     $con->beginTransaction();
-    
-    try{
+    try {
+      
+      $actTransaction = new Transaction($user, $actTransactionType, $amount);
+      $actTransaction->setAccount($account);
+      $actTransaction->save($con);
+      
+      $account->debit($amount, $con);
+      $actTransaction->updateAccountBalance($account->getBalance(), $con);
+        
+      $cdtTransaction = new Transaction($user, $cdtTransactionType, $amount);
+      $cdtTransaction->setCredit($credit);
+      $cdtTransaction->save($con);
+      
+      $credit->accredit($amount, $con);
       
       foreach ($payments as $payment){
-        $payment->pay($user, $accountTransactionType, $creditTransactionType, $con);
+          
+        $payment->setTransaction($cdtTransaction);
+        $payment->setStatus(Payment::STATUS_PAID);
+        $payment->setPaidAt(time());
+        $payment->save($con);
+      }
+      
+      if($credit->CountPaymentsPending()== 0){       
+        $credit->setStatus(Credit::STATUS_PAID);  
+        $credit->save($con);
       }
       
       $con->commit();
-      
-    }catch(Exception $e){
+
+    } catch (Exception $e) {
       
       $con->rollBack();
       throw $e;
     }
+    
+    return $cdtTransaction;
   }
 } // CreditAmortizationPeer

@@ -19,6 +19,8 @@ class GeneralTransactionForm extends TransactionForm
   {
     parent::configure();
     
+    $this->useFields(array('amount', 'transaction_type_id', 'observation'));
+    
     $criteria = new Criteria();
     $criteria->add(TransactionTypePeer::TYPE, TransactionType::TYPE_GENERAL, Criteria::EQUAL);
 

@@ -16,8 +16,8 @@ CREATE TABLE `credit_product`
 	`name` VARCHAR(60)  NOT NULL,
 	`amortization_type` VARCHAR(60) default 'german' NOT NULL,
 	`grace_days` INTEGER default 0 NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `credit_product_U_1` (`name`)
 )ENGINE=InnoDB;
@@ -84,7 +84,7 @@ CREATE TABLE `credit`
 	`id` BIGINT  NOT NULL AUTO_INCREMENT,
 	`product_id` BIGINT  NOT NULL,
 	`associate_id` BIGINT  NOT NULL,
-	`account_id` BIGINT  NOT NULL,
+	`account_id` BIGINT,
 	`amount` DECIMAL(18,2)  NOT NULL,
 	`balance` DECIMAL(18,2)  NOT NULL,
 	`time_in_months` INTEGER  NOT NULL,
@@ -93,8 +93,11 @@ CREATE TABLE `credit`
 	`purpose` VARCHAR(100)  NOT NULL,
 	`interest_rate` DECIMAL(8,2)  NOT NULL,
 	`status` VARCHAR(30) default 'in_request' NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`issued_at` DATETIME,
+	`disbursed_at` DATETIME,
+	`annulled_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `credit_FI_1` (`product_id`),
 	CONSTRAINT `credit_FK_1`
@@ -114,6 +117,27 @@ CREATE TABLE `credit`
 		REFERENCES `account` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- committee_member
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `committee_member`;
+
+
+CREATE TABLE `committee_member`
+(
+	`id` BIGINT  NOT NULL AUTO_INCREMENT,
+	`credit_id` BIGINT  NOT NULL,
+	`name` VARCHAR(60)  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `committee_member_FI_1` (`credit_id`),
+	CONSTRAINT `committee_member_FK_1`
+		FOREIGN KEY (`credit_id`)
+		REFERENCES `credit` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -137,42 +161,18 @@ CREATE TABLE `payment`
 	`days_in_arrear` INTEGER,
 	`arrear` DECIMAL(8,2),
 	`discount` DECIMAL(8,2),
+	`paid_at` DATETIME,
 	PRIMARY KEY (`id`),
-	UNIQUE KEY `payment_U_1` (`transaction_id`),
 	INDEX `payment_FI_1` (`credit_id`),
 	CONSTRAINT `payment_FK_1`
 		FOREIGN KEY (`credit_id`)
 		REFERENCES `credit` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE CASCADE,
+	INDEX `payment_FI_2` (`transaction_id`),
 	CONSTRAINT `payment_FK_2`
 		FOREIGN KEY (`transaction_id`)
-		REFERENCES `credit_transaction` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE
-)ENGINE=InnoDB;
-
-#-----------------------------------------------------------------------------
-#-- credit_transaction
-#-----------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `credit_transaction`;
-
-
-CREATE TABLE `credit_transaction`
-(
-	`id` BIGINT  NOT NULL,
-	`credit_id` BIGINT  NOT NULL,
-	PRIMARY KEY (`id`),
-	CONSTRAINT `credit_transaction_FK_1`
-		FOREIGN KEY (`id`)
 		REFERENCES `transaction` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE,
-	INDEX `credit_transaction_FI_2` (`credit_id`),
-	CONSTRAINT `credit_transaction_FK_2`
-		FOREIGN KEY (`credit_id`)
-		REFERENCES `credit` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE CASCADE
 )ENGINE=InnoDB;

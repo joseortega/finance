@@ -8,7 +8,8 @@
             <unique-column name="name"/>
         </unique>
         <column name="tax_rate" type="decimal" size="8" scale="2" required="true" default="0.00"/>
-        <behavior name="timestampable"/>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
     </table>
 
     <table name="investment_product_interest_rate">
@@ -43,18 +44,7 @@
         <column name="interest_rate" type="decimal" size="8" scale="2" required="true" />
         <column name="tax_rate" type="decimal" size="8" scale="2" required="true" />
         <column name="is_current" type="boolean" required="true" default="0"/>
-        <behavior name="timestampable"/>
-    </table>
-
-    <table name="investment_transaction">
-        <column name="id" type="bigint" primaryKey="true" required="true" />
-        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference local="id" foreign="id" />
-        </foreign-key> 
-        <column name="investment_id" type="bigint" required="true" />
-        <foreign-key foreignTable="investment" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference local="investment_id" foreign="id" />
-        </foreign-key>
-    </table>
-    
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>    
 </database>

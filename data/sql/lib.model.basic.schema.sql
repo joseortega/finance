@@ -30,9 +30,8 @@ CREATE TABLE `agency`
 (
 	`id` BIGINT  NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(60)  NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
-	PRIMARY KEY (`id`)
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `agency_U_1` (`name`)
 )ENGINE=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -50,8 +49,8 @@ CREATE TABLE `cash`
 	`ip_address` VARCHAR(50)  NOT NULL,
 	`balance` DECIMAL(18,2)  NOT NULL,
 	`status` VARCHAR(50) default 'close' NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `cash_U_1` (`name`),
 	INDEX `cash_FI_1` (`agency_id`),
@@ -78,8 +77,8 @@ CREATE TABLE `transaction_type`
 	`concept` VARCHAR(30)  NOT NULL,
 	`initials` VARCHAR(15)  NOT NULL,
 	`operation_type` VARCHAR(50)  NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `transaction_type_U_1` (`concept`),
 	UNIQUE KEY `transaction_type_U_2` (`initials`)
@@ -98,10 +97,14 @@ CREATE TABLE `transaction`
 	`cash_id` BIGINT,
 	`user_id` INTEGER  NOT NULL,
 	`transaction_type_id` BIGINT  NOT NULL,
-	`type` VARCHAR(30) default 'general' NOT NULL,
 	`amount` DECIMAL(18,2)  NOT NULL,
 	`observation` TEXT,
 	`created_at` DATETIME  NOT NULL,
+	`credit_id` BIGINT,
+	`account_id` BIGINT,
+	`bankbook_id` BIGINT,
+	`account_balance` DECIMAL(18,2),
+	`investment_id` BIGINT,
 	PRIMARY KEY (`id`),
 	INDEX `transaction_FI_1` (`cash_id`),
 	CONSTRAINT `transaction_FK_1`
@@ -120,7 +123,31 @@ CREATE TABLE `transaction`
 		FOREIGN KEY (`transaction_type_id`)
 		REFERENCES `transaction_type` (`id`)
 		ON UPDATE RESTRICT
-		ON DELETE RESTRICT
+		ON DELETE RESTRICT,
+	INDEX `transaction_FI_4` (`credit_id`),
+	CONSTRAINT `transaction_FK_4`
+		FOREIGN KEY (`credit_id`)
+		REFERENCES `credit` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE,
+	INDEX `transaction_FI_5` (`account_id`),
+	CONSTRAINT `transaction_FK_5`
+		FOREIGN KEY (`account_id`)
+		REFERENCES `account` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE,
+	INDEX `transaction_FI_6` (`bankbook_id`),
+	CONSTRAINT `transaction_FK_6`
+		FOREIGN KEY (`bankbook_id`)
+		REFERENCES `bankbook` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE RESTRICT,
+	INDEX `transaction_FI_7` (`investment_id`),
+	CONSTRAINT `transaction_FK_7`
+		FOREIGN KEY (`investment_id`)
+		REFERENCES `investment` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #-----------------------------------------------------------------------------

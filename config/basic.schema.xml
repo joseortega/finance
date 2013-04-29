@@ -13,7 +13,9 @@
     <table name="agency">
         <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
         <column name="name" type="varchar" size="60" required="true" />
-        <behavior name="timestampable"/>
+        <unique>
+            <unique-column name="name"/>
+        </unique>
     </table>
 
     <table name="cash">
@@ -29,7 +31,8 @@
         <unique>
             <unique-column name="name"/>
         </unique>
-        <behavior name="timestampable"/>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
     </table>
     
     <table name="transaction_type">
@@ -46,7 +49,8 @@
         </unique>
         <column name="initials" type="varchar" size="15" required="true" />
         <column name="operation_type" type="varchar" size="50" required="true" default="null"/>
-        <behavior name="timestampable"/>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
     </table>
     
     <table name="transaction">
@@ -63,10 +67,32 @@
         <foreign-key foreignTable="transaction_type" onDelete="RESTRICT" onUpdate="RESTRICT">
             <reference local="transaction_type_id" foreign="id" />
         </foreign-key>
-        <column name="type" type="varchar" size="30" required="true" default="general"/>
         <column name="amount" type="decimal" size="18" scale="2" required="true" />
         <column name="observation" type="longvarchar" required="false" />
         <column name="created_at" type="timestamp" required="true" />
+        
+        <!--credit_transaction-->
+        <column name="credit_id" type="bigint" required="false" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+        
+        <!--account_transaction-->
+        <column name="account_id" type="bigint" required="false" />
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="account_id" foreign="id" />
+        </foreign-key>
+        <column name="bankbook_id" type="bigint" required="false" />
+        <foreign-key foreignTable="bankbook" onDelete="RESTRICT" onUpdate="RESTRICT">
+            <reference local="bankbook_id" foreign="id" />
+        </foreign-key>
+        <column name="account_balance" type="decimal" size="18" scale="2" required="false" />
+        
+        <!--investment_transaction-->
+        <column name="investment_id" type="bigint" required="false" />
+        <foreign-key foreignTable="investment" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="investment_id" foreign="id" />
+        </foreign-key>
     </table>
     
     <table name="rate_unique">

@@ -112,7 +112,7 @@ class BankbookPdf
    */
   public static function buildContent(Bankbook $bankbook, FPDF $pdf) 
   {
-    $transactions = $bankbook->getAccountTransactions();
+    $transactions = $bankbook->getTransactions();
     
     //print table content
     foreach ($transactions as $key=>$transaction){

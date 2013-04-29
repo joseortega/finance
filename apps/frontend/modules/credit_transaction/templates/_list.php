@@ -5,7 +5,7 @@
   <div class="alert <?php echo $transaction->getTypeOperationText()?>">
     <div class="body">
       <div class="title">
-        <a href="<?php echo url_for('credit_transaction/show?id='.$transaction->getId())?>"><?php echo $transaction->getTransactionType()?></a>
+        <a href="<?php echo url_for('credit_transaction/show?id='.$transaction->getId())?>"># <?php echo $transaction->getId()?> <?php echo $transaction->getTransactionType()?></a>
         <span><?php echo __($transaction->getTransactionType()->getNature())?></span>
         
         <?php echo __('amount')?>

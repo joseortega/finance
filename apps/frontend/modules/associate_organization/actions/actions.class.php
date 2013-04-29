@@ -10,7 +10,7 @@
 class associate_organizationActions extends sfActions
 {
   protected $request;
-  protected $criteria;
+  protected $criteria = null;
 
   public function preExecute()
   {
@@ -38,20 +38,46 @@ class associate_organizationActions extends sfActions
    */
   protected function getPager()
   {
-    if(!$this->criteria){
-      $this->criteria = new Criteria();
-    }
-    //add person filter
-    $this->criteria->add(AssociatePeer::TYPE, Associate::TYPE_ORGANIZATION);
-    $this->criteria->addDescendingOrderByColumn(AssociatePeer::UPDATED_AT);
-    
+    $this->buildCriteria();
+
     $pager = new sfPropelPager('Associate',20);
     $pager->setCriteria($this->criteria);
-    $pager->setPage($this->request->getParameter('page', 1));
+    $pager->setPage($this->getPage());
     $pager->setPeerMethod('doSelectJoinCategory');
     $pager->init();
 
     return $pager;
+  }
+  
+  /**
+   * build criteria
+   */
+  public function buildCriteria()
+  {
+    if($this->criteria == null){
+      $this->criteria = new Criteria();
+    }
+    //type organization
+    $this->criteria->add(AssociatePeer::TYPE, Associate::TYPE_ORGANIZATION);
+    
+    //by category
+    if($this->getCategory()){
+      $this->criteria->add(AssociatePeer::CATEGORY_ID, $this->getCategory()->getId());
+    }
+    
+    //by query
+    if($query = $this->request->getParameter('query')){
+      $c1 = $this->criteria->getNewCriterion(AssociatePeer::NAME, '%'.$query.'%', Criteria::LIKE);
+      $c2 = $this->criteria->getNewCriterion(AssociatePeer::NUMBER, '%'.$query.'%', Criteria::LIKE);
+      $c3 = $this->criteria->getNewCriterion(AssociatePeer::IDENTIFICATION, '%'.$query.'%', Criteria::LIKE);
+      $c1->addOr($c2);
+      $c1->addOr($c3);
+      $this->criteria->add($c1);
+    }
+    
+    //order by
+    $this->criteria->addDescendingOrderByColumn(AssociatePeer::UPDATED_AT);
+    $this->criteria->addAscendingOrderByColumn(AssociatePeer::NAME);
   }
 
   /**
@@ -78,10 +104,37 @@ class associate_organizationActions extends sfActions
     
     $associate = new Associate();
     $associate->setType(Associate::TYPE_ORGANIZATION);
-    
     $this->form = new AssociateForm($associate);
 
-    $this->processForm($request, $this->form);
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+
+    if ($this->form->isValid()){
+      
+      $associate = $this->form->updateObject();  
+      
+      $con = Propel::getConnection(AssociatePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
+      
+      try{
+          $associate->setNumber(AssociatePeer::generateNumber($con));
+          $associate->save();
+          
+          $con->commit();
+          
+      }  catch (Exception $e){
+          
+          $con->rollBack();
+          $this->getUser()->setFlash('error', 'A persistence error occurred.');
+      }
+
+      $this->getUser()->setFlash('notice', 'The item was created successfully.');
+      
+      $this->redirect('associate_show', $associate);
+      
+    }else{
+      
+      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+    }
 
     $this->setTemplate('new');
   }
@@ -109,86 +162,42 @@ class associate_organizationActions extends sfActions
     $this->forward404If(!$this->associate->isOrganization());
     $this->form = new AssociateForm($this->associate);
 
-    $this->processForm($request, $this->form);
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    
+    if ($this->form->isValid()){
+                  
+      $this->associate = $this->form->save();
+
+      $this->getUser()->setFlash('notice', 'The item was updated successfully.');
+      
+      $this->redirect('associate_organization_edit', $this->associate);
+      
+    }else{
+      
+      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+    }
 
     $this->setTemplate('edit');
   }
-
-  /**
-   * Process form
-   * 
-   * @param sfWebRequest $request
-   * @param sfForm $form 
-   */
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
-      
-      $b = $form->getObject()->isNew();
-      
-      $associate = $form->save();
-
-      $this->getUser()->setFlash('notice', $notice);
-      
-      if($b){
-        $this->redirect('associate_show', $associate);
-      }else{
-        $this->redirect('associate_organization_edit', $associate);
-      }
-    }
-    else
-    {
-      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
-    }
-  }
-
-  /**
-   * Filter by category_id
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeFilterByCategory(sfWebRequest $request)
-  {
-    $this->categories = $this->getCategories();
-    $this->category = $this->getCategory();
-    
-    $this->criteria = new Criteria();
-
-    $this->criteria->add(AssociatePeer::CATEGORY_ID, $this->category->getId());
-    
-    $this->pager = $this->getPager();
-    
-    $this->setTemplate('index');
-  }
   
   /**
-   * Execute search associate
+   * Print list in pdf
    * 
    * @param sfWebRequest $request 
    */
-  public function executeSearch(sfWebRequest $request)
+  public function executePrintInPdf(sfWebRequest $request)
   {
-     $this->forwardUnless($query = $request->getParameter('query'), 'associate_organization', 'index');
+    $this->buildCriteria();
     
-    $this->category = $this->getCategory();
-    $this->categories = $this->getCategories();
+    $associates = AssociatePeer::doSelect($this->criteria);
+   
+    $pdf = Document::pdfAssociates($associates, $this->getUser()->getCulture());
     
-    $this->criteria = new Criteria();
-    
-    $c1 = $this->criteria->getNewCriterion(AssociatePeer::NAME, '%'.$query.'%', Criteria::LIKE);
-    $c2 = $this->criteria->getNewCriterion(AssociatePeer::NUMBER, '%'.$query.'%', Criteria::LIKE);
-    $c3 = $this->criteria->getNewCriterion(AssociatePeer::IDENTIFICATION, '%'.$query.'%', Criteria::LIKE);
-    $c1->addOr($c2);
-    $c1->addOr($c3);
-    $this->criteria->add($c1);
-    $this->criteria->addAscendingOrderByColumn(AssociatePeer::NAME);
-    
-    $this->pager = $this->getPager();
+    $pdf->Output();
 
-    $this->setTemplate('index');
+    exit();
+
+    $this->setLayout(false);
   }
   
   /**
@@ -209,5 +218,15 @@ class associate_organizationActions extends sfActions
   public function getCategory()
   {
     return CategoryPeer::retrieveByPK($this->request->getParameter('categoryId'));
+  }
+  
+  /**
+   * Return the page
+   * 
+   * @return int
+   */
+  public function getPage()
+  {
+    return $this->request->getParameter('page', 1);
   }
 }

@@ -31,6 +31,8 @@ abstract class BaseAssociateForm extends BaseFormPropel
       'gender'                  => new sfWidgetFormInputText(),
       'relationship_status'     => new sfWidgetFormInputText(),
       'birthday'                => new sfWidgetFormDate(),
+      'monthly_income'          => new sfWidgetFormInputText(),
+      'monthly_expenditure'     => new sfWidgetFormInputText(),
       'created_at'              => new sfWidgetFormDateTime(),
       'updated_at'              => new sfWidgetFormDateTime(),
       'guarantee_personal_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'Credit')),
@@ -54,8 +56,10 @@ abstract class BaseAssociateForm extends BaseFormPropel
       'gender'                  => new sfValidatorString(array('max_length' => 15, 'required' => false)),
       'relationship_status'     => new sfValidatorString(array('max_length' => 30, 'required' => false)),
       'birthday'                => new sfValidatorDate(array('required' => false)),
-      'created_at'              => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'              => new sfValidatorDateTime(array('required' => false)),
+      'monthly_income'          => new sfValidatorNumber(array('required' => false)),
+      'monthly_expenditure'     => new sfValidatorNumber(array('required' => false)),
+      'created_at'              => new sfValidatorDateTime(),
+      'updated_at'              => new sfValidatorDateTime(),
       'guarantee_personal_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'Credit', 'required' => false)),
     ));
 

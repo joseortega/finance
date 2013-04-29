@@ -10,10 +10,12 @@ all:
   #i18n pdf...report
   
   #transaction detail en.
+  en_id: Id
   en_agency: Agency
   en_account: Account
   en_associate: Associate
   en_transaction: Transaction
+  en_transaction_id: Transaction id
   en_date: Date
   en_amount: Amount
   en_investment: Investment
@@ -26,14 +28,50 @@ all:
   en_final_amount: Final amount
   en_balance: Balance
   en_n: Nº
+  en_payments: Payments
   en_payment: Payment
   en_bankbook_id: Bankbook.id
+  en_arrear: Arrear
+  en_capital: Capital
+  en_status: Status
+  en_paid: Paid
+  en_unpaid: Unpaid
+  en_debit: Debit
+  en_credit: Credit
+  en_entity_type_account: Account 
+  en_entity_type_credit: Credit 
+  en_entity_type_investment: Investment
+  es_entity_type_cash: Cash 
+  en_entity_type_account_cash: Account-Cash 
+  
+  #Associate list
+  en_number: Number
+  en_name: Name
+  en_identification: Identification
+  en_category: Category
+  en_type: Type
+  en_created_at: Created at
+  
+  #account list
+  en_available_balance: Available B
+  en_blocked_balance: Blocked B
+  
+  #credit list
+  en_term: Term
+  
+  #cash
+  en_cash: Cash
+  
+  #payment
+  en_discount: Discount
   
   #transaction detail es.
+  es_id: Código
   es_agency: Agencia
   es_account: Cuenta
   es_associate: Socio
   es_transaction: Transacción
+  es_transaction_id: Código de transacción
   es_date: Fecha
   es_amount: Monto
   es_investment: Inversión
@@ -46,7 +84,39 @@ all:
   es_final_amount: Monto final
   es_balance: Saldo
   es_n: Nº
+  es_payments: Pagos
   es_payment: Pago
   es_bankbook_id: Lib.id
+  es_arrear: Mora
+  es_capital: Capital
+  es_status: Estado
+  es_paid: Pagado
+  es_unpaid: No pagado
+  es_debit: Débito
+  es_credit: Crédito
+  es_entity_type_account: Cuenta 
+  es_entity_type_credit: Crédito 
+  es_entity_type_investment: Inversión 
+  es_entity_type_cash: Caja 
+  es_entity_type_account_cash: Cuenta-Caja
   
+  #Associate list
+  es_number: Número
+  es_name: Nombre
+  es_identification: Identificación
+  es_category: Categoría
+  es_type: Tipo
+  es_created_at: Creado en
   
+  #account list
+  es_available_balance: S. Disponible
+  es_blocked_balance: S. Bloqueado
+  
+  #credit list
+  es_term: Plazo
+  
+  #cash
+  es_cash: Caja
+  
+  #payment
+  es_discount: Descuento

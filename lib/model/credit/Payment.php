@@ -27,8 +27,8 @@ class Payment extends BasePayment
    * The status attribute = paid
    */
   const STATUS_PAID = 'paid';
-  
-  /**
+
+    /**
    * Return true if this fee is canceled
    * 
    * @return boolean 
@@ -95,11 +95,10 @@ class Payment extends BasePayment
         $daysInArrear = ($now - $paymentDate)/60/60/24;
       }
       
-      return $daysInArrear;
-      
+      $this->setDaysInArrear($daysInArrear);
     }
     
-    parent::getDaysInArrear();
+    return parent::getDaysInArrear();
   }
   
   /**
@@ -131,13 +130,29 @@ class Payment extends BasePayment
         $arrear = (pow((1+ ($tea/100)), $n/360)-1)*$k;
       }
       
-      return round($arrear, 2);
+      $arrear = round($arrear, 2);
+      
+      $this->setArrear($arrear);
     }
     
-    parent::getArrear();
-    
+    return parent::getArrear(); 
   }
   
+  /**
+   * Get discount
+   * 
+   * @return decimal 
+   */
+  public function getDiscount() 
+  {
+    if($this->discount == null){
+
+      $this->setDiscount(0);
+    }
+          
+    return parent::getDiscount();
+  }
+
   /**
    * Return the total payment
    * 
@@ -145,7 +160,7 @@ class Payment extends BasePayment
    */
   public function getTotal()
   {
-    $total = $this->getPreTotal() + $this->getArrear();
+    $total = $this->getPreTotal() + $this->getArrear() - $this->getDiscount();
     
     return number_format(round($total,2), 2);
   }
@@ -200,22 +215,22 @@ class Payment extends BasePayment
     $con->beginTransaction();
     try {
       
-      $transaction = new Transaction($user, $actTransactionType, $amount);
-      $transaction->save($con);
-        
-      $actTransaction = new AccountTransaction($transaction, $account);
+      $actTransaction = new Transaction($user, $actTransactionType, $amount);
+      $actTransaction->setAccount($account);
       $actTransaction->save($con);
-
-      $transaction = new Transaction($user, $cdtTransactionType, $amount);
-      $transaction->save($con);
       
-      $cdtTransaction = new CreditTransaction($transaction, $credit);
+      $account->debit($amount, $con);
+      $actTransaction->updateAccountBalance($account->getBalance(), $con);
+
+      $cdtTransaction = new Transaction($user, $cdtTransactionType, $amount);
+      $cdtTransaction->setCredit($credit);
       $cdtTransaction->save($con);
+     
+      $credit->accredit($amount, $con);
       
       $this->setTransaction($cdtTransaction);
-      $this->setArrear($this->getArrear());
-      $this->setDaysInArrear($this->getDaysInArrear());
       $this->setStatus(Payment::STATUS_PAID);
+      $this->setPaidAt(time());
       $this->save($con);
       
       if($credit->CountPaymentsPending()== 0){       
@@ -232,6 +247,5 @@ class Payment extends BasePayment
     }
     
     return $cdtTransaction;
-  }
-  
+  } 
 } // CreditAmortization

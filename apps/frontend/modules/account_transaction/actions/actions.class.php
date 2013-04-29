@@ -69,10 +69,10 @@ class account_transactionActions extends sfActions
    */
   protected function getPager()
   {
-    $pager = new sfPropelPager('AccountTransaction',20);
+    $pager = new sfPropelPager('Transaction',20);
     $pager->setCriteria($this->buildCriteria());
     $pager->setPage($this->getPage());
-    $pager->setPeerMethod('doSelectJoinCustom');
+    $pager->setPeerMethod('doSelectJoinAll');
     $pager->init();
 
     return $pager;
@@ -93,7 +93,8 @@ class account_transactionActions extends sfActions
     }
     
     $criteria = $this->filters->buildCriteria($this->getFilters());
-    $criteria->addDescendingOrderByColumn(AccountTransactionPeer::ID);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);
+    $criteria->add(TransactionPeer::ACCOUNT_ID, null, Criteria::NOT_EQUAL);
     $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $criteria);
     $criteria = $event->getReturnValue();
 
@@ -107,7 +108,7 @@ class account_transactionActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $this->transaction = AccountTransactionPeer::retrieveByPk($request->getParameter('id'));
+    $this->transaction = TransactionPeer::retrieveByPk($request->getParameter('id'));
     $this->forward404Unless($this->transaction);
   }
 
@@ -120,7 +121,7 @@ class account_transactionActions extends sfActions
   {
     $transaction = new Transaction();
 
-    $this->form = new TransactionEmbedAccountTransactionForm($transaction, array(
+    $this->form = new AccountTransactionForm($transaction, array(
         'url' => $this->getController()->genUrl('ajax/ajaxAccount'),
         'type' => $this->type
     ));
@@ -143,7 +144,7 @@ class account_transactionActions extends sfActions
     
     $transaction->setUser($user);
     
-    $this->form = new TransactionEmbedAccountTransactionForm($transaction, array(
+    $this->form = new AccountTransactionForm($transaction, array(
         'url' => $this->getController()->genUrl('ajax/ajaxAccount'),
         'cash' => $this->cash,
     ));
@@ -164,18 +165,50 @@ class account_transactionActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $notice = 'The item was created successfully.';
-
-      $form->updateObject();
+      $transaction = $form->updateObject();
       
-      if($form->getObject()->getTransactionType()->getCashBalanceIsAffect())
-      {
-        $form->getObject()->setCash($this->cash);
+      if($transaction->getTransactionType()->getCashBalanceIsAffect()){
+          $transaction->setCash($this->cash);
       }
       
-      $transaction = $form->save();
+      $nature = $transaction->getTransactionType()->getNature();
+      
+      $con = Propel::getConnection(AccountPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
+      
+      try {
+        
+        $transaction->save($con);
+        
+        if($nature == TransactionType::CREDIT){
+          
+          if($transaction->getCash()){
+            $transaction->getCash()->accredit($transaction->getAmount(), $con);
+          }
 
-      $this->getUser()->setFlash('notice', $notice);
+          $transaction->getAccount()->accredit($transaction->getAmount(), $con);
+
+        }elseif($nature == TransactionType::DEBIT){
+
+          if($transaction->getCash()){
+            $transaction->getCash()->debit($transaction->getAmount(), $con);
+          }
+
+          $transaction->getAccount()->debit($transaction->getAmount(), $con);
+
+        }
+        
+        $transaction->updateAccountBalance($transaction->getAccount()->getBalance(), $con);
+        
+        $con->commit();
+        
+      }catch(Exception $e){
+        
+        $con->rollBack();
+        $this->getUser()->setFlash('error', 'A persistence error occurred.');
+      }
+        
+      $this->getUser()->setFlash('notice', 'The item was created successfully.');
 
       $this->redirect('account_transaction_show', $transaction);
     }
@@ -192,7 +225,7 @@ class account_transactionActions extends sfActions
    */
   public function  executePrintDetail(sfWebRequest $request)
   {  
-    $transaction = AccountTransactionPeer::retrieveByPK($request->getParameter('id'));
+    $transaction = TransactionPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($transaction);
     
     $pdf = Document::pdfAccountTransaction($transaction, $this->getUser()->getCulture());
@@ -217,10 +250,10 @@ class account_transactionActions extends sfActions
     
     if($orderBy == Criteria::ASC){
       $criteria->clearOrderByColumns();
-      $criteria->addAscendingOrderByColumn(AccountTransactionPeer::ID);
+      $criteria->addAscendingOrderByColumn(TransactionPeer::ID);
     }
     
-    $transactions = AccountTransactionPeer::doSelectJoinAll($criteria);
+    $transactions = TransactionPeer::doSelectJoinAll($criteria);
     
     $pdf = Document::pdfAccountTransactions($transactions, $this->getUser()->getCulture());
     

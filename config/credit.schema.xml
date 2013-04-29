@@ -9,7 +9,8 @@
         </unique>
         <column name="amortization_type" type="varchar" size="60" required="true" default="german"/>
         <column name="grace_days" type="integer" required="true" default="0"/>
-        <behavior name="timestampable"/>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
     </table>
     
     <table name="credit_product_interest_rate">
@@ -44,7 +45,7 @@
         <foreign-key foreignTable="associate" onDelete="RESTRICT" onUpdate="RESTRICT">
             <reference local="associate_id" foreign="id" />
         </foreign-key>
-        <column name="account_id" type="bigint" required="true" />
+        <column name="account_id" type="bigint" required="false" />
         <foreign-key foreignTable="account" onDelete="RESTRICT" onUpdate="RESTRICT">
             <reference local="account_id" foreign="id" />
         </foreign-key>
@@ -56,7 +57,20 @@
         <column name="purpose" type="varchar" size="100" required="true" />
         <column name="interest_rate" type="decimal" size="8" scale="2" required="true" />
         <column name="status" type="varchar" size="30" required="true" default="in_request"/>
-        <behavior name="timestampable"/>
+        <column name="issued_at" type="timestamp" required="false" default="null" />
+        <column name="disbursed_at" type="timestamp" required="false" default="null" />
+        <column name="annulled_at" type="timestamp" required="false" default="null" />
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="committee_member">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="credit_id" type="bigint" required="true" />
+        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference local="credit_id" foreign="id" />
+        </foreign-key>
+        <column name="name" type="varchar" size="60" required="true" />
     </table>
 
     <table name="payment">
@@ -66,12 +80,10 @@
             <reference local="credit_id" foreign="id" />
         </foreign-key>
         <column name="transaction_id" type="bigint" required="false" />
-        <foreign-key foreignTable="credit_transaction" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Transaction">
+        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT" phpName="Transaction">
             <reference local="transaction_id" foreign="id" />
         </foreign-key>
-        <unique>
-            <unique-column name="transaction_id"/>
-        </unique>
+        
         <column name="number" type="integer" required="true" />
         <column name="date" type="date" required="true" />
         <column name="balance" type="decimal" size="18" scale="2" required="true" />
@@ -80,17 +92,8 @@
         <column name="status" type="varchar" size="30" required="true" />
         <column name="days_in_arrear" type="integer" required="false"/>
         <column name="arrear" type="decimal" size="8" scale="2" required="false"/> 
-    </table>
-
-    <table name="credit_transaction">
-        <column name="id" type="bigint" primaryKey="true" required="true" />
-        <foreign-key foreignTable="transaction" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference local="id" foreign="id" />
-        </foreign-key>
-        <column name="credit_id" type="bigint" required="true" />
-        <foreign-key foreignTable="credit" onDelete="CASCADE" onUpdate="RESTRICT">
-            <reference local="credit_id" foreign="id" />
-        </foreign-key>
+        <column name="discount" type="decimal" size="8" scale="2" required="false"/> 
+        <column name="paid_at" type="timestamp" required="false" default="null" />
     </table>
 
     <table name="guarantee_personal">

@@ -6,7 +6,7 @@
     <div class="body">
       <div class="title">
         
-        <a href="<?php echo url_for('investment_transaction_show', $transaction)?>"><?php echo $transaction->getTransactionType()?></a>
+        <a href="<?php echo url_for('investment_transaction_show', $transaction)?>"># <?php echo $transaction->getId()?> <?php echo $transaction->getTransactionType()?></a>
         <span><?php echo __($transaction->getTransactionType()->getNature())?></span>
         
         <?php echo __('amount')?>

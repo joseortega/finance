@@ -13,7 +13,7 @@
     <div class="body">
       <div class="title">
         
-        <a href="<?php echo url_for('general_transaction_show', $transaction)?>"><?php echo $transaction->getTransactionType()?></a>
+          <a href="<?php echo url_for('general_transaction_show', $transaction)?>"># <?php echo $transaction->getId()?> <?php echo $transaction->getTransactionType()?></a>
         <span><?php echo $transaction->getTransactionType()->getNature()?></span>
         
         <?php echo __('amount')?>

@@ -65,7 +65,7 @@ class investment_transactionActions extends sfActions
    */
   protected function getPager()
   {    
-    $pager = new sfPropelPager('InvestmentTransaction',20);
+    $pager = new sfPropelPager('Transaction',20);
     $pager->setCriteria($this->buildCriteria());
     $pager->setPage($this->getPage());
     $pager->setPeerMethod('doSelectJoinAll');
@@ -88,9 +88,10 @@ class investment_transactionActions extends sfActions
       ));
     }
     
-    $criteria = $this->filters->buildCriteria($this->getFilters());   
+    $criteria = $this->filters->buildCriteria($this->getFilters());
+    $criteria->add(TransactionPeer::INVESTMENT_ID, null, Criteria::NOT_EQUAL);
     $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-    $criteria->addDescendingOrderByColumn(InvestmentTransactionPeer::ID);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);
     $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $criteria);
     $criteria = $event->getReturnValue();
 
@@ -104,7 +105,7 @@ class investment_transactionActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $this->transaction = InvestmentTransactionPeer::retrieveByPk($request->getParameter('id'));
+    $this->transaction = TransactionPeer::retrieveByPk($request->getParameter('id'));
     $this->forward404Unless($this->transaction);
   }
 
@@ -165,7 +166,7 @@ class investment_transactionActions extends sfActions
    */
   public function  executePrintDetail(sfWebRequest $request){
     
-    $transaction = InvestmentTransactionPeer::retrieveByPK($request->getParameter('id'));
+    $transaction = TransactionPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($transaction);
 
     $documentTransaction = new Document();
@@ -192,10 +193,10 @@ class investment_transactionActions extends sfActions
     
     if($orderBy == Criteria::ASC){
       $criteria->clearOrderByColumns();
-      $criteria->addAscendingOrderByColumn(InvestmentTransactionPeer::ID);
+      $criteria->addAscendingOrderByColumn(TransactionPeer::ID);
     }
     
-    $transactions = InvestmentTransactionPeer::doSelectJoinAll($criteria);
+    $transactions = TransactionPeer::doSelectJoinAll($criteria);
     
     $pdf = Document::pdfInvestmentTransactions($transactions, $this->getUser()->getCulture());
     

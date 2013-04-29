@@ -44,7 +44,7 @@ class credit_paymentActions extends sfActions
     $query = $request->getParameter('query');
     
     $this->credit = CreditPeer::retrieveByPK($request->getParameter('id'));
-    
+
     $amortizations = $this->credit->getPaymentsPending($query);
     
     return $this->renderPartial('credit_payment/list', array('amortizations' => $amortizations));
@@ -84,19 +84,16 @@ class credit_paymentActions extends sfActions
       try {
         
         $number = $this->form->getValue('number_payments');
-        
-        $payments = $this->credit->getPaymentsPending($number);
-        
-        $this->credit->pay($user, $actTransactionType, $crdTransactionType, $number);
-        
+        $crdTransaction = PaymentPeer::pay($user, $this->credit, $number, $actTransactionType, $crdTransactionType);
+                
       } catch (Exception $e) {
         
-        $this->getUser()->setFlash('error', 'A persistence error occurred.');
+        $this->getUser()->setFlash('error', 'A persistence error occurred.'.$e);
         $this->setTemplate('index');
       }
       
       $this->getUser()->setFlash('notice', 'Payments have been made successfully.');
-      $this->redirect('credit_amortization', $this->credit);
+      $this->redirect('credit_transaction_history/show?id='.$this->credit->getId().'&transaction_id='.$crdTransaction->getId());
 
     }  else {
       

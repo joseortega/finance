@@ -3,6 +3,17 @@
     <p><?php echo __('No result') ?></p>
   <?php else: ?>
     <table class="credits" cellspacing="0">
+      <thead>
+        <tr>
+          <th colspan="2"><?php echo __('Credit')?></th>
+          <th class="data"><?php echo __('Product')?></th>
+          <th class="data"><?php echo __('Amount')?></th>
+          <th class="data"><?php echo __('Term')?></th>
+        </tr>
+        <tr class="sep">
+          <td colspan="8"></td>
+        </tr>
+      </thead>
     <tfoot>
       <tr>
         <th colspan="5">
@@ -34,15 +45,12 @@
         </td>
         <td class="data"><?php echo $credit->getProduct() ?></td>
         <td class="data"><?php echo $credit->getAmount() ?></td>
-        <td class="data">
-          <?php echo $credit->getTimeInMonths() ?>
-          <?php echo __('months')?>
-        </td>
+        <td class="data"><?php echo $credit->getTimeInMonths() ?></td>
       </tr>
       <tr>
         <td colspan="4">
           <?php echo __('Created at')?> <?php echo $credit->getCreatedAt('Y-m-d')?>
-          <em>(<?php echo __($credit->getStatusText())?>)</em>
+            <span class="label"><?php echo __($credit->getStatusText())?></span>
         </td>
       </tr>
       <tr class="sep">

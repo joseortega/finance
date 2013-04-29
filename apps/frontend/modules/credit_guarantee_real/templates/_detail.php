@@ -3,10 +3,10 @@
 <table class="info">
   <tbody>
     <tr>
-      <th class="label"><?php echo __('Mortgages')?>:</th>
+      <th class="label"><?php echo __('Guarantees')?>:</th>
       <td class="data">
         <?php if(count($credit->getGuaranteeReals())==0):?>
-        <?php echo __('No tiene ningun garante hipotecario')?>
+        <?php echo __('None')?>
         <?php else:?>
         <ul>
           <?php foreach ($credit->getGuaranteeReals() as $guarantee):?>

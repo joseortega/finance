@@ -13,7 +13,7 @@ abstract class BasePaymentFormFilter extends BaseFormFilterPropel
   {
     $this->setWidgets(array(
       'credit_id'      => new sfWidgetFormPropelChoice(array('model' => 'Credit', 'add_empty' => true)),
-      'transaction_id' => new sfWidgetFormPropelChoice(array('model' => 'CreditTransaction', 'add_empty' => true)),
+      'transaction_id' => new sfWidgetFormPropelChoice(array('model' => 'Transaction', 'add_empty' => true)),
       'number'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'date'           => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'balance'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
@@ -23,11 +23,12 @@ abstract class BasePaymentFormFilter extends BaseFormFilterPropel
       'days_in_arrear' => new sfWidgetFormFilterInput(),
       'arrear'         => new sfWidgetFormFilterInput(),
       'discount'       => new sfWidgetFormFilterInput(),
+      'paid_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
     ));
 
     $this->setValidators(array(
       'credit_id'      => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Credit', 'column' => 'id')),
-      'transaction_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'CreditTransaction', 'column' => 'id')),
+      'transaction_id' => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Transaction', 'column' => 'id')),
       'number'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'date'           => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'balance'        => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
@@ -37,6 +38,7 @@ abstract class BasePaymentFormFilter extends BaseFormFilterPropel
       'days_in_arrear' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'arrear'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'discount'       => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'paid_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 
     $this->widgetSchema->setNameFormat('payment_filters[%s]');
@@ -66,6 +68,7 @@ abstract class BasePaymentFormFilter extends BaseFormFilterPropel
       'days_in_arrear' => 'Number',
       'arrear'         => 'Number',
       'discount'       => 'Number',
+      'paid_at'        => 'Date',
     );
   }
 }

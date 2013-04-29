@@ -17,7 +17,7 @@ class GeneralTransactionFormFilter extends TransactionFormFilter
     parent::configure();
     
     $criteria = new Criteria();
-    $criteria->add(TransactionTypePeer::TYPE, TransactionType::TYPE_GENERAL, Criteria::EQUAL);
+    $criteria->add(TransactionTypePeer::CASH_BALANCE_IS_AFFECT, true, Criteria::EQUAL);
 
     $this->widgetSchema['transaction_type_id']->setOption('criteria', $criteria);
     $this->validatorSchema['transaction_type_id']->setOption('criteria', $criteria);

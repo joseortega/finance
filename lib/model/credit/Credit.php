@@ -42,17 +42,57 @@ class Credit extends BaseCredit
    * status attribute = paid
    */
   const STATUS_PAID = 'paid';
-
+  
   /**
-   * Post insert 
-   * 
+   *
+   * @param type $amount
    * @param PropelPDO $con 
    */
-  public function postInsert(PropelPDO $con = null) 
+  public function accredit($amount, PropelPDO $con)
   {
-    $this->setAmortizationType($this->getProduct()->getAmortizationType());
-    $this->save();
-    parent::postInsert($con);
+    if($con == NULL){
+        $con = Propel::getConnection(CreditPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->beginTransaction();
+    
+    try {
+        //set values $credit
+        $this->setBalance($this->getBalance() + $amount);
+        $this->save($con);
+        
+        $con->commit();
+        
+    } catch (Exception $e) {
+        
+        $con->rollBack();
+    } 
+  }
+  
+  /**
+   *
+   * @param type $amount
+   * @param PropelPDO $con 
+   */
+  public function debit($amount, PropelPDO $con = null)
+  {
+    if($con == NULL){
+      $con = Propel::getConnection(CreditPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->beginTransaction();
+    
+    try {
+        //set values $credit
+        $this->setBalance($this->getBalance() - $amount);
+        $this->save($con);
+        
+        $con->commit();
+        
+    } catch (Exception $e) {
+        
+        $con->rollBack();
+    }
   }
 
   /**
@@ -178,7 +218,7 @@ class Credit extends BaseCredit
    * @param int $limit Limit
    * @return  array amortizations 
    */
-  public function getPaymentsPending($limit = null)
+  public function getPaymentsPending($limit = null, $discount = true)
   {
     $criteria = new Criteria();
     $criteria->add(PaymentPeer::STATUS, Payment::STATUS_UNPAID, Criteria::EQUAL);
@@ -186,9 +226,36 @@ class Credit extends BaseCredit
     
     if($limit){
       $criteria->setLimit($limit);
+    }else {
+       $limit = $this->CountPaymentsPending(); 
     }
     
-    return $this->getPayments($criteria);
+    $payments = $this->getPayments($criteria);
+    
+    if($discount == true){
+        
+        //se aplica descuentos de los intereses solo si el crédito se paga en su totalidad
+        if($this->countPayments() == ($this->CountPaymentsEffected() + $limit)){
+            
+            $newPayments = array();
+        
+            foreach($payments as $payment){
+
+                $paymentDate  = mktime(0, 0, 0, date("m", $payment->getDate('U')) - ($this->getPayFrequencyInMonths()), date("d", $payment->getDate('U')),   date("Y", $payment->getDate('U')));
+                $nowDate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+
+                if($paymentDate >= $nowDate){
+                    $payment->setDiscount($payment->getInterest());
+                }
+
+                $newPayments[] = $payment;
+            }
+            
+            return $newPayments;  
+        }       
+    }
+    
+    return $payments;
   }
   
   /**
@@ -316,82 +383,28 @@ class Credit extends BaseCredit
   }
   
   /**
-   * Transfer to account
-   * 
-   * @param Cash $connection
-   * @param sfGuardUser $user
-   * @param TransactionType $cdtTransactionType
-   * @param TransactionType $actTransactionType 
+   *
+   * @return decimal
    */
-  public function disbursement(sfGuardUser $user, TransactionType $cdtTransactionType, TransactionType $actTransactionType)
+  public function getAverageMonthlyFee()
   {
-    $credit = $this;
-    
-    $account = $this->getAccount();
-    
+    $product = $this->getProduct();
     $amount = $this->getAmount();
+    $payFrequencyInMonths = $this->getPayFrequencyInMonths();
+    $annualinterestRate = $product->getInterestRateCurrent() ? $product->getInterestRateCurrent()->getValue() : 0;
+    $timeInMonths = $this->getTimeInMonths();
     
-    $con = Propel::getConnection(CreditPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
-
-    $con->beginTransaction();
-    try{
-        //build transaction credit
-        $transaction = new Transaction($user, $cdtTransactionType, $amount);
-        $transaction->save($con);
-        
-        $creditTransaction = new CreditTransaction($transaction, $credit);
-        $creditTransaction->save($con);
-
-        //update credit status
-        $credit->setStatus(Credit::STATUS_CURRENT);
-        $credit->save($con);
-        
-        //build transacction account
-        $transaction = new Transaction($user, $actTransactionType, $amount); 
-        $transaction->save($con);
-        
-        $accountTransaction = new AccountTransaction($transaction, $account);
-        $accountTransaction->save($con);
-
-        $con->commit();
-
-    }catch (Exception $e){
-      $con->rollBack();
-      throw $e;
+    if($annualinterestRate == 0.00){
+      $total = $amount/$timeInMonths;
+    }else{
+      //To calculate the interest according to the frequency of payments in months
+      $rate = $annualinterestRate/(12/$payFrequencyInMonths);
+      $time = $timeInMonths/($payFrequencyInMonths);
+      //calculate fee: (amount*rate)/(100*(1-(1+rate/100)^-time))
+      $total = round(($amount*$rate)/(100*(1-pow(1+$rate/100,-$time))), 2);
     }
-  }
-  
-  /**
-   * Pay the payments
-   * 
-   * @param sfGuardUser $user
-   * @param Cash $connection
-   * @param TransactionType $actTransactionType
-   * @param TransactionType $cdtTransactionType
-   * @param int $number number of payments 
-   */
-  public function pay(sfGuardUser $user, TransactionType $actTransactionType, TransactionType $cdtTransactionType, $number)
-  {
-    $payments = $this->getPaymentsPending($number);
-    
-    $con = Propel::getConnection(PaymentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
 
-    $con->beginTransaction();
-    
-    try {
-      
-      foreach ($payments as $payment){
-        $payment->pay($user, $actTransactionType, $cdtTransactionType);
-      }
-      
-      $con->commit();
-      
-    } catch (Exception $e) {
-      
-      $con->rollBack();
-      throw $e;
-    }
-    
+    return $total;
   }
 
   /**

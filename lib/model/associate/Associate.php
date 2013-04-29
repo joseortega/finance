@@ -43,10 +43,6 @@ class Associate extends BaseAssociate
     
     try{
       
-      if($this->isNew()){  
-        $this->setNumber(AssociatePeer::generateNumber());
-      }
-
       $ret = parent::save($con);
  
       $this->updateLuceneIndex();
@@ -178,20 +174,40 @@ class Associate extends BaseAssociate
   }
   
   /**
+   *
+   * @return array 
+   */
+  public function getCreditsCurrent()
+  {
+    $criteria = new Criteria();
+    $criteria->add(CreditPeer::STATUS, Credit::STATUS_CURRENT, Criteria::EQUAL);
+    
+    return $this->getCredits($criteria);
+  }
+  
+  /**
    * Count investments current
    * 
    * @return int 
    */
-  public function countInvestmentsCurrent(){
-    
+  public function countInvestmentsCurrent()
+  {  
     $criteria = new Criteria();
     $criteria->add(InvestmentPeer::IS_CURRENT, true, Criteria::EQUAL);
     
     return $this->countInvestments($criteria);
-    
   }
   
   /**
+   *
+   * @return decimal
+   */
+  public function getMonthlyLiquid()
+  {
+    return round($this->getMonthlyIncome() - $this->getMonthlyExpenditure(), 2);
+  }
+
+    /**
    * Method toString
    * 
    * @return type 

@@ -19,11 +19,10 @@ class account_transaction_historyActions extends sfActions
     $this->account = AccountPeer::retrieveByPK($request->getParameter('id'));
     
     $criteria = new Criteria();
-    $criteria->add(AccountTransactionPeer::ACCOUNT_ID, $this->account->getId(), Criteria::EQUAL);
-    $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-    $criteria->addDescendingOrderByColumn(AccountTransactionPeer::ID);    
+    $criteria->add(TransactionPeer::ACCOUNT_ID, $this->account->getId(), Criteria::EQUAL);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);    
 
-    $this->pager = new sfPropelPager('AccountTransaction',20);
+    $this->pager = new sfPropelPager('Transaction',20);
     $this->pager->setCriteria($criteria);
     $this->pager->setPeerMethod('doSelectJoinAll');
     $this->pager->setPage($request->getParameter('page', 1));
@@ -37,7 +36,7 @@ class account_transaction_historyActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $this->transaction = AccountTransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
+    $this->transaction = TransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
     $this->forward404Unless($this->transaction);
     
     $this->account = $this->transaction->getAccount();

@@ -336,7 +336,7 @@ input[type="text"], input[type="password"], select, textarea {
   border-bottom-color: #EAEAEA;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3p
+  border-radius: 3px;
 }
 
 #search_associate_keywords
@@ -351,7 +351,7 @@ input[type="text"], input[type="password"], select, textarea {
   border-bottom-color: #EAEAEA;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3p
+  border-radius: 3px;
 }
 
 .form select
@@ -772,7 +772,7 @@ table.info.product {
   padding-right: 0;
 }
 
-.accounts thead th, .investments thead th
+.accounts thead th, .investments thead th, .credits thead th
 {
   padding-bottom: 10px;
   padding-top: 0px;
@@ -1005,58 +1005,15 @@ table.info.product {
 /*-----------htabs---------*/
 
 .htabs{
+  margin: 15px 0;
   border-top: 1px solid #ddd;
+  background: url('/images/common/side_rule.gif') 230px 0 repeat-y;
 }
 
 .htabs .main{
-  float: left;
+  float: right;
   width: 670px;
-  border-left: 1px solid #ddd;
-  min-height: 270px;
-  padding: 10px 0 0 20px;
-}
-
-.htabs.associate .main
-{
-  min-height: 264px;
-}
-
-.htabs.account .main
-{
-  min-height: 88px;
-}
-
-.htabs.credit .main
-{
-  min-height: 176px;
-}
-
-.htabs.investment_transaction_type .main
-{
-  min-height: 176px;
-}
-
-.htabs.account_transaction_type .main
-{
-  min-height: 220px;
-}
-
-.htabs.credit_transaction_type .main
-{
-  min-height: 132px;
-}
-
-.htabs.credit_product .main
-{
-  min-height: 176px;
-}
-.htabs.account_product .main
-{
-  min-height: 176px;
-}
-.htabs.investment_product .main
-{
-  min-height: 132px;
+  margin-top: 10px;
 }
 
 .htabs .sidebar{
@@ -1066,12 +1023,14 @@ table.info.product {
 
 .htabs .columns.typical
 {
-  width: 691px;
-  float: left;
+  float: right;
+  width: 670px;
 }
+
 .htabs .columns.typical .main
 {
   width: 440px;
+  float: left;
 }
 
 .htabs .columns.typical .sidebar
@@ -1501,4 +1460,106 @@ ul.fieldpills.associatesname li img {
 .search *
 {
   vertical-align: middle;
+}
+
+h4.section_header
+{
+  padding-bottom: 10px;
+}
+
+.columns.equacols.bordered 
+{
+/*  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;*/
+  background: url('../../images/common/column_separator.gif') 50% 0 repeat-y;
+}
+
+.columns.equacols .first, .columns.equacols .last
+{
+  width: 440px;
+}
+
+.filterbox 
+{
+    margin: 8px 0;
+    padding: 10px;
+    background: #FAFAFB;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-image: initial;
+}
+
+.filterbox input 
+{
+    
+    width: 100%;
+}
+
+ul.smallnav {
+margin: 0;
+}
+
+ul.smallnav > li {
+list-style-type: none;
+margin: 0 0 2px 0;
+}
+
+ul.smallnav > li > a {
+display: block;
+padding: 4px 10px;
+font-size: 12px;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+ul.smallnav > li > a .count {
+float: right;
+font-weight: bold;
+color: #777;
+}
+
+ul.smallnav > li > a.selected {
+color: white;
+background: #4183C4;
+}
+
+ul.smallnav > li > a.selected .count {
+color: white;
+}
+
+
+/*labels*/
+
+.label {
+    padding: 1px 3px 2px;
+    font-size: 9.75px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    background-color: #999;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.label-success {
+    background-color: #468847;
+}
+
+.label-warning {
+    background-color: #F89406;
+}
+
+.label-important {
+    background-color: #B94A48;
+}
+
+.label-info {
+    background-color: #3A87AD;
 }

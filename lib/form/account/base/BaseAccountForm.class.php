@@ -39,8 +39,8 @@ abstract class BaseAccountForm extends BaseFormPropel
       'last_capitalization' => new sfValidatorDate(array('required' => false)),
       'next_capitalization' => new sfValidatorDate(array('required' => false)),
       'is_active'           => new sfValidatorBoolean(),
-      'created_at'          => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'          => new sfValidatorDateTime(array('required' => false)),
+      'created_at'          => new sfValidatorDateTime(),
+      'updated_at'          => new sfValidatorDateTime(),
     ));
 
     $this->validatorSchema->setPostValidator(

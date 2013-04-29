@@ -20,8 +20,8 @@ abstract class BaseCreditProductForm extends BaseFormPropel
       'grace_days'                        => new sfWidgetFormInputText(),
       'created_at'                        => new sfWidgetFormDateTime(),
       'updated_at'                        => new sfWidgetFormDateTime(),
-      'credit_product_interest_rate_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'RateUnique')),
       'credit_product_arrear_rate_list'   => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'RateUnique')),
+      'credit_product_interest_rate_list' => new sfWidgetFormPropelChoice(array('multiple' => true, 'model' => 'RateUnique')),
     ));
 
     $this->setValidators(array(
@@ -29,10 +29,10 @@ abstract class BaseCreditProductForm extends BaseFormPropel
       'name'                              => new sfValidatorString(array('max_length' => 60)),
       'amortization_type'                 => new sfValidatorString(array('max_length' => 60)),
       'grace_days'                        => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
-      'created_at'                        => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'                        => new sfValidatorDateTime(array('required' => false)),
-      'credit_product_interest_rate_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'RateUnique', 'required' => false)),
+      'created_at'                        => new sfValidatorDateTime(),
+      'updated_at'                        => new sfValidatorDateTime(),
       'credit_product_arrear_rate_list'   => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'RateUnique', 'required' => false)),
+      'credit_product_interest_rate_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'RateUnique', 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
@@ -56,17 +56,6 @@ abstract class BaseCreditProductForm extends BaseFormPropel
   {
     parent::updateDefaultsFromObject();
 
-    if (isset($this->widgetSchema['credit_product_interest_rate_list']))
-    {
-      $values = array();
-      foreach ($this->object->getCreditProductInterestRates() as $obj)
-      {
-        $values[] = $obj->getRateUniqueId();
-      }
-
-      $this->setDefault('credit_product_interest_rate_list', $values);
-    }
-
     if (isset($this->widgetSchema['credit_product_arrear_rate_list']))
     {
       $values = array();
@@ -78,49 +67,25 @@ abstract class BaseCreditProductForm extends BaseFormPropel
       $this->setDefault('credit_product_arrear_rate_list', $values);
     }
 
+    if (isset($this->widgetSchema['credit_product_interest_rate_list']))
+    {
+      $values = array();
+      foreach ($this->object->getCreditProductInterestRates() as $obj)
+      {
+        $values[] = $obj->getRateUniqueId();
+      }
+
+      $this->setDefault('credit_product_interest_rate_list', $values);
+    }
+
   }
 
   protected function doSave($con = null)
   {
     parent::doSave($con);
 
-    $this->saveCreditProductInterestRateList($con);
     $this->saveCreditProductArrearRateList($con);
-  }
-
-  public function saveCreditProductInterestRateList($con = null)
-  {
-    if (!$this->isValid())
-    {
-      throw $this->getErrorSchema();
-    }
-
-    if (!isset($this->widgetSchema['credit_product_interest_rate_list']))
-    {
-      // somebody has unset this widget
-      return;
-    }
-
-    if (null === $con)
-    {
-      $con = $this->getConnection();
-    }
-
-    $c = new Criteria();
-    $c->add(CreditProductInterestRatePeer::PRODUCT_ID, $this->object->getPrimaryKey());
-    CreditProductInterestRatePeer::doDelete($c, $con);
-
-    $values = $this->getValue('credit_product_interest_rate_list');
-    if (is_array($values))
-    {
-      foreach ($values as $value)
-      {
-        $obj = new CreditProductInterestRate();
-        $obj->setProductId($this->object->getPrimaryKey());
-        $obj->setRateUniqueId($value);
-        $obj->save();
-      }
-    }
+    $this->saveCreditProductInterestRateList($con);
   }
 
   public function saveCreditProductArrearRateList($con = null)
@@ -151,6 +116,41 @@ abstract class BaseCreditProductForm extends BaseFormPropel
       foreach ($values as $value)
       {
         $obj = new CreditProductArrearRate();
+        $obj->setProductId($this->object->getPrimaryKey());
+        $obj->setRateUniqueId($value);
+        $obj->save();
+      }
+    }
+  }
+
+  public function saveCreditProductInterestRateList($con = null)
+  {
+    if (!$this->isValid())
+    {
+      throw $this->getErrorSchema();
+    }
+
+    if (!isset($this->widgetSchema['credit_product_interest_rate_list']))
+    {
+      // somebody has unset this widget
+      return;
+    }
+
+    if (null === $con)
+    {
+      $con = $this->getConnection();
+    }
+
+    $c = new Criteria();
+    $c->add(CreditProductInterestRatePeer::PRODUCT_ID, $this->object->getPrimaryKey());
+    CreditProductInterestRatePeer::doDelete($c, $con);
+
+    $values = $this->getValue('credit_product_interest_rate_list');
+    if (is_array($values))
+    {
+      foreach ($values as $value)
+      {
+        $obj = new CreditProductInterestRate();
         $obj->setProductId($this->object->getPrimaryKey());
         $obj->setRateUniqueId($value);
         $obj->save();

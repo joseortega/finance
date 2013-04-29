@@ -1,10 +1,10 @@
 <table class="info">
   <tbody>
     <tr>
-      <th class="label"><?php echo __('Persons')?>:</th>
+      <th class="label"><?php echo __('Guarantees')?>:</th>
       <td class="data">
         <?php if(count($credit->getGuaranteePersonals())==0):?>
-          <?php echo __('No tiene ningun garante personal')?>
+          <?php echo __('None')?>
         <?php else:?>
         <ul>
           <?php foreach ($credit->getGuaranteePersonals() as $guarantee):?>

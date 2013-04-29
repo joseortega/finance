@@ -18,8 +18,8 @@ abstract class BaseTransactionTypeFormFilter extends BaseFormFilterPropel
       'concept'                               => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'initials'                              => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'operation_type'                        => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'created_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'updated_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'created_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'updated_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'account_product_transaction_type_list' => new sfWidgetFormPropelChoice(array('model' => 'AccountProduct', 'add_empty' => true)),
     ));
 

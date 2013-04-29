@@ -55,29 +55,6 @@ class Transaction extends BaseTransaction
   }
 
   /**
-   * Save the object
-   * 
-   * @param PropelPDO $con 
-   */
-  public function postInsert(PropelPDO $con = null) 
-  {
-    $cash = $this->getCash();
-    
-    if($this->isDeposit()){
-
-      $cash->setBalance($cash->getBalance() + $this->getAmount());
-      $cash->save();
-
-    }elseif($this->isWithdrawal()){
-
-      $cash->setBalance($cash->getBalance() - $this->getAmount());
-      $cash->save();
-    }
-
-    parent::postInsert($con);
-  }
-  
-  /**
    * Get isDebit
    * 
    * @return boolean 
@@ -207,6 +184,58 @@ class Transaction extends BaseTransaction
     }
        
     return $text;
+  }
+  
+  /** Return Entity type
+   * 
+   * @return string 
+   */
+  public function getEntityType()
+  {
+    $entityType = null;
+    
+    if($this->getAccountId() != null){
+        $entityType = 'account';
+        
+        if($this->getCashId() !=null){
+            $entityType = 'account_cash';
+        }
+        
+    }elseif($this->getInvestmentId() != null){
+        $entityType = 'investment';
+    }elseif($this->getCreditId() != null){
+        $entityType = 'credit';
+    }elseif($this->getCashId() != null){
+        $entityType = 'cash';
+    }
+    
+    return $entityType;
+    
+  }
+
+  /**
+   * update balance
+   * 
+   * @param PropelPDO $con 
+   */
+  public function updateAccountBalance($amount, PropelPDO $con = null)
+  {
+    if($con == NULL){
+        $con = Propel::getConnection(TransactionPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->beginTransaction();
+    
+    try {
+        
+        $this->setAccountBalance($amount);
+        $this->save($con);
+        
+        $con->commit();
+        
+    }  catch (Exception $e){
+        $con->rollBack();
+    }
   }
   
   /**

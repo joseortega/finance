@@ -66,7 +66,7 @@ class account_balance_blockedActions extends sfActions
   }
 
   /**
-   * Process form
+   * Process form and block balance
    * 
    * @param sfWebRequest $request
    * @param sfForm $form 
@@ -74,20 +74,46 @@ class account_balance_blockedActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {      
-      $balanceBlockedDetail = $form->save();
-      
-      $notice = 'The value was blocked successfully.';
-      
-      $this->getUser()->setFlash('notice', $notice);
+    
+    if ($form->isValid()) {
 
-      $this->redirect('account_balance_blocked', $balanceBlockedDetail->getAccount());
-    }
-    else
-    {
+      $con = Propel::getConnection(BalanceBlockedDetailPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+
+      $con->beginTransaction();
+
+      try{
+
+        $balanceBlockedDetail = $form->updateObject();
+        $balanceBlockedDetail->setBlockedAt(time());
+        
+        $account = $balanceBlockedDetail->getAccount();
+        $amount = $balanceBlockedDetail->getAmount();
+
+        $account->setAvailableBalance($account->getAvailableBalance() - $amount);
+        $account->setBlockedBalance($account->getBlockedBalance() + $amount);
+
+        $account->save($con);
+
+        $balanceBlockedDetail->save($con);
+
+        $con->commit();
+
+      } catch (Exception $e){
+        
+        $con->rollBack();
+        $this->getUser()->setFlash('error', 'Persistence error.'.$e);
+      }
+      
+    $notice = 'The value was blocked successfully.';
+
+    $this->getUser()->setFlash('notice', $notice);
+
+    $this->redirect('account_balance_blocked', $account);
+
+    }else{
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
+    
   }
   
   /**
@@ -100,15 +126,31 @@ class account_balance_blockedActions extends sfActions
     $balanceBlockedDetail = BalanceBlockedDetailPeer::retrieveByPK($request->getParameter('id'));
     
     $this->forward404Unless($balanceBlockedDetail);
-    
     $this->forward404Unless(!$balanceBlockedDetail->getUnblockAt());
+    
+    $con = Propel::getConnection(AccountPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    
+    $con->beginTransaction();
+    
     try{
       
-      $balanceBlockedDetail->unblock();
+      $account = $balanceBlockedDetail->getAccount();
+      $amount = $balanceBlockedDetail->getAmount();
+      
+      //update account
+      $account->setAvailableBalance($account->getAvailableBalance() + $amount);
+      $account->setBlockedBalance($account->getBlockedBalance() - $amount);
+      
+      $account->save($con);
+      
+      $balanceBlockedDetail->delete();
+
+      $con->commit();
+      
       $this->getUser()->setFlash('notice', 'The value was unblocked successfully.');
       
     } catch (Exception $e){
-      
+      $con->rollBack();
       $this->getUser()->setFlash('error', 'Persistence error.');
     }
     

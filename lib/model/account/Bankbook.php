@@ -30,26 +30,12 @@ class Bankbook extends BaseBankbook
   }
   
   /**
-   * Post insert
-   * 
-   * @param PropelPDO $con 
+   * Inactive the bankbook 
    */
-  public function postInsert(PropelPDO $con = null) 
+  public function inactivate()
   {
-    $criteria = new Criteria();
-    
-    $criteria->add(BankbookPeer::ACCOUNT_ID, $this->getAccount()->getId(), Criteria::EQUAL);
-    $criteria->add(BankbookPeer::ID, $this->getId(), Criteria::ALT_NOT_EQUAL);
-    $criteria->add(BankbookPeer::IS_ACTIVE, TRUE, Criteria::EQUAL);
-    
-    $bankbooks = BankbookPeer::doSelect($criteria);
-    
-    foreach ($bankbooks as $bankbook){
-      $bankbook->setIsActive(FALSE);
-      $bankbook->save();
-    }
-    
-    parent::postInsert($con);
+    $this->setIsActive(false);
+    $this->save();
   }
 
   /**
@@ -59,7 +45,7 @@ class Bankbook extends BaseBankbook
    */
   public function  __toString() 
   {
-    return $this->getNumber();
+    return $this->getId();
   }
 
 } // AccountBankbook

@@ -18,6 +18,14 @@
     </div>
     <div class="sidebar">
       <?php include_partial('general_transaction/filters', array('form' => $filters)) ?>
+      <div>
+        <p>
+          <?php echo __('Print the filtered list,')?>
+          <a href="<?php echo url_for('general_transaction/printList?orderBy='.Criteria::ASC)?>"><?php echo __('asc')?></a>
+          <?php echo __('or')?>
+          <a href="<?php echo url_for('general_transaction/printList')?>"><?php echo __('desc')?></a>
+        </p>
+      </div>
     </div>
   </div>
 <?php else:?>

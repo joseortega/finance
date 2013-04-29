@@ -1029,6 +1029,25 @@
         <source>Edit Category</source>
         <target>Editar Categoría</target>
       </trans-unit>
+      
+      <!-- Backup -->
+     
+     <trans-unit>
+        <source>Data liberation</source>
+        <target>Liberación de datos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Finance lets you save a backup the database to your computer.</source>
+        <target>Finance le permite guardar una copia de seguridad de la base de datos a su ordenador.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Create Archive and Download</source>
+        <target>Crear Archivo y Descargar</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Backup</source>
+        <target>Copia de Seguridad</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -3,6 +3,17 @@
     <p><?php echo __('No result') ?></p>
   <?php else: ?>
   <table class="associates" cellspacing="0">
+    <thead>
+        <tr>
+          <th colspan="2"><?php echo __('Associate')?></th>
+          <th class="data"><?php echo __('Identification')?></th>
+          <th class="data"><?php echo __('Category')?></th>
+          <th class="data"><?php echo __('Created at')?></th>
+        </tr>
+        <tr class="sep">
+          <td colspan="8"></td>
+        </tr>
+      </thead>
     <tfoot>
       <tr>
         <th colspan="5">
@@ -30,7 +41,7 @@
           <td class="title"><a href="<?php echo url_for('associate_show',$associate)?>"><?php echo $associate?></a></td>
           <td class="data"><?php echo $associate->getIdentification() ?></td>
           <td class="data"><?php echo $associate->getCategory() ?></td>
-          <td class="data"><?php echo __('Created at') ?> <?php echo $associate->getCreatedAt('Y-m-d') ?></td>
+          <td class="data"><?php echo $associate->getCreatedAt('Y-m-d') ?></td>
         </tr>
         <tr>
           <td colspan="4">

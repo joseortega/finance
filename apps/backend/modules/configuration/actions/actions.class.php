@@ -13,7 +13,12 @@ class configurationActions extends sfActions
   {
     $this->name = $request->getParameter('name');
     
-    $this->forward404If($this->name != Configuration::TITLE_REPORT);
+//    $this->forward404If($this->name != Configuration::TITLE_REPORT ||
+//            $this->name != Configuration::BANKBOOK_ROWS_BY_PAGE);
+    
+    $this->forward404Unless(
+            $this->name == Configuration::TITLE_REPORT
+    );
     
     $configuration = ConfigurationPeer::retrieveByName($this->name);
     
@@ -35,7 +40,9 @@ class configurationActions extends sfActions
   
     $configuration = ConfigurationPeer::retrieveByName($this->name);
     
-    $this->forward404If($this->name != Configuration::TITLE_REPORT);
+    $this->forward404Unless(
+            $this->name == Configuration::TITLE_REPORT
+    );
     
     if(!$configuration){
       $configuration = new Configuration();

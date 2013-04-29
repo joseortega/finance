@@ -34,8 +34,8 @@ abstract class BaseTransactionTypeForm extends BaseFormPropel
       'concept'                               => new sfValidatorString(array('max_length' => 30)),
       'initials'                              => new sfValidatorString(array('max_length' => 15)),
       'operation_type'                        => new sfValidatorString(array('max_length' => 50)),
-      'created_at'                            => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'                            => new sfValidatorDateTime(array('required' => false)),
+      'created_at'                            => new sfValidatorDateTime(),
+      'updated_at'                            => new sfValidatorDateTime(),
       'account_product_transaction_type_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'AccountProduct', 'required' => false)),
     ));
 

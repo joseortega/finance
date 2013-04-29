@@ -3,7 +3,7 @@
     <img src="/images/common/first.png" alt="First page" title="First page" />
   </a>
 
-  <a href="<?php echo url_for('@associate_organization') ?>?<?php echo $category ? 'categoryId='.$category->getId().'&':''?>page=<?php echo $pager->getPreviousPage() ?>">
+  <a href="<?php echo url_for('@associate_organization') ?>?categoryId=<?php echo $category ? $category->getId():''?>&query=<?php echo $sf_request->getParameter('query') ?>&page=<?php echo $pager->getPreviousPage() ?>">
     <img src="/images/common/previous.png" alt="Previous page" title="Previous page" />
   </a>
 
@@ -11,15 +11,15 @@
     <?php if ($page == $pager->getPage()): ?>
       <?php echo $page ?>
     <?php else: ?>
-      <a href="<?php echo url_for('@associate_organization') ?>?<?php echo $category ? 'categoryId='.$category->getId().'&':''?>page=<?php echo $page ?>"><?php echo $page ?></a>
+      <a href="<?php echo url_for('@associate_organization') ?>?categoryId=<?php echo $category ? $category->getId():''?>&query=<?php echo $sf_request->getParameter('query') ?>&page=<?php echo $page ?>"><?php echo $page ?></a>
     <?php endif; ?>
   <?php endforeach; ?>
 
-  <a href="<?php echo url_for('@associate_organization') ?>?<?php echo $category ? 'categoryId='.$category->getId().'&':''?>page=<?php echo $pager->getNextPage() ?>">
+  <a href="<?php echo url_for('@associate_organization') ?>?categoryId=<?php echo $category ? $category->getId():''?>&query=<?php echo $sf_request->getParameter('query') ?>&page=<?php echo $pager->getNextPage() ?>">
    <img src="/images/common/next.png" alt="Next page" title="Next page" />
   </a>
 
-  <a href="<?php echo url_for('@associate_organization') ?>?<?php echo $category ? 'categoryId='.$category->getId().'&':''?>page=<?php echo $pager->getLastPage() ?>">
+  <a href="<?php echo url_for('@associate_organization') ?>?categoryId=<?php echo $category ? $category->getId():''?>&query=<?php echo $sf_request->getParameter('query') ?>&page=<?php echo $pager->getLastPage() ?>">
     <img src="/images/common/last.png" alt="Last page" title="Last page" />
   </a>
 </div>

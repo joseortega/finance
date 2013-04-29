@@ -15,8 +15,8 @@ CREATE TABLE `account_product`
 	`id` BIGINT  NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(60)  NOT NULL,
 	`capitalization_frequency` VARCHAR(30) default 'monthly' NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `account_product_U_1` (`name`)
 )ENGINE=InnoDB;
@@ -65,8 +65,8 @@ CREATE TABLE `account`
 	`last_capitalization` DATE,
 	`next_capitalization` DATE,
 	`is_active` TINYINT default 1 NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `account_U_1` (`number`),
 	INDEX `account_FI_1` (`associate_id`),
@@ -141,8 +141,8 @@ CREATE TABLE `bankbook`
 	`account_id` BIGINT  NOT NULL,
 	`is_active` TINYINT default 1 NOT NULL,
 	`was_printed_header` TINYINT default 0 NOT NULL,
-	`created_at` DATETIME  NOT NULL,
 	`print_row` INTEGER  NOT NULL,
+	`created_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `bankbook_FI_1` (`account_id`),
 	CONSTRAINT `bankbook_FK_1`
@@ -175,39 +175,6 @@ CREATE TABLE `account_product_transaction_type`
 		REFERENCES `transaction_type` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE CASCADE
-)ENGINE=InnoDB;
-
-#-----------------------------------------------------------------------------
-#-- account_transaction
-#-----------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `account_transaction`;
-
-
-CREATE TABLE `account_transaction`
-(
-	`id` BIGINT  NOT NULL,
-	`account_id` BIGINT  NOT NULL,
-	`bankbook_id` BIGINT,
-	`account_balance` DECIMAL(18,2)  NOT NULL,
-	PRIMARY KEY (`id`),
-	CONSTRAINT `account_transaction_FK_1`
-		FOREIGN KEY (`id`)
-		REFERENCES `transaction` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE,
-	INDEX `account_transaction_FI_2` (`account_id`),
-	CONSTRAINT `account_transaction_FK_2`
-		FOREIGN KEY (`account_id`)
-		REFERENCES `account` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE,
-	INDEX `account_transaction_FI_3` (`bankbook_id`),
-	CONSTRAINT `account_transaction_FK_3`
-		FOREIGN KEY (`bankbook_id`)
-		REFERENCES `bankbook` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE RESTRICT
 )ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

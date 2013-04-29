@@ -18,7 +18,7 @@ class investment_transaction_historyActions extends sfActions
   {
     $this->investment = $this->getRoute()->getObject();
 
-    $this->pager = new sfPropelPager('InvestmentTransaction',20);
+    $this->pager = new sfPropelPager('Transaction',20);
     $this->pager->setCriteria($this->buildCriteria($this->investment));
     $this->pager->setPeerMethod('doSelectJoinAll');
     $this->pager->setPage($request->getParameter('page', 1));
@@ -35,9 +35,9 @@ class investment_transaction_historyActions extends sfActions
   {
     $criteria = new Criteria();
     
-    $criteria->add(InvestmentTransactionPeer::INVESTMENT_ID, $investment->getId(), Criteria::EQUAL);
+    $criteria->add(TransactionPeer::INVESTMENT_ID, $investment->getId(), Criteria::EQUAL);
     $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-    $criteria->addDescendingOrderByColumn(InvestmentTransactionPeer::ID);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);
 
     return $criteria;
   }
@@ -51,7 +51,7 @@ class investment_transaction_historyActions extends sfActions
   {
     $this->investment = $this->getRoute()->getObject();
     
-    $this->transaction = InvestmentTransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
+    $this->transaction = TransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
     $this->forward404Unless($this->transaction);
   }
 }

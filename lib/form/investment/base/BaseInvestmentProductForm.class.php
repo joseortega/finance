@@ -26,8 +26,8 @@ abstract class BaseInvestmentProductForm extends BaseFormPropel
       'id'                                    => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'name'                                  => new sfValidatorString(array('max_length' => 60)),
       'tax_rate'                              => new sfValidatorNumber(),
-      'created_at'                            => new sfValidatorDateTime(array('required' => false)),
-      'updated_at'                            => new sfValidatorDateTime(array('required' => false)),
+      'created_at'                            => new sfValidatorDateTime(),
+      'updated_at'                            => new sfValidatorDateTime(),
       'investment_product_interest_rate_list' => new sfValidatorPropelChoice(array('multiple' => true, 'model' => 'RateTerm', 'required' => false)),
     ));
 

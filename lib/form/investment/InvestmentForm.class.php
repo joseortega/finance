@@ -37,50 +37,10 @@ class InvestmentForm extends BaseInvestmentForm
     $this->validatorSchema['time_days'] = new sfValidatorInteger(array('min' => 1, 'max' => 2147483647));
     
     if($this->isNew()){
-      $this->mergePostValidator(new InvestmentValidatorSchema(null));
+      $this->mergePostValidator(new InvestmentValidatorSchema(null, array(
+          'accountTransactionType'=> $this->getOption('accountTransactionType'),
+          'investmentTransactionType'=> $this->getOption('investmentTransactionType'),
+      )));
     }
-  }
-  
-  /**
-   * @see parent:save
-   */
-  public function save($con = null)
-  {
-    if (!$this->isValid()) {
-      throw $this->getErrorSchema();
-    }
-
-    if (null === $con) {
-      $con = $this->getConnection();
-    }
-
-    try {
-      $con->beginTransaction();
-
-      $this->doSave($con);
-      
-      if ($this->isNew()){
-        
-        $investment = $this->getObject();   
-      
-        $account = $investment->getAccount();
-
-        $user = $this->getOption('user');
-        
-        $amount = $investment->getAmount();
-
-        $account->transferToInvestment($investment, $user, $amount, $con);
-      }
-
-      $con->commit();
-      
-    } catch (Exception $e) {
-      
-      $con->rollBack();
-
-      throw $e;
-    }
-
-    return $this->getObject();
   }
 }

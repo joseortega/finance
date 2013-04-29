@@ -65,7 +65,7 @@ class credit_transactionActions extends sfActions
    */
   protected function getPager()
   {
-    $pager = new sfPropelPager('CreditTransaction',20);
+    $pager = new sfPropelPager('Transaction',20);
     $pager->setCriteria($this->buildCriteria());
     $pager->setPeerMethod('doSelectJoinAll');
     $pager->setPage($this->getPage());
@@ -90,8 +90,9 @@ class credit_transactionActions extends sfActions
 
     $criteria = $this->filters->buildCriteria($this->getFilters());
     
+    $criteria->add(TransactionPeer::CREDIT_ID, null, Criteria::NOT_EQUAL);
     $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-    $criteria->addDescendingOrderByColumn(CreditTransactionPeer::ID);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);
     
     $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $criteria);
     $criteria = $event->getReturnValue();
@@ -167,7 +168,7 @@ class credit_transactionActions extends sfActions
    */
   public function  executePrintDetail(sfWebRequest $request)
   {
-    $transaction = CreditTransactionPeer::retrieveByPK($request->getParameter('id'));
+    $transaction = TransactionPeer::retrieveByPK($request->getParameter('id'));
     $this->forward404Unless($transaction);
 
     $pdf = Document::pdfCreditTransaction($transaction, $this->getUser()->getCulture());
@@ -192,10 +193,10 @@ class credit_transactionActions extends sfActions
     
     if($orderBy == Criteria::ASC){
       $criteria->clearOrderByColumns();
-      $criteria->addAscendingOrderByColumn(CreditTransactionPeer::ID);
+      $criteria->addAscendingOrderByColumn(TransactionPeer::ID);
     }
     
-    $transactions = CreditTransactionPeer::doSelectJoinAll($criteria);
+    $transactions = TransactionPeer::doSelectJoinAll($criteria);
     
     $pdf = Document::pdfCreditTransactions($transactions, $this->getUser()->getCulture());
     

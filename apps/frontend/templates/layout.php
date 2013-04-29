@@ -40,7 +40,7 @@
               <li><a href="<?php echo url_for('@account')?>"><?php echo __('Accounts')?></a></li>
               <li><a href="<?php echo url_for('@credit')?>"><?php echo __('Credits')?></a></li>
               <li><a href="<?php echo url_for('@investment')?>"><?php echo __('Investments')?></a></li>
-              <li><a href="<?php echo url_for('@general_transaction')?>"><?php echo __('General')?></a></li>
+              <li><a href="<?php echo url_for('@general_transaction')?>"><?php echo __('Cash')?></a></li>
             </ul>
           <?php else:?>
           

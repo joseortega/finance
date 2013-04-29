@@ -29,7 +29,7 @@ class AccountTransactionValidatorSchema extends sfValidatorSchema
   {
     $cash = $this->getOption('cash');
     
-    $account = AccountPeer::retrieveByPK($values['account_transaction']['account_id']);
+    $account = AccountPeer::retrieveByPK($values['account_id']);
     
     if(!$account){
       throw new sfValidatorErrorSchema($this, array());

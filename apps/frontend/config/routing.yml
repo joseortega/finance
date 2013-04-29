@@ -62,12 +62,21 @@ account_bankbook:
 credit_transaction:
   class: sfPropelRouteCollection
   options:
-    model:                CreditTransaction
+    model:                Transaction
     module:               credit_transaction
     prefix_path:          /credit_transaction
     column:               id
     with_wildcard_routes: true
 
+#Routers for committe member
+
+credit_committee_member:
+  url:     /credit/:id/committee_member.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_committee_member, action: index, sf_format: html }
+  requirements: { sf_method: get }
+  
 #personl guarantees
 
 credit_guarantee_real_update:
@@ -92,6 +101,13 @@ credit_guarantee_personal:
   requirements: { sf_method: get }
     
 #credit_account
+
+credit_disburse:
+  url:     /credit/:id/disburse.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit, action: disburse, sf_format: html }
+  requirements: { sf_method: put }
 
 credit_account_update:
   url:     /credit/:id/account.:sf_format
@@ -149,7 +165,7 @@ investment_transaction_history:
 investment_transaction:
   class: sfPropelRouteCollection
   options:
-    model:                Investment
+    model:                Transaction
     module:               investment_transaction
     prefix_path:          /investment_transaction
     column:               id
@@ -241,7 +257,7 @@ account_transaction_history_show:
 account_transaction:
   class: sfPropelRouteCollection
   options:
-    model:                AccountTransaction
+    model:                Transaction
     module:               account_transaction
     prefix_path:          /account_transaction
     column:               id

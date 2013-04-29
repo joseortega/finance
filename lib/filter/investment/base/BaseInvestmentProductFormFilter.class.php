@@ -14,8 +14,8 @@ abstract class BaseInvestmentProductFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'name'                                  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'tax_rate'                              => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'created_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'updated_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
+      'created_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'updated_at'                            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'investment_product_interest_rate_list' => new sfWidgetFormPropelChoice(array('model' => 'RateTerm', 'add_empty' => true)),
     ));
 

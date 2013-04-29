@@ -88,7 +88,7 @@ class CreditPeer extends BaseCreditPeer {
    */
   public static function doSelectExpired()
   {
-    return self::doSelect(self::doSelectExpired());
+    return self::doSelect(self::addCriteriaExpired());
   } 
   
   /**

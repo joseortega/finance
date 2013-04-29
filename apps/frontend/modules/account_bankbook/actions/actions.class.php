@@ -130,7 +130,45 @@ class account_bankbookActions extends sfActions
         'url' => $this->getController()->genUrl('ajax/ajaxAccount')
     ));
 
-    $this->processForm($request, $this->form);
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
+    
+      $notice = $this->form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
+      
+      $bankbook = $this->form->updateObject();
+      
+      $con = Propel::getConnection(BankbookPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
+      
+      try {
+        // Inactivar libretas vigentes si lo hay
+        $criteria = new Criteria();
+    
+        $criteria->add(BankbookPeer::ACCOUNT_ID, $bankbook->getAccount()->getId(), Criteria::EQUAL);
+        $criteria->add(BankbookPeer::IS_ACTIVE, TRUE, Criteria::EQUAL);
+
+        $bankbooks = BankbookPeer::doSelect($criteria, $con);
+
+        foreach ($bankbooks as $bankbookOld){
+          $bankbookOld->inactivate();
+        }
+      
+        // bankbook saving
+        $bankbook->save();
+        
+        $con->commit();
+        
+      }  catch (Exception $e){
+        $con->rollBack();
+        throw  $e;
+      }
+       
+      $this->getUser()->setFlash('notice', $notice);
+
+      $this->redirect('account_bankbook/show?id='.$bankbook->getId());
+    }else{
+      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+    }
 
     $this->setTemplate('new');
   }
@@ -148,29 +186,6 @@ class account_bankbookActions extends sfActions
     $bankbook->delete();
 
     $this->redirect('account_bankbook/index');
-  }
-
-  /**
-   * Execute proccess form
-   * 
-   * @param sfWebRequest $request
-   * @param sfForm $form 
-   */
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid()){
-    
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
-    
-      $bankbook = $form->save();
-      
-      $this->getUser()->setFlash('notice', $notice);
-
-      $this->redirect('account_bankbook/show?id='.$bankbook->getId());
-    }else{
-      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
-    }
   }
   
   /**

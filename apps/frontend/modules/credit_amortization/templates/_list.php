@@ -2,7 +2,7 @@
   <?php if (!$pager->getNbResults()): ?>
     <p><?php echo __('No result') ?></p>
   <?php else: ?>
-    <table class="payments" cellspacing="0">
+  <table class="payments" cellspacing="0">
     <thead>
       <tr>
         <th></th>
@@ -37,7 +37,7 @@
         <td class="data"><?php echo $payment->getBalance() ?></td>
         <td class="data"><?php echo $payment->getCapital() ?></td>
         <td class="data"><?php echo $payment->getInterest() ?></td>
-        <td class="payment"><?php echo $payment->getTotal() ?></td>
+        <td class="payment"><?php echo $payment->getPreTotal() ?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>

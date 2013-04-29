@@ -17,29 +17,58 @@
  * @package    lib.model.investment
  */
 class Investment extends BaseInvestment 
-{
+{ 
   /**
-   * Save investment object
-   * 
+   *
+   * @param type $amount
    * @param PropelPDO $con 
    */
-  public function save(PropelPDO $con = null) 
+  public function accredit($amount, PropelPDO $con = null)
   {
-    if($this->isNew()){
-      
-      if(!$this->getCreatedAt()){
-        $this->setCreatedAt(time());
-      }
-      
-      $expiresAt = $this->getCreatedAt('U') + 86400 * $this->getTimeDays();
-      $this->setExpirationDate(date('Y-m-d', $expiresAt));
-
-      $product = $this->getProduct();
-      $this->setInterestRate($product->getInterestRate($this->getTimeDays()));
-      $this->setTaxRate($product->getTaxRate());
+    if($con == NULL){
+        $con = Propel::getConnection(InvestmentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
     }
     
-    parent::save($con);
+    $con->beginTransaction();
+    
+    try {
+        //set values $account
+        $this->setBalance($this->getBalance() + $amount);
+        $this->save($con);
+        
+        $con->commit();
+        
+    }  catch (Exception $e){
+        
+        $con->rollBack();
+    }
+    
+  }
+  
+  /**
+   *
+   * @param type $amount
+   * @param PropelPDO $con 
+   */
+  public function debit($amount, PropelPDO $con)
+  {
+    if($con == NULL){
+        $con = Propel::getConnection(InvestmentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->beginTransaction();
+    
+    try {
+        //set values $account
+        $this->setBalance($this->getBalance() - $amount);
+        $this->save($con);
+        
+        $con->commit();
+        
+    } catch (Exception $exc) {
+        
+        $con->rollBack();
+    }
   }
   
   /**
@@ -140,17 +169,18 @@ class Investment extends BaseInvestment
     $con->beginTransaction();
     try
     {      
-      $transaction = new Transaction($user, $invTransactionType, $amount);
-      $transaction->save($con);
-    
-      $invTransaction = new InvestmentTransaction($transaction, $this);
+      $invTransaction = new Transaction($user, $invTransactionType, $amount);
+      $invTransaction->setInvestment($this);
       $invTransaction->save($con);
       
-      $transaction = new Transaction($user, $actTransactionType, $amount);
-      $transaction->save($con);
+      $this->debit($amount, $con);
       
-      $accountTransaction = new AccountTransaction($transaction, $account);
-      $accountTransaction->save($con);
+      $actTransaction = new Transaction($user, $actTransactionType, $amount);
+      $actTransaction->setAccount($account);
+      $actTransaction->save($con);
+      
+      $account->accredit($amount, $con);
+      $actTransaction->updateAccountBalance($account->getBalance(), $con);
       
       $this->setIsCurrent(false);
       $this->save();
@@ -181,14 +211,15 @@ class Investment extends BaseInvestment
     $con->beginTransaction();
     
     try{
+      
       $amount = $this->getInterestAmount();
 
       $transaction = new Transaction($user, $invTransactionType, $amount);
+      $transaction->setInvestment($this);
       $transaction->save($con);
-
-      $invTransaction = new InvestmentTransaction($transaction, $this);
-      $invTransaction->save($con);
       
+      $this->accredit($amount, $con);
+
       $con->commit();
       
     }catch (Exception $e){
@@ -217,10 +248,10 @@ class Investment extends BaseInvestment
       $amount = $this->getTaxAmount();
 
       $transaction = new Transaction($user, $invTransactionType, $amount);
+      $transaction->setInvestment($this);
       $transaction->save($con);
-
-      $invTransaction = new InvestmentTransaction($transaction, $this);     
-      $invTransaction->save($con);
+      
+      $this->accredit($amount, $con);
       
       $con->commit();
       

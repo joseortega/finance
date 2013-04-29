@@ -107,6 +107,10 @@ class creditActions extends sfActions
   {
     $this->credit = $this->getRoute()->getObject();
     $this->forward404Unless($this->credit);
+    
+    if($this->credit->isApproved()){
+        $this->form = new CreditAccountForm($this->credit);
+    }
   }
 
   /**
@@ -146,7 +150,21 @@ class creditActions extends sfActions
         'url2' => $this->getController()->genUrl('ajax/ajaxAccount'))
     );
 
-    $this->processForm($request, $this->form);
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid())
+    {
+      $credit = $this->form->updateObject();
+      $credit->setAmortizationType($credit->getProduct()->getAmortizationType());
+      $credit->save();
+      
+      $this->getUser()->setFlash('notice', 'The item was created successfully.');
+      
+      $this->redirect('credit/show?id='.$credit->getId());
+    }
+    else
+    {
+      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+    }
 
     $this->setTemplate('new');
   }
@@ -184,150 +202,21 @@ class creditActions extends sfActions
         'url2' => $this->getController()->genUrl('ajax/ajaxAccount'))
     );
 
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('edit');
-  }
-
-  /**
-   * Process form
-   * 
-   * @param sfWebRequest $request
-   * @param sfForm $form 
-   */
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
       
-      $redirectAction = $form->getObject()->isNew() ? 'show' : 'edit';
+      $this->credit = $this->form->updateObject();
+      $this->credit->save();
       
-      $credit = $form->save();
+      $this->getUser()->setFlash('notice', 'The item was updated successfully.');
       
-      $this->getUser()->setFlash('notice', $notice);
+      $this->redirect('credit/edit?id='.$this->credit->getId());
+    }else{
       
-      $this->redirect('credit/'.$redirectAction.'?id='.$credit->getId());
-    }
-    else
-    {
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
-  }
 
-  /**
-   * Get filters
-   * 
-   * @return array 
-   */
-  protected function getFilters()
-  {
-    return $this->getUser()->getAttribute('credit.filters', $this->getFilterDefaults());
-  }
-
-  /**
-   * Set filters
-   *  
-   * @param array $filters 
-   */
-  protected function setFilters(array $filters)
-  {
-    $this->getUser()->setAttribute('credit.filters', $filters);
-  }
-
-  /**
-   * Get filters defaults
-   * 
-   * @return array 
-   */
-  public function getFilterDefaults()
-  {
-    $filters = $this->getUser()->getAttribute('credit.filters');
-    
-    if(!$filters['status']){
-      $filters = array('status' => Credit::STATUS_CURRENT);
-      $this->getUser()->setAttribute('credit.filters', $filters);
-    }else{
-      $filters = array('status' => $filters['status']);
-    }
-    
-    return $filters;
-  }
-
-  /**
-   * Set page
-   * 
-   * @param int $page 
-   */
-  protected function setPage($page)
-  {
-    $this->getUser()->setAttribute('credit.page', $page);
-  }
-  
-  /**
-   * Get page
-   * 
-   * @return int 
-   */
-  protected function getPage()
-  {
-    return $this->getUser()->getAttribute('credit.page', 1);
-  }
-  
-  /**
-   * Filter by credit status
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeStatusFilter(sfWebRequest $request)
-  {
-    $filters = array();
-     
-    $filters['status'] = $request->getParameter('status');
-     
-    $this->setFilters($filters);
-    
-    $this->redirect($this->generateUrl('credit'));
-  }
-  
-  /**
-   * Execute disburse credit
-   * 
-   * @param sfWebRequest $request 
-   */
-  public function executeDisburse(sfWebRequest $request)
-  {
-    $credit = CreditPeer::retrieveByPK($request->getParameter('id'));
-    $this->forward404Unless($credit);
-    
-    $this->forward404If(!$credit->isApproved());
-
-    $user  = $this->getUser()->getGuardUser();
-
-    $cdtTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::CREDIT_DISBURSEMENT_ACCOUNT);
-    
-    if(!$cdtTransactionType){
-      $this->getUser()->setFlash('error', 'Credit transaction type, not contfiguration.');
-      $this->redirect('credit_show', $credit);
-    }
-    
-    $actTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_DISBURSEMENT_CREDIT);   
-    if(!$actTransactionType){
-      $this->getUser()->setFlash('error', 'Account transaction type, not contfiguration.');
-      $this->redirect('credit_show', $credit);
-    }
-    
-    try{
-      $credit->disbursement($user, $cdtTransactionType, $actTransactionType);
-    }catch (Exception $e){
-      $this->getUser()->setFlash('Error', 'Persistence error.');
-      $this->redirect('credit_show', $credit);
-    }
-
-    $this->getUser()->setFlash('notice', 'Se ha ejecutado el desembolso.');
-    
-    $this->redirect('credit_show', $credit);
+    $this->setTemplate('edit');
   }
   
   /**
@@ -353,7 +242,7 @@ class creditActions extends sfActions
     $interesRates = $credit->getProduct()->getArrearRates();
     
     if(!$interesRates){
-      $this->getUser()->setFlash('error', 'The interest rate not configured.');
+      $this->getUser()->setFlash('error', 'The interest rate is not defined for this product.');
       $this->redirect('credit_show', $credit);
     }
     
@@ -368,13 +257,14 @@ class creditActions extends sfActions
       {
         
         $transaction = new Transaction($user, $transactionType, $credit->getAmount());
+        $transaction->setCredit($credit);
         $transaction->save($con);
+        
+        $credit->accredit($credit->getAmount(), $con);
       
-        $creditTransaction = new CreditTransaction($transaction, $credit);
-        $creditTransaction->save($con);
-
         $credit->setStatus(Credit::STATUS_APPROVED);
         $credit->setInterestRate($credit->getProduct()->getInterestRateCurrent()->getValue());
+        $credit->setIssuedAt(time());
         
         if($credit->getAmortizationType() == 'french'){
            $this->generateAmortizationTableMethodFrench($credit);
@@ -398,6 +288,86 @@ class creditActions extends sfActions
     
     $this->redirect('credit_show', $credit);
    }
+   
+  /**
+   * Execute disburse credit
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executeDisburse(sfWebRequest $request)
+  {
+    $credit = CreditPeer::retrieveByPK($request->getParameter('id'));
+    $this->forward404Unless($credit);
+    
+    $this->forward404If(!$credit->isApproved());
+    
+
+    $this->form = new CreditAccountForm($credit);
+    
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
+      
+      $credit = $this->form->updateObject();
+    }else{
+        $this->getUser()->setFlash('error', 'Require an account for the disbursement.');
+        $this->redirect('credit_show', $credit);
+    }
+      
+    $user  = $this->getUser()->getGuardUser();
+
+    $cdtTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::CREDIT_DISBURSEMENT_ACCOUNT);
+    
+    if(!$cdtTransactionType){
+      $this->getUser()->setFlash('error', 'Credit transaction type, not contfiguration.');
+      $this->redirect('credit_show', $credit);
+    }
+    
+    $actTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_DISBURSEMENT_CREDIT);   
+    if(!$actTransactionType){
+      $this->getUser()->setFlash('error', 'Account transaction type, not contfiguration.');
+      $this->redirect('credit_show', $credit);
+    }
+    
+    $con = Propel::getConnection(CreditPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    $con->beginTransaction();
+    
+    try{
+      
+        $amount = $credit->getAmount();
+        $account = $credit->getAccount($con);
+        
+        //build transaction credit
+        $creditTransaction = new Transaction($user, $cdtTransactionType, $amount);
+        $creditTransaction->setCredit($credit);
+        $creditTransaction->save($con);
+        
+        $credit->debit($amount, $con);
+        
+        //update credit status
+        $credit->setStatus(Credit::STATUS_CURRENT);
+        $credit->setDisbursedAt(time());
+        $credit->save($con);
+        
+        //build transacction account
+        $accountTransaction = new Transaction($user, $actTransactionType, $amount); 
+        $accountTransaction->setAccount($account);
+        $accountTransaction->save($con);
+        
+        $account->accredit($amount, $con);
+        $accountTransaction->updateAccountBalance($account->getBalance(), $con);
+
+        $con->commit();
+
+    }catch (Exception $e){
+      
+      $con->rollBack();
+      $this->getUser()->setFlash('Error', 'Persistence error.');
+    }
+
+    $this->getUser()->setFlash('notice', 'Se ha ejecutado el desembolso.');
+    
+    $this->redirect('credit_show', $credit);
+  }
   
  /**
   * Execute annul credit
@@ -413,13 +383,14 @@ class creditActions extends sfActions
 
     if($credit->isInRequest()){
       $credit->setStatus(Credit::STATUS_ANNULLED);
+      $credit->setAnnulledAt(time());
       $credit->save();
       $this->getUser()->setFlash('notice', 'The credit was canceled successfully.');
     }
 
     $this->redirect('credit_show', $credit);
   }
-  
+
   /**
    * Execute delete
    * 
@@ -464,9 +435,13 @@ class creditActions extends sfActions
     //To calculate the interest according to the frequency of payments in months
     $rate = $annualinterestRate/(12/$payFrequencyInMonths);
     $time = $timeInMonths/($payFrequencyInMonths);
-
-    //calculate fee: (amount*rate)/(100*(1-(1+rate/100)^-time))
-    $total = round(($amount*$rate)/(100*(1-pow(1+$rate/100,-$time))), 2);
+    
+    if($rate == 0.00){
+      $total = $amount/$timeInMonths;
+    }else{
+      //calculate fee: (amount*rate)/(100*(1-(1+rate/100)^-time))
+      $total = round(($amount*$rate)/(100*(1-pow(1+$rate/100,-$time))), 2);
+    }
     
     $amountPending = $amount;
     
@@ -496,7 +471,7 @@ class creditActions extends sfActions
       //calculate balance
       $balance = $amountPending - $capital;
       
-      $nextMonth  = mktime(0, 0, 0, date("m")+($count), date("d"),   date("Y"));
+      $nextMonth  = mktime(0, 0, 0, date("m")+($count), date("d"), date("Y"));
 
       $count = $count +$payFrequencyInMonths;
       
@@ -570,5 +545,107 @@ class creditActions extends sfActions
       
       $amountPending = $balance;
     }
+  }
+  
+  /**
+   * Print the credits based to current filter
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePrintList(sfWebRequest $request)
+  {
+    $orderBy = $request->getParameter('orderBy');
+
+    $criteria = $this->buildCriteria();
+    
+    if($orderBy == Criteria::ASC){
+      $criteria->clearOrderByColumns();
+      $criteria->addAscendingOrderByColumn(CreditPeer::ID);
+    }
+    
+    $credits = CreditPeer::doSelectJoinAll($criteria);
+    
+    $pdf = Document::pdfCredits($credits, $this->getUser()->getCulture());
+    
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  }
+  
+  /**
+   * Get filters
+   * 
+   * @return array 
+   */
+  protected function getFilters()
+  {
+    return $this->getUser()->getAttribute('credit.filters', $this->getFilterDefaults());
+  }
+
+  /**
+   * Set filters
+   *  
+   * @param array $filters 
+   */
+  protected function setFilters(array $filters)
+  {
+    $this->getUser()->setAttribute('credit.filters', $filters);
+  }
+
+  /**
+   * Get filters defaults
+   * 
+   * @return array 
+   */
+  public function getFilterDefaults()
+  {
+    $filters = $this->getUser()->getAttribute('credit.filters');
+    
+    if(!$filters['status']){
+      $filters = array('status' => Credit::STATUS_CURRENT);
+      $this->getUser()->setAttribute('credit.filters', $filters);
+    }else{
+      $filters = array('status' => $filters['status']);
+    }
+    
+    return $filters;
+  }
+
+  /**
+   * Set page
+   * 
+   * @param int $page 
+   */
+  protected function setPage($page)
+  {
+    $this->getUser()->setAttribute('credit.page', $page);
+  }
+  
+  /**
+   * Get page
+   * 
+   * @return int 
+   */
+  protected function getPage()
+  {
+    return $this->getUser()->getAttribute('credit.page', 1);
+  }
+  
+  /**
+   * Filter by credit status
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executeStatusFilter(sfWebRequest $request)
+  {
+    $filters = array();
+     
+    $filters['status'] = $request->getParameter('status');
+     
+    $this->setFilters($filters);
+    
+    $this->redirect($this->generateUrl('credit'));
   }
 }

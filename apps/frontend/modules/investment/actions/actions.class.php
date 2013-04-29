@@ -139,18 +139,69 @@ class investmentActions extends sfActions
     $this->forward404Unless($request->isMethod(sfRequest::POST));
     
     $user = $this->getUser()->getGuardUser();
-    
-    $connection = CashPeer::retrieveByPK($this->getUser()->getAttribute('connection_id'));
-    
     $investment = new Investment();
+    $actTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_TRANSFER_TO_INVESTMENT);
+    $invTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_TRANSFER_FROM_ACCOUNT);
     
     $this->form = new InvestmentForm($investment, array(
         'url' => $this->getController()->genUrl('ajax/ajaxAssociates'),
         'url2' => $this->getController()->genUrl('ajax/ajaxAccount'),
         'user' => $user,
+        'accountTransactionType' => $actTransactionType,
+        'investmentTransactionType' => $invTransactionType,
     ));
     
-    $this->processForm($request, $this->form);
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
+      
+      $investment = $this->form->updateObject();
+      
+      //set default values
+      $investment->setCreatedAt(time());
+      $expiresAt = $investment->getCreatedAt('U') + 86400 * $investment->getTimeDays();
+      $investment->setExpirationDate(date('Y-m-d', $expiresAt));
+      $product = $investment->getProduct();
+      $investment->setInterestRate($product->getInterestRate($investment->getTimeDays()));
+      $investment->setTaxRate($product->getTaxRate());
+      $investment->setIsCurrent(true);
+      
+      $amount = $investment->getAmount();
+      
+      $con = Propel::getConnection(InvestmentPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
+      
+      try{
+        
+        $investment->save($con);
+        
+        //register transactios
+        $actTransaction = new Transaction($user, $actTransactionType, $amount);
+        $actTransaction->setAccount($investment->getAccount());
+        $actTransaction->save($con);
+        
+        $investment->getAccount()->debit($amount, $con);
+        $actTransaction->updateAccountBalance($investment->getAccount()->getBalance(), $con);
+
+        $invTransaction = new Transaction($user, $invTransactionType, $amount, $observation);
+        $invTransaction->setInvestment($investment);
+        $invTransaction->save($con);
+        
+        $investment->accredit($amount, $con);
+
+        $con->commit();
+
+      }catch (Exception $e){
+        
+        $con->rollBack();
+        $this->getUser()->setFlash('error', 'Persistence error.');
+      }
+
+      $this->getUser()->setFlash('notice', 'The item was created successfully.');
+
+      $this->redirect('investment/show?id='.$investment->getId());
+    }else{
+      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
+    }
     
     $this->setTemplate('new');
   }
@@ -168,31 +219,6 @@ class investmentActions extends sfActions
     $investment->delete();
 
     $this->redirect('investment/index');
-  }
-
-  /**
-   * Process form
-   * 
-   * @param sfWebRequest $request
-   * @param sfForm $form 
-   */
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
-      
-      $investment = $form->save();
-
-      $this->getUser()->setFlash('notice', $notice);
-
-      $this->redirect('investment/show?id='.$investment->getId());
-    }
-    else
-    {
-      $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
-    }
   }
   
   /**

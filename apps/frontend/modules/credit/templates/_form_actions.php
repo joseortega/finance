@@ -4,5 +4,4 @@
   <?php else:?>
     <li><button type="submit" class="classy" onclick="this.disabled=true; this.form.submit();"><span><?php echo __('Update credit')?></span> </button></li>
   <?php endif;?>
-  
 </ul>

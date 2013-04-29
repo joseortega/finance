@@ -21,6 +21,8 @@ class CreditAccountForm extends BaseCreditForm{
 
     $this->widgetSchema['account_id'] = new sfWidgetFormPropelChoice(array('model' => 'Account', 'add_empty' => false, 'expanded'=>true));
     $this->widgetSchema['account_id']->setOption('criteria', $criteria);
+    
+    $this->validatorSchema['account_id']->setOption('required', true);
   }
 }
 ?>

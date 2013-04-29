@@ -1,9 +1,9 @@
 <?php include_partial('page_head')?>
 
-<div class="columns infocols clear_fix">
+<div class="columns clear_fix">
   
   <div class="title_actions_bar clear_fix">
-    <h3><?php echo __('Detail Bankbook')?></h3>
+      <h3><?php echo __('Detail Bankbook')?> # <?php echo $bankbook->getId()?></h3>
     <ul class="actions"> 
       <li><a class="minibutton" href="<?php echo url_for('account_bankbook/printHeader?id='.$bankbook->getId())?>"><span><?php echo __('Print header')?></span></a></li>
       <li><a class="minibutton" href="<?php echo url_for('account_bankbook/printContent?id='.$bankbook->getId())?>"><span><?php echo __('Print content')?></span></a></li>
@@ -19,6 +19,5 @@
   <div class="main">
       <?php include_partial('detail', array('bankbook' => $bankbook)) ?>
   </div>
-  <div class="sidebar"> 
-  </div>
+  <div>
 </div>

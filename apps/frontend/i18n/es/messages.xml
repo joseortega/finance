@@ -358,12 +358,32 @@
         <target>Inversión: El tipo de transacción no está configurado, Admin.</target>
       </trans-unit>
       <trans-unit>
+        <source>Investment-Transaction type: Transfer to Account is not configured, Admin.</source>
+        <target>Inversión-Tipo de transaccion: Transferencia a cuenta no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account-Transaction type: Expiry of Investment is not configured, Admin.</source>
+        <target>Cuenta-Tipo de transacción: Vencimiento de inversión no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investment-Transaction type: Interest Capitalization is not configured, Admin.</source>
+        <target>Inversión-Tipo de transacción: Capitalización de interés no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Investment-Transaction type: Withholding Tax is not configured, Admin.</source>
+        <target>Inversión-Tipo de transacción: Retención de impuesto no está configurado, Admin.</target>
+      </trans-unit>
+      <trans-unit>
         <source>The password is invalid.</source>
         <target>La contraseña no es válida.</target>
       </trans-unit>
       <trans-unit>
         <source>The interest rate not configured.</source>
         <target>La tasa de interés no está configurado.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>The interest rate is not defined for this product.</source>
+        <target>La tasa de interés no está definida para este producto.</target>
       </trans-unit>
       <trans-unit>
         <source>The credit was passed successfully.</source>
@@ -451,6 +471,10 @@
       <trans-unit>
         <source>Once you delete an credit, there is no going back. Please be certain.</source>
         <target>Una vez que se elimina un crédito, no hay vuelta atrás. Por favor estar seguro.</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Require an account for the disbursement.</source>
+        <target>Requiere una cuenta para el desembolso.</target>
       </trans-unit>
       <trans-unit>
         <source>Execute Payment</source>
@@ -703,6 +727,10 @@
       <trans-unit>
         <source>Time</source>
         <target>Tiempo</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Not defined</source>
+        <target>No definido</target>
       </trans-unit>
       
       <!-- module associate nav -->
@@ -1072,6 +1100,23 @@
         <source>About</source>
         <target>Acerca</target>
       </trans-unit>
+      <trans-unit>
+        <source>Employment</source>
+        <target>Empleo/Ocupación</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Monthly income</source>
+        <target>Ingreso mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Monthly expenditure</source>
+        <target>Egreso mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Monthly liquid</source>
+        <target>Líquido mensual</target>
+      </trans-unit>
+      
       <!--  phone options  -->
       <trans-unit>
         <source>Mobile</source>
@@ -1617,7 +1662,6 @@
         <source>Credit</source>
         <target>Crédito</target>
       </trans-unit>
-      
       <trans-unit>
         <source>New Credit</source>
         <target>Nuevo Crédito</target>
@@ -1706,7 +1750,86 @@
         <source>Update credit</source>
         <target>Actualizar crédito</target>
       </trans-unit>
-      
+      <trans-unit>
+        <source>Financial analysis</source>
+        <target>Análisis financiero</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Average monthly payment</source>
+        <target>Promedio de pago mensual</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Associate monthly liquid</source>
+        <target>Líquido mensual del socio</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Committee</source>
+        <target>Comité de Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Add Member</source>
+        <target>Añadir Miembro</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Outstanding Credits</source>
+        <target>Créditos Vigentes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account Balances</source>
+        <target>Saldo en Cuentas</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Economic Information</source>
+        <target>Información Económica</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Repayment Capacity</source>
+        <target>Capacidad de Pago</target>
+      </trans-unit>
+      <trans-unit>
+        <source>It has no outstanding loans</source>
+        <target>No tiene créditos vigentes</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Guarantees</source>
+        <target>Garantías</target>
+      </trans-unit>
+      <trans-unit>
+        <source>None</source>
+        <target>Ninguno</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Credit Detail</source>
+        <target>Detalle de Crédito</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Amortization type</source>
+        <target>Tipo de Amortización</target>
+      </trans-unit>
+      <trans-unit>
+        <source>French</source>
+        <target>Frances</target>
+      </trans-unit>
+      <trans-unit>
+        <source>German</source>
+        <target>Alemán</target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[Credit #%id%]]></source>
+        <target><![CDATA[Crédito #%id%]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source><![CDATA[%number% outstanding payments]]></source>
+        <target><![CDATA[%number% pagos pendientes]]></target>
+      </trans-unit>
+      <trans-unit>
+        <source>Issued at</source>
+        <target>Emitido en</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Disbursed at</source>
+        <target>Desembolsado en</target>
+      </trans-unit>
       <!--credits list-->
       
       <trans-unit>
@@ -1758,7 +1881,10 @@
       </trans-unit>
       
       <!--credit payment-->
-         
+      <trans-unit>
+        <source>Payments</source>
+        <target>Pagos</target>
+      </trans-unit>
       <trans-unit>
         <source>Number payments</source>
         <target>Número de Pagos</target>
@@ -1780,6 +1906,10 @@
         <target>Mora</target>
       </trans-unit>
       <trans-unit>
+        <source>Discount</source>
+        <target>Descuento</target>
+      </trans-unit>
+      <trans-unit>
         <source>Days in arrear</source>
         <target>Dias en mora</target>
       </trans-unit>
@@ -1798,6 +1928,10 @@
       <trans-unit>
         <source>Pay all</source>
         <target>Pagar todos</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account to Disburse</source>
+        <target>Cuenta para el Desembolso</target>
       </trans-unit>
       
       <!--credit transaction-->

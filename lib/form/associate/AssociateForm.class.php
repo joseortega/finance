@@ -47,7 +47,7 @@ class AssociateForm extends BaseAssociateForm
       if($this->getObject()->isNew()){
         $this->useFields(array('category_id', 'name', 'identification', 'gender', 'birthday'));
       }else{
-        $this->useFields(array('category_id', 'name', 'identification', 'gender', 'birthday', 'relationship_status', 'about'));
+        $this->useFields(array('category_id', 'name', 'identification', 'gender', 'birthday', 'relationship_status', 'about', 'monthly_income', 'monthly_expenditure'));
       }
       
       $this->mergePostValidator(new IdentificationValidatorSchema(null, array('type' => Associate::TYPE_PERSON)));
@@ -61,7 +61,7 @@ class AssociateForm extends BaseAssociateForm
       if($this->getObject()->isNew()){
         $this->useFields(array('category_id', 'name', 'identification', 'birthday'));
       }else{
-        $this->useFields(array('category_id', 'name', 'identification', 'birthday', 'about'));
+        $this->useFields(array('category_id', 'name', 'identification', 'birthday', 'about', 'monthly_income', 'monthly_expenditure'));
       }
       
       $this->mergePostValidator(new IdentificationValidatorSchema(null, array('type' => Associate::TYPE_ORGANIZATION)));

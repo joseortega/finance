@@ -7,15 +7,13 @@
  * @subpackage filter
  * @author     Your name here
  */
-class InvestmentTransactionFormFilter extends BaseInvestmentTransactionFormFilter
+class InvestmentTransactionFormFilter extends TransactionFormFilter
 {
   public function configure()
-  {
-    $transactionFormFilter = new TransactionFormFilter();
+  {    
+    $this->widgetSchema['id'] = new sfWidgetFormFilterInput(array('with_empty' => false));
     
-    $this->mergeForm($transactionFormFilter);
-    
-    $this->useFields(array('user_id', 'investment_id', 'transaction_type_id', 'created_at'));
+    $this->validatorSchema['id'] = new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false)));
     
     $criteria = new Criteria();
     $criteria->add(TransactionTypePeer::TYPE, TransactionType::TYPE_INVESTMENT, Criteria::EQUAL);
@@ -28,114 +26,7 @@ class InvestmentTransactionFormFilter extends BaseInvestmentTransactionFormFilte
       'model' => 'Investment',
       'url'   => $this->getOption('url'),
     ));
-  }
-  
-  public function addCashIdColumnCriteria(Criteria $criteria, $field, $value)
-  {
-    $colname = TransactionPeer::CASH_ID;
     
-    $criteria->addJoin(InvestmentTransactionPeer::ID, TransactionPeer::ID, Criteria::LEFT_JOIN);
-
-    if (is_array($value))
-    {
-      $values = $value;
-      $value = array_pop($values);
-      $criterion = $criteria->getNewCriterion($colname, $value);
-
-      foreach ($values as $value)
-      {
-        $criterion->addOr($criteria->getNewCriterion($colname, $value));
-      }
-
-      $criteria->add($criterion);
-    }
-    else
-    {
-      $criteria->add($colname, $value);
-    }
-  }
-  
-  public function addCreatedAtColumnCriteria(Criteria $criteria, $field, $values)
-  {
-    $colname = TransactionPeer::CREATED_AT;
-    
-    $criteria->addJoin(InvestmentTransactionPeer::ID, TransactionPeer::ID, Criteria::LEFT_JOIN);
-
-    if (isset($values['is_empty']) && $values['is_empty'])
-    {
-      $criteria->add($colname, null, Criteria::ISNULL);
-    }
-    else
-    {
-      $criterion = null;
-      if (null !== $values['from'] && null !== $values['to'])
-      {
-        $criterion = $criteria->getNewCriterion($colname, $values['from'], Criteria::GREATER_EQUAL);
-        $criterion->addAnd($criteria->getNewCriterion($colname, $values['to'], Criteria::LESS_EQUAL));
-      }
-      else if (null !== $values['from'])
-      {
-        $criterion = $criteria->getNewCriterion($colname, $values['from'], Criteria::GREATER_EQUAL);
-      }
-      else if (null !== $values['to'])
-      {
-        $criterion = $criteria->getNewCriterion($colname, $values['to'], Criteria::LESS_EQUAL);
-      }
-
-      if (null !== $criterion)
-      {
-        $criteria->add($criterion);
-      }
-    }
-  }
-  
-  public function addTransactionTypeIdColumnCriteria(Criteria $criteria, $field, $value)
-  {
-    $colname = TransactionPeer::TRANSACTION_TYPE_ID;
-    
-    $criteria->addJoin(InvestmentTransactionPeer::ID, TransactionPeer::ID, Criteria::LEFT_JOIN);
-
-    if (is_array($value))
-    {
-      $values = $value;
-      $value = array_pop($values);
-      $criterion = $criteria->getNewCriterion($colname, $value);
-
-      foreach ($values as $value)
-      {
-        $criterion->addOr($criteria->getNewCriterion($colname, $value));
-      }
-
-      $criteria->add($criterion);
-    }
-    else
-    {
-      $criteria->add($colname, $value);
-    }
-  }
-  
-  public function addUserIdColumnCriteria(Criteria $criteria, $field, $value)
-  {
-    $colname = TransactionPeer::USER_ID;
-    
-    $criteria->addJoin(InvestmentTransactionPeer::ID, TransactionPeer::ID, Criteria::LEFT_JOIN);
-
-    if (is_array($value))
-    {
-      $values = $value;
-      $value = array_pop($values);
-      $criterion = $criteria->getNewCriterion($colname, $value);
-
-      foreach ($values as $value)
-      {
-        $criterion->addOr($criteria->getNewCriterion($colname, $value));
-      }
-
-      $criteria->add($criterion);
-    }
-    else
-    {
-      $criteria->add($colname, $value);
-    }
+    $this->useFields(array('id','user_id', 'investment_id', 'transaction_type_id', 'created_at'));
   }
 }

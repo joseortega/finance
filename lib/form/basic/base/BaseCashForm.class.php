@@ -31,8 +31,8 @@ abstract class BaseCashForm extends BaseFormPropel
       'ip_address' => new sfValidatorString(array('max_length' => 50)),
       'balance'    => new sfValidatorNumber(),
       'status'     => new sfValidatorString(array('max_length' => 50)),
-      'created_at' => new sfValidatorDateTime(array('required' => false)),
-      'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'created_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(),
     ));
 
     $this->validatorSchema->setPostValidator(

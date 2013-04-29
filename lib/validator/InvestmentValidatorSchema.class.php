@@ -28,6 +28,9 @@ class InvestmentValidatorSchema extends sfValidatorSchema
     $this->addMessage('account_transaction_type', 'Account: Transaction type is not configured, Admin.');
     $this->addMessage('investment_transaction_type', 'Investment: Transaction type is not configured, Admin.');
     $this->addMessage('amount', 'The amount is higher than the balance in the account.');
+    
+    $this->addOption('accountTransactionType');
+    $this->addOption('investmentTransactionType');
 
     parent::configure($options, $messages);
   }
@@ -40,13 +43,13 @@ class InvestmentValidatorSchema extends sfValidatorSchema
    */
   protected function doClean($values)
   {    
-    $accountTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::ACCOUNT_TRANSFER_TO_INVESTMENT);
+    $accountTransactionType = $this->getOption('accountTransactionType');
     if(!$accountTransactionType){
       $error = new sfValidatorError($this, 'account_transaction_type');
       throw new sfValidatorErrorSchema($this, array('account_transaction_type'=>$error));
     }
     
-    $investmentTransactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::INVESTMENT_TRANSFER_FROM_ACCOUNT);
+    $investmentTransactionType = $this->getOption('investmentTransactionType');
     if(!$investmentTransactionType){
       $error = new sfValidatorError($this, 'account_transaction_type');
       throw new sfValidatorErrorSchema($this, array('account_transaction_type'=>$error));

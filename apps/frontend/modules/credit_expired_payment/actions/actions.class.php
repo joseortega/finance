@@ -69,6 +69,7 @@ class credit_expired_paymentActions extends sfActions
           $fNotice = $fNotice +1;
         }else{
           $fError = $fError + 1;
+          break;
         }
       }
     }catch(Exception $e){
@@ -84,7 +85,7 @@ class credit_expired_paymentActions extends sfActions
     $this->redirect('@credit_expired_payment');
   }
 
-    /**
+  /**
    * Pay the expired payments
    * 
    * @param sfWebRequest $request 
@@ -109,24 +110,28 @@ class credit_expired_paymentActions extends sfActions
       $this->redirect('@credit_expired_payment');
     }
     
-    $payments = PaymentPeer::doSelectExpired();
+    $credits = CreditPeer::doSelectExpired();
     
     try{
       
       $fNotice = 0;
       $fError = 0;
       
-      foreach ($payments as $payment){
+      foreach ($credits as $credit){
+          
+        foreach ($credit->getExpiredPayments() as $payment){
         
-        $account = $payment->getCredit()->getAccount();
-        
-        if($account->hasAvailableBalance($payment->getTotal())){
-          $payment->pay($user, $actTransactionType, $crdTransactionType);
-          $fNotice = $fNotice+1;
-        }else{
-          $fError = $fError+1;
-        }
-      }
+            $account = $payment->getCredit()->getAccount();
+
+            if($account->hasAvailableBalance($payment->getTotal())){
+              $payment->pay($user, $actTransactionType, $crdTransactionType);
+              $fNotice = $fNotice+1;
+            }else{
+              $fError = $fError+1;
+              break;
+            }
+        }    
+      }   
     }catch(Exception $e){
       $this->getUser()->setFlash('error', 'A persistence error ocurred.');
       $this->redirect('@credit_expired_payment');

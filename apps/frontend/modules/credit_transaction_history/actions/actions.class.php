@@ -18,7 +18,7 @@ class credit_transaction_historyActions extends sfActions
   {
     $this->credit = CreditPeer::retrieveByPK($request->getParameter('id'));
 
-    $this->pager = new sfPropelPager('CreditTransaction',20);
+    $this->pager = new sfPropelPager('Transaction',20);
     $this->pager->setCriteria($this->buildCriteria($this->credit));
     $this->pager->setPeerMethod('doSelectJoinAll');
     $this->pager->setPage($request->getParameter('page', 1));
@@ -34,9 +34,9 @@ class credit_transaction_historyActions extends sfActions
   protected function buildCriteria(Credit $credit)
   {
     $criteria = new Criteria();
-    $criteria->add(CreditTransactionPeer::CREDIT_ID, $credit->getId(), Criteria::EQUAL);
+    $criteria->add(TransactionPeer::CREDIT_ID, $credit->getId(), Criteria::EQUAL);
     $criteria->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-    $criteria->addDescendingOrderByColumn(CreditTransactionPeer::ID);
+    $criteria->addDescendingOrderByColumn(TransactionPeer::ID);
 
     return $criteria;
   }
@@ -50,7 +50,7 @@ class credit_transaction_historyActions extends sfActions
   {
     $this->credit = $this->getRoute()->getObject();
     
-    $this->transaction = CreditTransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
+    $this->transaction = TransactionPeer::retrieveByPk($request->getParameter('transaction_id'));
     $this->forward404Unless($this->transaction);
   }
 }

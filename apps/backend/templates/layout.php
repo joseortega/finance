@@ -26,6 +26,7 @@
               <ul class="usernav clear_fix">
                 <li><a href="<?php echo url_for('/user')?>"><?php echo __('Configuration')?></a></li>
                 <li><a href="<?php echo url_for('/help/index')?>"><?php echo __('Help')?></a></li>
+                <li><a href="<?php echo url_for('backup/index')?>"><?php echo __('Backup')?></a></li>
                 <li><?php echo link_to(__('Log Out'), 'sf_guard_signout') ?></li>
               </ul>
             </div>

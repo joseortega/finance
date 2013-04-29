@@ -18,8 +18,8 @@ abstract class BaseBankbookForm extends BaseFormPropel
       'account_id'         => new sfWidgetFormPropelChoice(array('model' => 'Account', 'add_empty' => false)),
       'is_active'          => new sfWidgetFormInputCheckbox(),
       'was_printed_header' => new sfWidgetFormInputCheckbox(),
-      'created_at'         => new sfWidgetFormDateTime(),
       'print_row'          => new sfWidgetFormInputText(),
+      'created_at'         => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -27,8 +27,8 @@ abstract class BaseBankbookForm extends BaseFormPropel
       'account_id'         => new sfValidatorPropelChoice(array('model' => 'Account', 'column' => 'id')),
       'is_active'          => new sfValidatorBoolean(),
       'was_printed_header' => new sfValidatorBoolean(),
-      'created_at'         => new sfValidatorDateTime(),
       'print_row'          => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647)),
+      'created_at'         => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('bankbook[%s]');

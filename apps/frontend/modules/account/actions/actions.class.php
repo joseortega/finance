@@ -8,14 +8,14 @@
  * @author     Your name here
  */
 class accountActions extends sfActions
-{
-  /**
+{ 
+ /**
   * Execute index account
   * 
   * @param sfWebRequest $request 
   */
   public function executeIndex(sfWebRequest $request)
-  {
+  {   
     // pager
     if ($request->getParameter('page'))
     {
@@ -23,7 +23,6 @@ class accountActions extends sfActions
     }
 
     $this->pager = $this->getPager();
-    
   }
 
   /**
@@ -65,7 +64,7 @@ class accountActions extends sfActions
    * @return sfPropelPager 
    */
   protected function getPager()
-  {
+  {   
     $pager = new sfPropelPager('Account',20);
     $pager->setCriteria($this->buildCriteria());
     $pager->setPage($this->getPage());
@@ -174,11 +173,26 @@ class accountActions extends sfActions
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     if ($form->isValid())
     {
-      $notice = 'The item was created successfully.';
+      $account = $form->updateObject();
       
-      $account = $form->save();
+      $con = Propel::getConnection(AccountPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+      $con->beginTransaction();
 
-      $this->getUser()->setFlash('notice', $notice);
+      try{
+        
+        $account->setNumber(AccountPeer::generateNumber());
+        $account->save($con);
+
+        $con->commit();
+
+      }catch (Exception $e){
+        
+        $con->rollBack();
+        $this->getUser()->setFlash('error', 'A persistence error occurred.');
+      }
+      
+
+      $this->getUser()->setFlash('notice', 'The item was created successfully.');
 
       $this->redirect('account/show?id='.$account->getId());
     }
@@ -254,8 +268,8 @@ class accountActions extends sfActions
     //query transactions
     
     $criteria = new Criteria();
-    $criteria->add(AccountTransactionPeer::BANKBOOK_ID, null, Criteria::EQUAL);
-    $transactions = $account->getAccountTransactions($criteria);
+    $criteria->add(TransactionPeer::BANKBOOK_ID, null, Criteria::EQUAL);
+    $transactions = $account->getTransactions($criteria);
     
     foreach ($transactions as $key => $transaction){
       
@@ -299,6 +313,33 @@ class accountActions extends sfActions
       $bankbook->save();
     }
 
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  }
+  
+  /**
+   * Print the transactions based to current filter
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePrintList(sfWebRequest $request)
+  {
+    $orderBy = $request->getParameter('orderBy');
+
+    $criteria = $this->buildCriteria();
+    
+    if($orderBy == Criteria::ASC){
+      $criteria->clearOrderByColumns();
+      $criteria->addAscendingOrderByColumn(AccountPeer::ID);
+    }
+    
+    $accounts = AccountPeer::doSelectJoinAll($criteria);
+    
+    $pdf = Document::pdfAccounts($accounts, $this->getUser()->getCulture());
+    
     $pdf->Output();
 
     exit();

@@ -11,7 +11,7 @@ class CreditForm extends BaseCreditForm
 {
   public function configure()
   {
-    $this->useFields(array('product_id', 'associate_id', 'account_id', 'amount', 'time_in_months', 'pay_frequency_in_months', 'purpose'));
+    $this->useFields(array('product_id', 'associate_id', 'amount', 'time_in_months', 'pay_frequency_in_months', 'purpose'));
     
     $this->widgetSchema['associate_id']->setOption('renderer_class', 'sfWidgetFormPropelJQueryAutocompleter');
     $this->widgetSchema['associate_id']->setOption('renderer_options', array(
@@ -20,14 +20,6 @@ class CreditForm extends BaseCreditForm
     ));
     
     $this->widgetSchema->setHelp('associate_id', 'Name of the associate.');
-    
-    $this->widgetSchema['account_id']->setOption('renderer_class', 'sfWidgetFormPropelJQueryAutocompleter');
-    $this->widgetSchema['account_id']->setOption('renderer_options', array(
-      'model' => 'Account',
-      'url'   => $this->getOption('url2'),
-    ));
-    
-    $this->widgetSchema->setHelp('account_id', 'Account for payment and disbursement operations.');
     
     $this->validatorSchema['time_in_months'] = new sfValidatorInteger(array('min' => 1, 'max' => 2147483647));
     

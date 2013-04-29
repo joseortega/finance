@@ -121,15 +121,31 @@ class AssociatePeer extends BaseAssociatePeer
    * 
    * @return int  
    */
-  public static function generateNumber()
+  public static function generateNumber($con = null)
   {
-    $max = self::max(self::NUMBER);
-
-    if(!$max){
-        $max = sfConfig::get('app_associate_number_offset');
+    if($con == null){
+        $con = Propel::getConnection(AssociatePeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
     }
+    
+    $con->beginTransaction();
+    
+    try {
+        
+        $max = self::max(self::NUMBER);
 
-    $number = $max+1;
+        if(!$max){
+            $max = sfConfig::get('app_associate_number_offset');
+        }
+
+        $number = $max+1;
+        
+        $con->commit();
+        
+    }  catch (Exception $e){
+        
+        $con->rollBack();  
+    }
+    
     
     return $number;
   }
@@ -157,7 +173,7 @@ class AssociatePeer extends BaseAssociatePeer
    */
   public static function getLuceneIndexFile()
   {
-    return sfConfig::get('sf_data_dir').'/associate.'.sfConfig::get('sf_environment').'.index';
+    return sfConfig::get('sf_data_dir').'/associate.index';
   }
   
   /**

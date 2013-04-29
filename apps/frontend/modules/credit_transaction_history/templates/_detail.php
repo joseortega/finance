@@ -1,3 +1,5 @@
+<?php $payments = $transaction->getPayments()?>
+
 <table class="info">
   <tbody>
     <tr>
@@ -21,6 +23,33 @@
       <td><?php echo $transaction->getTransactionType() ?></td>
     </tr>
     <tr>
+      <th><?php echo __('Payments')?>:</th>
+      <td>
+        <?php foreach ($payments as $key => $payment): ?>
+          <?php if($key!=0):?>
+            <?php echo ','?>
+          <?php endif;?>
+          <?php echo $payment->getNumber()?>
+        <?php endforeach;?>
+      </td>
+    </tr>
+    <tr>
+      <th><?php echo __('Capital')?>:</th>
+      <td><?php echo PaymentPeer::sumCapital($payments) ?></td>
+    </tr>
+    <tr>
+      <th><?php echo __('Interest')?>:</th>
+      <td><?php echo PaymentPeer::sumInterest($payments) ?></td>
+    </tr>
+    <tr>
+      <th><?php echo __('Arrear')?>:</th>
+      <td><?php echo PaymentPeer::sumArrear($payments) ?></td>
+    </tr>
+    <tr>
+      <th><?php echo __('Discount')?>:</th>
+      <td><?php echo PaymentPeer::sumDiscount($payments) ?></td>
+    </tr>
+    <tr>
       <th><?php echo __('Amount')?>:</th>
       <td><?php echo $transaction->getAmount() ?></td>
     </tr>
@@ -33,5 +62,4 @@
       <td><?php echo $transaction->getId() ?></td>
     </tr>
   </tbody>
-
 </table>

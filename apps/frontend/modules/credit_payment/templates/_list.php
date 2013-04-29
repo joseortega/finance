@@ -7,6 +7,7 @@
       <th class="data"><?php echo __('Capital')?></th>
       <th class="data"><?php echo __('Interest')?></th>
       <th class="data"><?php echo __('Arrear')?></th>
+      <th class="data"><?php echo __('Discount')?></th>
       <th class="payment"><?php echo __('Amount payable')?></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td class="data"><?php echo $payment->getCapital()?></td>
         <td class="data"><?php echo $payment->getInterest()?></td>
         <td class="data"><?php echo $payment->getArrear()?></td>
+        <td class="data"><?php echo $payment->getDiscount()?></td>
         <td class="payment"><?php echo $payment->getTotal()?></td>
       </tr>
     <?php endforeach;?>
@@ -28,6 +30,7 @@
       <td class="data"><?php echo PaymentPeer::sumCapital($amortizations)?></td>
       <td class="data"><?php echo PaymentPeer::sumInterest($amortizations)?></td>
       <td class="data"><?php echo PaymentPeer::sumArrear($amortizations)?></td>
+      <td class="data"><?php echo PaymentPeer::sumDiscount($amortizations)?></td>
       <td class="payment"><strong><?php echo PaymentPeer::sumAll($amortizations)?></strong></td>
     </tr>
   </tbody>

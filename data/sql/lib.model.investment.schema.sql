@@ -15,8 +15,8 @@ CREATE TABLE `investment_product`
 	`id` BIGINT  NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(60)  NOT NULL,
 	`tax_rate` DECIMAL(8,2) default 0.00 NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `investment_product_U_1` (`name`)
 )ENGINE=InnoDB;
@@ -66,8 +66,8 @@ CREATE TABLE `investment`
 	`interest_rate` DECIMAL(8,2)  NOT NULL,
 	`tax_rate` DECIMAL(8,2)  NOT NULL,
 	`is_current` TINYINT default 0 NOT NULL,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `investment_FI_1` (`associate_id`),
 	CONSTRAINT `investment_FK_1`
@@ -87,31 +87,6 @@ CREATE TABLE `investment`
 		REFERENCES `investment_product` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE RESTRICT
-)ENGINE=InnoDB;
-
-#-----------------------------------------------------------------------------
-#-- investment_transaction
-#-----------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `investment_transaction`;
-
-
-CREATE TABLE `investment_transaction`
-(
-	`id` BIGINT  NOT NULL,
-	`investment_id` BIGINT  NOT NULL,
-	PRIMARY KEY (`id`),
-	CONSTRAINT `investment_transaction_FK_1`
-		FOREIGN KEY (`id`)
-		REFERENCES `transaction` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE,
-	INDEX `investment_transaction_FI_2` (`investment_id`),
-	CONSTRAINT `investment_transaction_FK_2`
-		FOREIGN KEY (`investment_id`)
-		REFERENCES `investment` (`id`)
-		ON UPDATE RESTRICT
-		ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

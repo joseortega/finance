@@ -39,7 +39,10 @@
         <column name="gender" type="varchar" size="15" required="false" />
         <column name="relationship_status" type="varchar" size="30" required="false" />
         <column name="birthday" type="date" required="false" />
-        <behavior name="timestampable"/>
+        <column name="monthly_income" type="decimal" size="18" scale="2" required="false" default="0.00"/>
+        <column name="monthly_expenditure" type="decimal" size="18" scale="2" required="false" default="0.00"/>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
     </table>  
 
     <table name="relationship">

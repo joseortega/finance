@@ -19,53 +19,12 @@
 class BalanceBlockedDetail extends BaseBalanceBlockedDetail 
 {
   /**
-   * Save this object
+   * Method toString
    * 
-   * @param PropelPDO $con 
+   * @return string
    */
-  public function save(PropelPDO $con = null) 
+  public function __toString() 
   {
-    if($this->isNew()){
-      $this->setBlockedAt(time());
-    }
-    parent::save($con);
-  }
-  
-  /**
-   * Post insert
-   * 
-   * @param PropelPDO $con 
-   */
-  public function postInsert(PropelPDO $con = null)
-  {
-    $this->getAccount()->blockBalance($this->getAmount(), $con);
-    parent::postInsert($con);
-  }
-  
-  /**
-   * Unblock the amount this object
-   * 
-   * @param PropelPDO $con 
-   */
-  public function unblock(PropelPDO $con = null)
-  {
-    if($con == null){
-      $con = Propel::getConnection(AccountPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
-    }
-    
-    $con->beginTransaction();
-    
-    try{ 
-      
-      $this->getAccount()->unblockBalance($this->getAmount(), $con);
-      
-      $this->delete();
-
-      $con->commit();
-      
-    }catch (Exception $e){
-      $con->rollBack();
-      throw $e;
-    }
+    return $this->getAmount();
   }
 } // BalanceBlockDetail

@@ -7,7 +7,7 @@
     <div class="body">
       <div class="title">
         
-        <a href="<?php echo url_for('account_transaction_show', $transaction)?>"><?php echo $transaction->getTransactionType()?></a>
+        <a href="<?php echo url_for('account_transaction_show', $transaction)?>"># <?php echo $transaction->getId()?> <?php echo $transaction->getTransactionType()?></a>
         
         <?php echo __('type')?>
         <span><?php echo __($transaction->getTransactionType()->getNature())?></span>
