@@ -26,6 +26,24 @@ class credit_amortizationActions extends sfActions
     $this->pager->setPage($request->getParameter('page', 1));
     $this->pager->init();
   }
+  
+  /**
+  * Executes index action
+  *
+  * @param sfRequest $request
+  */
+  public function executeFullTable(sfWebRequest $request)
+  {
+    $this->credit = CreditPeer::retrieveByPK($request->getParameter('id'));
+    
+    $criteria = new Criteria();
+    $criteria->add(PaymentPeer::CREDIT_ID, $this->credit->getId(), Criteria::EQUAL);
+
+    $this->pager = new sfPropelPager('Payment',20);
+    $this->pager->setCriteria($criteria);
+    $this->pager->setPage($request->getParameter('page', 1));
+    $this->pager->init();
+  }
 
   /**
    * Execute print pdf

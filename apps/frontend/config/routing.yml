@@ -49,6 +49,13 @@ credit_amortization:
   options: { model: Credit, type: object }
   param:   { module: credit_amortization, action: index, sf_format: html }
   requirements: { sf_method: get }
+  
+credit_amortization_now:
+  url:     /credit/:id/payment_plan_now.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit_amortization, action: fullTable, sf_format: html }
+  requirements: { sf_method: get }
 
 account_bankbook:
   class: sfPropelRouteCollection

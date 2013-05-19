@@ -2,11 +2,8 @@
 
 <?php include_partial('account/account_page_head', array('account'=>$account))?>
 
-<div class=" columns listcols clear_fix">
-  <div class="news">
-    <?php include_partial('list', array('pager' => $pager, 'account'=> $account)) ?>
-  </div>
-  <div class="sidebar">
+<div class="">
+  <div class="">
     <?php if($account->CountTransacctionsByBankbookIdNull()!=0):?>
       <div class="notice_task">
         <p>
@@ -20,4 +17,8 @@
       </div>
     <?php endif;?>
   </div>
+  <div class="">
+    <?php include_partial('list_new_template', array('pager' => $pager, 'account'=> $account)) ?>
+  </div>
+  
 </div>

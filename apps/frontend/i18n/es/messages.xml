@@ -1844,6 +1844,14 @@
         <target>Tabla de amortización</target>
       </trans-unit>
       <trans-unit>
+        <source>Origen Table</source>
+        <target>Tabla de Origen</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Current Table</source>
+        <target>Tabla Actual</target>
+      </trans-unit>
+      <trans-unit>
         <source>Payment date</source>
         <target>Fecha de pago</target>
       </trans-unit>

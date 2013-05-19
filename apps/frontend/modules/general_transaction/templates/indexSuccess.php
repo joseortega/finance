@@ -14,7 +14,7 @@
   <div class="columns transactions clear_fix">
     <?php include_partial('util/flashes') ?>
     <div class="news">
-      <?php include_partial('general_transaction/list', array('pager' => $pager)) ?>
+        <?php include_partial('general_transaction/list_new_template', array('pager' => $pager)) ?>
     </div>
     <div class="sidebar">
       <?php include_partial('general_transaction/filters', array('form' => $filters)) ?>

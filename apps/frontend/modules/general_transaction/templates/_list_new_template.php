@@ -1,4 +1,4 @@
-<div class="list">
+<div class="list boxed-group">
   <?php if (!$pager->getNbResults()): ?>
     <p><?php echo __('No result') ?></p>
   <?php else: ?>
@@ -9,7 +9,6 @@
         <th class="data"><?php echo __('Id')?></th>
         <th class="data"><?php echo __('Transaction')?></th>
         <th class="data"><?php echo __('Amount')?></th>
-        <th class="data"><?php echo __('Cash balance')?></th>
         <th class="payment"><?php echo __('User')?></th>
       </tr>
     </thead>
@@ -30,11 +29,10 @@
       <?php foreach ($pager->getResults() as $key=>$transaction): ?>
       <tr class="row <?php echo fmod($key, 2) ? 'even' : 'odd' ?>">
         <td><?php echo $transaction->getCreatedAt() ?></td>
-        <td class="number"><?php echo '#'?><?php echo $transaction->getId()?></td>
-        <td class="data"><?php echo $transaction->getTransactionType()->getConcept() ?></td>
+        <td class="data"><a href="<?php echo url_for('general_transaction_show', $transaction)?>"># <?php echo $transaction->getId()?></a></td>
+        <td class="data"><?php echo $transaction->getTransactionType()?></td>
         <td class="data"><?php echo $transaction->getAmount() ?></td>
-        <td class="data"><?php echo $transaction->getCashBalance() ?></td>
-        <td class="data"><?php echo $transaction->getUser() ?></td>
+        <td class="payment"><?php echo $transaction->getUser() ?></td>
       </tr>
       <?php endforeach; ?>
     </tbody>

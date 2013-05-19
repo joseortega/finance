@@ -6,5 +6,5 @@
 
 <div class="columns listcols clear_fix">
   <?php include_partial('util/flashes')?>
-  <?php include_partial('list', array('pager' => $pager, 'credit'=>$credit)) ?>
+  <?php include_partial('list_full', array('pager' => $pager, 'credit'=>$credit)) ?>
 </div>
