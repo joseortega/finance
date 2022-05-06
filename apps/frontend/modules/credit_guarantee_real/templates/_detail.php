@@ -6,7 +6,7 @@
       <th class="label"><?php echo __('Guarantees')?>:</th>
       <td class="data">
         <?php if(count($credit->getGuaranteeReals())==0):?>
-        <?php echo __('None')?>
+          <?php echo __('None')?>
         <?php else:?>
         <ul>
           <?php foreach ($credit->getGuaranteeReals() as $guarantee):?>
@@ -23,6 +23,11 @@
             </li>
           <?php endforeach;?>
         </ul>
+        <?php endif;?>
+        <?php if($credit->isInRequest() || $credit->isApproved() || $credit->isCurrent()):?>
+          <ul>
+            <li><a href="<?php echo url_for('credit_guarantee_real_edit', $credit)?>"><span><?php echo __('Añadir Garantías Hipotecarias o Prendarias')?></span></a> </li>
+          </ul>
         <?php endif;?>
       </td>
     </tr>

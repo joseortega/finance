@@ -13,10 +13,8 @@
     
     <?php if($credit->isInRequest()):?>
       <div class="rule"></div>
-      <ul class="actions">
-        <li><?php echo link_to('<span>'.__('Approve request').'</span>', 'credit/approve?id='.$credit->getId(), array('confirm' => 'Are you sure?', 'class'=>'button classy')) ?></li>
-        <li><?php echo link_to('<span>'.__('Annul request').'</span>', 'credit/annul?id='.$credit->getId(), array('confirm' => 'Are you sure?', 'class'=>'button classy danger')) ?></li>
-      </ul>
+      <h4 class="section_header"><?php echo __('Tipo de Amortizazion')?></h4>
+      <?php include_partial('form_pre_approve', array('credit' => $credit, 'form' => $form))?>
       
     <?php elseif($credit->isApproved()):?>
       <div class="rule"></div>

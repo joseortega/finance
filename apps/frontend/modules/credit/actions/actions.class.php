@@ -108,6 +108,10 @@ class creditActions extends sfActions
     $this->credit = $this->getRoute()->getObject();
     $this->forward404Unless($this->credit);
     
+    if($this->credit->isInRequest()){
+      $this->form = new CreditAmortizationTypesForm($this->credit);
+    }
+
     if($this->credit->isApproved()){
         $this->form = new CreditAccountForm($this->credit);
     }
@@ -231,6 +235,17 @@ class creditActions extends sfActions
     $this->forward404Unless($credit);
     
     $this->forward404If(!$credit->isInRequest());
+
+    $this->form = new CreditAmortizationTypesForm($credit);
+    
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
+      
+      $credit = $this->form->updateObject();
+    }else{
+        $this->getUser()->setFlash('error', 'Require an amortization type for the approve.');
+        $this->redirect('credit_show', $credit);
+    }
     
     $transactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::CREDIT_APPROVAL);
     
@@ -545,6 +560,23 @@ class creditActions extends sfActions
       
       $amountPending = $balance;
     }
+  }
+  /**
+   * Imprimir pagaré a al orden
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function  executePdfPagare(sfWebRequest $request)
+  {
+    $credit = CreditPeer::retrieveByPK($request->getParameter('id'));
+    
+    $pdf = Document::pdfPagare($credit, $this->getUser()->getCulture());
+            
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
   }
   
   /**

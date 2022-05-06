@@ -66,3 +66,11 @@
 
 <h4 class="section_header"><?php echo __('Credit Committee')?></h4>
 <?php include_partial('credit_committee_member/detail', array('credit'=>$credit))?>
+
+<?php if($credit->isApproved() || $credit->isCurrent() || $credit->isPaid()):?>
+
+  <div class="rule"></div>
+  <h4 class="section_header"><?php echo __('Documentos Legales')?></h4>
+  <?php include_partial('credit/legal_documents', array('credit'=>$credit))?>
+
+<?php endif; ?>

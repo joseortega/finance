@@ -106,7 +106,14 @@ credit_guarantee_personal:
   options: { model: Credit, type: object }
   param:   { module: credit_guarantee_personal, action: index, sf_format: html }
   requirements: { sf_method: get }
-    
+
+credit_approve:
+  url:     /credit/:id/approve.:sf_format
+  class:   sfPropelRoute
+  options: { model: Credit, type: object }
+  param:   { module: credit, action: approve, sf_format: html }
+  requirements: { sf_method: put }    
+
 #credit_account
 
 credit_disburse:

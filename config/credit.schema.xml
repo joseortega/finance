@@ -50,12 +50,12 @@
             <reference local="account_id" foreign="id" />
         </foreign-key>
         <column name="amount" type="decimal" size="18" scale="2" required="true" />
-        <column name="balance" type="decimal" size="18" scale="2" required="true" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
         <column name="time_in_months" type="integer" required="true"/>
         <column name="pay_frequency_in_months" type="integer" required="true" default="1"/>
         <column name="amortization_type" type="varchar" size="60" required="true"/>
         <column name="purpose" type="varchar" size="100" required="true" />
-        <column name="interest_rate" type="decimal" size="8" scale="2" required="true" />
+        <column name="interest_rate" type="decimal" size="8" scale="2" required="true" default="0.00"/>
         <column name="status" type="varchar" size="30" required="true" default="in_request"/>
         <column name="issued_at" type="timestamp" required="false" default="null" />
         <column name="disbursed_at" type="timestamp" required="false" default="null" />

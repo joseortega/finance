@@ -20,7 +20,7 @@ class CreditForm extends BaseCreditForm
     ));
     
     $this->widgetSchema->setHelp('associate_id', 'Name of the associate.');
-    
+
     $this->validatorSchema['time_in_months'] = new sfValidatorInteger(array('min' => 1, 'max' => 2147483647));
     
     $this->validatorSchema['pay_frequency_in_months'] = new sfValidatorInteger(array('min' => 1, 'max' => 2147483647));
@@ -28,7 +28,7 @@ class CreditForm extends BaseCreditForm
     $this->validatorSchema['amount'] = new sfValidatorNumber(array('min'=>0.01, 'max'=>99999999.99));
     
     $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('pay_frequency_in_months','<=', 'time_in_months'));
-    
+
     $this->mergePostValidator(new CreditValidatorSchema());
     
     if(!$this->getObject()->isNew()){

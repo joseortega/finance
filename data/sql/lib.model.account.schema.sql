@@ -141,7 +141,7 @@ CREATE TABLE `bankbook`
 	`account_id` BIGINT  NOT NULL,
 	`is_active` TINYINT default 1 NOT NULL,
 	`was_printed_header` TINYINT default 0 NOT NULL,
-	`print_row` INTEGER  NOT NULL,
+	`print_row` INTEGER  default 0 NOT NULL,
 	`created_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `bankbook_FI_1` (`account_id`),

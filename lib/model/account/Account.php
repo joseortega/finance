@@ -244,7 +244,7 @@ class Account extends BaseAccount
    */
   public function  __toString() 
   {
-      return $this->getNumber().' / '.$this->getAssociate()->getName().' / '.$this->getAvailableBalance();
+      return $this->getNumber().' / '.$this->getProduct().' / '.$this->getAssociate()->getName().' / '.$this->getAvailableBalance();
   }
 
 } // Account

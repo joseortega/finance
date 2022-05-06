@@ -12,6 +12,11 @@
           <?php endforeach;?>
         </ul>
         <?php endif;?>
+        <?php if($credit->isInRequest() || $credit->isApproved() || $credit->isCurrent()):?>
+          <ul>
+            <li><a href="<?php echo url_for('credit_guarantee_personal', $credit)?>"><span><?php echo __('Añadir Garantías Personales')?></span></a> </li>
+          </ul>
+        <?php endif;?>
       </td>
     </tr>
   </tbody>
