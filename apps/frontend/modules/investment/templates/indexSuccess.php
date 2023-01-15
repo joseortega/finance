@@ -27,5 +27,13 @@
   </div>
   <div class="sidebar">
     <?php include_partial('investment/filters', array('form' => $filters)) ?>
+    <div>
+      <p>
+        <?php echo __('Print the filtered list,')?>
+        <a href="<?php echo url_for('investment/printList?orderBy='.Criteria::ASC)?>"><?php echo __('asc')?></a>
+        <?php echo __('or')?>
+        <a href="<?php echo url_for('investment/printList')?>"><?php echo __('desc')?></a>
+      </p>
+    </div>
   </div>
 </div>

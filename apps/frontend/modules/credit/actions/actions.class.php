@@ -159,6 +159,7 @@ class creditActions extends sfActions
     {
       $credit = $this->form->updateObject();
       $credit->setAmortizationType($credit->getProduct()->getAmortizationType());
+      $credit->setStatus(Credit::STATUS_IN_REQUEST);
       $credit->save();
       
       $this->getUser()->setFlash('notice', 'The item was created successfully.');
@@ -221,6 +222,56 @@ class creditActions extends sfActions
     }
 
     $this->setTemplate('edit');
+  }
+
+  public function executeGenerateTemporalTable(sfWebRequest $request)
+  {
+    $credit = CreditPeer::retrieveByPK($request->getParameter('id'));
+    
+    $this->forward404Unless($credit);
+    
+    $this->forward404If(!$credit->isInRequest());
+
+    $this->form = new CreditAmortizationTypesForm($credit);
+    
+    $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
+    if ($this->form->isValid()){
+      
+      $credit = $this->form->updateObject();
+    }else{
+        $this->getUser()->setFlash('error', 'Require an amortization type for the approve.');
+        $this->redirect('credit_show', $credit);
+    }
+
+    $transactionType = TransactionTypePeer::retrieveByOperationType(TransactionType::CREDIT_APPROVAL);
+    
+    if(!$transactionType){
+      $this->getUser()->setFlash('error', 'Credit: Transaction type no configuration, Admin');
+      $this->redirect('credit_show', $credit);
+    }
+    
+    $interesRates = $credit->getProduct()->getArrearRates();
+    
+    if(!$interesRates){
+      $this->getUser()->setFlash('error', 'The interest rate is not defined for this product.');
+      $this->redirect('credit_show', $credit);
+    }
+
+    if($credit->isInRequest()){
+
+        $credit->setInterestRate($credit->getProduct()->getInterestRateCurrent()->getValue());
+        
+        if($credit->getAmortizationType() == 'french'){
+           $this->generateAmortizationTableMethodFrench($credit);
+        }else{
+           $this->generateAmortizationTableMethodGerman($credit);
+        }
+        
+      
+      $this->getUser()->setFlash('notice', 'The credit was passed successfully.');
+    }
+    
+    $this->redirect('credit_show', $credit);
   }
   
   /**
@@ -418,10 +469,13 @@ class creditActions extends sfActions
     $this->forward404Unless($credit = CreditPeer::retrieveByPk($request->getParameter('id')), sprintf('Object credit does not exist (%s).', $request->getParameter('id')));
     
     $this->forward404If(!$credit->isAnnulled());
+
+    $con = Propel::getConnection(CreditPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    $con->beginTransaction();
     
     try 
     {
-      $credit->delete();
+      $credit->delete($con);
     }  
     catch (Exception $e)
     {
@@ -498,8 +552,8 @@ class creditActions extends sfActions
       $payment->setCapital($capital);
       $payment->setStatus(Payment::STATUS_UNPAID);
 
-      $payment->save();
-      
+      $credit->addPayment($payment);
+
       $amountPending = $balance;
     }
   }
@@ -556,7 +610,7 @@ class creditActions extends sfActions
       $payment->setCapital($capital);
       $payment->setStatus(Payment::STATUS_UNPAID);
 
-      $payment->save();
+      $credit->addPayment($payment);
       
       $amountPending = $balance;
     }

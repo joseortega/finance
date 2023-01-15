@@ -1,0 +1,33 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           AccountingExercise
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              AccountingExercise
+    plural:                AccountingExercises
+    route_prefix:          accounting_exercise
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Accounting Exercise
+        display: [=code, name, start_date, end_date]
+        batch_actions: {}
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  
+        display: [code, name]
+      form:    
+        display: [code, name, start_date, end_date]
+      edit:    ~
+      new:     
+        actions:
+          _save: ~
+          _list: ~

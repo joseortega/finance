@@ -53,6 +53,7 @@
         </foreign-key>
         <column name="name" type="varchar" size="100" required="true"/>
         <column name="type" type="varchar" size="100" required="true" />
+        <column name="phone_number" type="varchar" size="25" required="false"/>
     </table>
 
     <table name="email">

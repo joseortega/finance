@@ -14,7 +14,7 @@ abstract class BaseCashFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'agency_id'  => new sfWidgetFormPropelChoice(array('model' => 'Agency', 'add_empty' => true)),
       'name'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'ip_address' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'ip_address' => new sfWidgetFormFilterInput(),
       'balance'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'status'     => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'created_at' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),

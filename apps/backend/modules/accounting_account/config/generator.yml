@@ -1,0 +1,27 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           AccountingAccount
+    theme:                 fynance
+    non_verbose_templates: true
+    with_show:             false
+    singular:              AccountingAccount
+    plural:                AccountingAccounts
+    route_prefix:          accounting_account
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        display: [=code, name, type, nature, debit, credit, balance]
+        object_actions:
+          _edit: ~
+        actions:
+          _new: {label: New}
+      filter:  
+        display: [accounting_account_id, code, name, type, nature]
+      form:    ~
+      edit:    ~
+      new:     ~

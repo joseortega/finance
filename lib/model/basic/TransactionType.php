@@ -32,8 +32,8 @@ class TransactionType extends BaseTransactionType
   const CUSTOM = 'custom';
   
   //Const operationType account-account
-  const ACCOUNT_TRANSFER_FROM_ACCOUNT = 'account_transfer_from_account';
-  const ACCOUNT_TRANSFER_TO_ACCOUNT = 'account_transfer_to_account';
+  const ACCOUNT_TRANSFER_ORIGIN_ACCOUNT = 'account_transfer_origin_account';
+  const ACCOUNT_TRANSFER_DESTINATION_ACCOUNT = 'account_transfer_destination_account';
   
   //Const operationType account-investment
   const ACCOUNT_TRANSFER_FROM_INVESTMENT = 'account_transfer_from_investment';
@@ -81,13 +81,13 @@ class TransactionType extends BaseTransactionType
       
       //for account
       
-      case self::ACCOUNT_TRANSFER_FROM_ACCOUNT :
-        $this->setNature(self::CREDIT);
+      case self::ACCOUNT_TRANSFER_ORIGIN_ACCOUNT :
+        $this->setNature(self::DEBIT);
         $this->setCashBalanceIsAffect(FALSE);
         break;
 
-      case self::ACCOUNT_TRANSFER_TO_ACCOUNT :
-        $this->setNature(self::DEBIT);
+      case self::ACCOUNT_TRANSFER_DESTINATION_ACCOUNT :
+        $this->setNature(self::CREDIT);
         $this->setCashBalanceIsAffect(FALSE);
          break;
 

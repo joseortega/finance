@@ -25,8 +25,8 @@
             <reference local="agency_id" foreign="id" />
         </foreign-key>
         <column name="name" type="varchar" size="60" required="true" />
-        <column name="ip_address" type="varchar" size="50" required="true" />
-        <column name="balance" type="decimal" size="18" scale="2" required="true" />
+        <column name="ip_address" type="varchar" size="50" required="false" />
+        <column name="balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
         <column name="status" type="varchar" size="50" required="true" default="close" />
         <unique>
             <unique-column name="name"/>

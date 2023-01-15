@@ -905,7 +905,7 @@
       </trans-unit>
       <trans-unit>
         <source>Juridical identification</source>
-        <target>Identificación jurídica</target>
+        <target>Ruc</target>
       </trans-unit>
       <trans-unit>
         <source>Organization type</source>
@@ -1062,6 +1062,10 @@
       <trans-unit>
         <source>Wife</source>
         <target>Esposa</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Phone number</source>
+        <target>Núm de Telef.</target>
       </trans-unit>
        <!-- end Relation options -->
       
@@ -1522,6 +1526,45 @@
       <trans-unit>
         <source>Detail Bankbook</source>
         <target>Detalle de Libreta</target>
+      </trans-unit>
+      
+      <!--Transfer-->
+      
+      <trans-unit>
+        <source>Transfers</source>
+        <target>Transferencias</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New transfer</source>
+        <target>Nueva transferencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>New Transfer</source>
+        <target>Nueva Transferencia</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Origin</source>
+        <target>Origen</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Destination</source>
+        <target>Destino</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Date</source>
+        <target>Fecha</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account origin</source>
+        <target>Cuenta de origen</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Account destination</source>
+        <target>Cuenta de destino</target>
+      </trans-unit>
+      <trans-unit>
+        <source>Save transfer</source>
+        <target>Guardat transferencia</target>
       </trans-unit>
       
       <!--Products-->

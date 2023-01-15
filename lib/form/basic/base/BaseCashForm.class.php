@@ -28,7 +28,7 @@ abstract class BaseCashForm extends BaseFormPropel
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'agency_id'  => new sfValidatorPropelChoice(array('model' => 'Agency', 'column' => 'id')),
       'name'       => new sfValidatorString(array('max_length' => 60)),
-      'ip_address' => new sfValidatorString(array('max_length' => 50)),
+      'ip_address' => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'balance'    => new sfValidatorNumber(),
       'status'     => new sfValidatorString(array('max_length' => 50)),
       'created_at' => new sfValidatorDateTime(),

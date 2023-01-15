@@ -18,6 +18,7 @@ abstract class BaseRelationshipForm extends BaseFormPropel
       'associate_id' => new sfWidgetFormPropelChoice(array('model' => 'Associate', 'add_empty' => false)),
       'name'         => new sfWidgetFormInputText(),
       'type'         => new sfWidgetFormInputText(),
+      'phone_number' => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -25,6 +26,7 @@ abstract class BaseRelationshipForm extends BaseFormPropel
       'associate_id' => new sfValidatorPropelChoice(array('model' => 'Associate', 'column' => 'id')),
       'name'         => new sfValidatorString(array('max_length' => 100)),
       'type'         => new sfValidatorString(array('max_length' => 100)),
+      'phone_number' => new sfValidatorString(array('max_length' => 25, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('relationship[%s]');

@@ -27,6 +27,11 @@
   background: url(/images/pagehead/background-yellow.png) 0 0 no-repeat;
 }
 
+#page_head.admin
+{
+  background:  url(/images/pagehead/background-yellow.png) 0 0 no-repeat;
+}
+
 #page_head h1 {
   margin: 0 0 10px 0;
   font-size: 20px;

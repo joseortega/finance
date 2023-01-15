@@ -69,7 +69,7 @@ CREATE TABLE `sf_guard_user`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`username` VARCHAR(128)  NOT NULL,
-	`algorithm` VARCHAR(128) default 'sha1' NOT NULL,
+	`algorithm` VARCHAR(128) default '' NOT NULL,
 	`salt` VARCHAR(128)  NOT NULL,
 	`password` VARCHAR(128)  NOT NULL,
 	`created_at` DATETIME,

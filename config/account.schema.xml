@@ -47,6 +47,25 @@
         <column name="updated_at" type="timestamp" required="true" />
     </table>
     
+    <table name="transfer">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
+        <column name="account_origin_id" type="bigint" required="true"/>
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT" phpName="AccountOrigin">
+            <reference local="account_origin_id" foreign="id" />
+        </foreign-key>
+        <column name="account_destination_id" type="bigint" required="true"/>
+        <foreign-key foreignTable="account" onDelete="CASCADE" onUpdate="RESTRICT" phpName="AccountDestination">
+            <reference local="account_destination_id" foreign="id" />
+        </foreign-key>
+        <column name="user_id" type="integer" required="true" />
+        <foreign-key foreignTable="sf_guard_user" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="User">
+            <reference local="user_id" foreign="id" />
+        </foreign-key>
+        <column name="amount" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="observation" type="longvarchar" required="true" />
+        <column name="created_at" type="timestamp" required="true" />
+    </table>
+    
     <table name="balance_blocked_detail">
         <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true" />
         <column name="account_id" type="bigint" required="true"/>
@@ -78,7 +97,7 @@
         </foreign-key>
         <column name="is_active" type="boolean" required="true" default="1" />
         <column name="was_printed_header" type="boolean" required="true" default="0" />
-        <column name="print_row" type="integer" required="true" defaul="0"/>  
+        <column name="print_row" type="integer" required="true" default="0"/>  
         <column name="created_at" type="timestamp" required="true" /> 
     </table>
 

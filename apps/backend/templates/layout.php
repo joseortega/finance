@@ -39,6 +39,7 @@
               <li><a href="<?php echo url_for('@agency')?>"><?php echo __('General')?></a></li>
               <li><a href="<?php echo url_for('@sf_guard_user')?>"><?php echo __('Users')?></a></li>
               <li><a href="<?php echo url_for('@category')?>"><?php echo __('Associates')?></a></li>
+              <li><a href="<?php echo url_for('@accounting_exercise')?>"><?php echo __('Contabilidad')?></a></li>
             </ul>
           <?php else:?>
             <ul class="nav logged_out clear_fix">

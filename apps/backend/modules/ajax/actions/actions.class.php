@@ -20,6 +20,15 @@ class ajaxActions extends sfActions
 
     return $this->renderText(json_encode($provinces));
   }
+  
+  public function executeAjaxAccountingAccount(sfWebRequest $request)
+  {
+    $this->getResponse()->setContentType('application/json');
+
+    $provinces = AccountingAccountPeer::retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'));
+
+    return $this->renderText(json_encode($provinces));
+  }
 }
 
 ?>

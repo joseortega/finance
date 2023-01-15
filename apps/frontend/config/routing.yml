@@ -12,7 +12,7 @@ user:
   options: { model: sfGuardUser, type: object }
   param:   { module: user, action: index, sf_format: html }
   requirements: { sf_method: get }
-  
+    
 general_transaction:
   class: sfPropelRouteCollection
   options:
@@ -213,7 +213,7 @@ investment:
 account_transfer:
   class: sfPropelRouteCollection
   options:
-    model:                AccountTransaction
+    model:                Transfer
     module:               account_transfer
     prefix_path:          /account_transfer
     column:               id
@@ -299,6 +299,16 @@ account:
     model:                Account
     module:               account
     prefix_path:          /account
+    column:               id
+    with_wildcard_routes: true
+    
+#accounting routers
+accounting_voucher:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountingVoucher
+    module:               accounting_voucher
+    prefix_path:          /accounting_voucher
     column:               id
     with_wildcard_routes: true
     

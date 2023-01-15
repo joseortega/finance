@@ -5,7 +5,7 @@
  *
  * @package    finance
  * @subpackage account
- * @author     Your name here
+ * @author     Jose Claudio Ortega A
  */
 class accountActions extends sfActions
 { 

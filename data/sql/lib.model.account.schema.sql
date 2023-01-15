@@ -14,7 +14,7 @@ CREATE TABLE `account_product`
 (
 	`id` BIGINT  NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(60)  NOT NULL,
-	`capitalization_frequency` VARCHAR(30) default 'monthly' NOT NULL,
+	`capitalization_frequency` VARCHAR(30) default '' NOT NULL,
 	`created_at` DATETIME  NOT NULL,
 	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
@@ -84,6 +84,43 @@ CREATE TABLE `account`
 )ENGINE=InnoDB;
 
 #-----------------------------------------------------------------------------
+#-- transfer
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `transfer`;
+
+
+CREATE TABLE `transfer`
+(
+	`id` BIGINT  NOT NULL AUTO_INCREMENT,
+	`account_origin_id` BIGINT  NOT NULL,
+	`account_destination_id` BIGINT  NOT NULL,
+	`user_id` INTEGER  NOT NULL,
+	`amount` DECIMAL(18,2) default 0.00 NOT NULL,
+	`observation` TEXT  NOT NULL,
+	`created_at` DATETIME  NOT NULL,
+	PRIMARY KEY (`id`),
+	INDEX `transfer_FI_1` (`account_origin_id`),
+	CONSTRAINT `transfer_FK_1`
+		FOREIGN KEY (`account_origin_id`)
+		REFERENCES `account` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE,
+	INDEX `transfer_FI_2` (`account_destination_id`),
+	CONSTRAINT `transfer_FK_2`
+		FOREIGN KEY (`account_destination_id`)
+		REFERENCES `account` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE CASCADE,
+	INDEX `transfer_FI_3` (`user_id`),
+	CONSTRAINT `transfer_FK_3`
+		FOREIGN KEY (`user_id`)
+		REFERENCES `sf_guard_user` (`id`)
+		ON UPDATE RESTRICT
+		ON DELETE RESTRICT
+)ENGINE=InnoDB;
+
+#-----------------------------------------------------------------------------
 #-- balance_blocked_detail
 #-----------------------------------------------------------------------------
 
@@ -141,7 +178,7 @@ CREATE TABLE `bankbook`
 	`account_id` BIGINT  NOT NULL,
 	`is_active` TINYINT default 1 NOT NULL,
 	`was_printed_header` TINYINT default 0 NOT NULL,
-	`print_row` INTEGER  default 0 NOT NULL,
+	`print_row` INTEGER default 0 NOT NULL,
 	`created_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `bankbook_FI_1` (`account_id`),

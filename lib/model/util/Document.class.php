@@ -203,6 +203,45 @@ class Document
   }
   
   /**
+   * Write account transaction in pdf object
+   * @param AccountTransaction $transaction
+   * @param string $i18n
+   * @return PDF 
+   */
+  public static function pdfAccountTransfer(Transfer $transfer, $i18n)
+  {
+    $pdf=new PDF('P','mm', array(105,147));
+    $pdf->AddPage();
+
+    $titleReport = ConfigurationPeer::retrieveByName(Configuration::TITLE_REPORT);
+
+    $pdf->SetFont('Arial','',7);
+    $pdf->SetFillColor(255,255,255);
+    $pdf->SetTextColor(0);
+
+    $pdf->Cell(25,5,$titleReport->getValue(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Cuenta de Origen',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getAccountOrigin()->getNumber().' / '.$transfer->getAccountOrigin()->getAssociate()->getName(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Cuenta de Destino',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getAccountDestination()->getNumber().' / '.$transfer->getAccountDestination()->getAssociate()->getName(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Observación',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getObservation(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Creado en',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getCreatedAt(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Monto',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getAmount(),0,1,'L');
+    
+    $pdf->Cell(25,5,'Código',0,0,'L',1);
+    $pdf->Cell(25,5,$transfer->getId(),0,1,'L');
+    
+    return $pdf;
+  }
+  /**
    * Write investment in pdf object
    * 
    * @param Investment $investment
@@ -565,18 +604,17 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Movimientos en Cuentas',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->SetFillColor(255,255,255);
-    $pdf->SetTextColor(0);
-    
-    $pdf->SetTextColor(0);
+    $pdf->SetFont('Arial','',8);    
     $pdf->SetFillColor(210,210,210);
+    
+    $pdf->SetFont('Arial','B',8);
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_date'),1,0,'L',1);
     $pdf->Cell(70,5,sfConfig::get('app_'.$i18n.'_account'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_transaction'),1,0,'L',1);
@@ -585,6 +623,8 @@ class Document
     
     $debit = 0;
     $credit = 0;
+    
+    $pdf->SetFont('Arial','',8);
     
     foreach ($transactions as $accountTransaction)
     {
@@ -606,12 +646,9 @@ class Document
       }
     }
     
-    $pdf->SetFillColor(220,220,220);
+    $pdf->SetFont('Arial','B',8);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->Cell(125,5,'',1,0,'R',1);
-    
-    $pdf->SetFont('Arial','',7);
+    $pdf->Cell(125,5,'Total',1,0,'L',1);
     $pdf->Cell(30,5, $debit,1,0,'R',1);
     $pdf->Cell(0,5, $credit,1,1,'R',1);
     
@@ -632,30 +669,53 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Movimientos en Créditos',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->SetFillColor(255,255,255);
-    $pdf->SetTextColor(0);
-    
+    $pdf->SetFont('Arial','B',8);
     $pdf->SetTextColor(0);
     $pdf->SetFillColor(210,210,210);
+    
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_date'),1,0,'L',1);
     $pdf->Cell(70,5,sfConfig::get('app_'.$i18n.'_credit'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_transaction'),1,0,'L',1);
-    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_amount'),1,1,'R',1);
+    $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_debit'),1,0,'R',1);
+    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_credit'),1,1,'R',1);
+    
+    $pdf->SetFont('Arial','',8);
+    
+    $debit = 0;
+    $credit = 0;
     
     foreach ($transactions as $transaction)
     {
       $pdf->Cell(25,5,$transaction->getCreatedAt('Y-m-d'),1,0,'L');
       $pdf->Cell(70,5,$transaction->getCredit()->getId().'/'.$transaction->getCredit()->getAssociate()->getName(),1,0,'L');
       $pdf->Cell(30,5,$transaction->getTransactionType()->getInitials(),1,0,'L');   
-      $pdf->Cell(0,5,$transaction->getAmount(),1,1,'R');
+      
+      if($transaction->isDebit()){
+          $pdf->Cell(30,5,$transaction->getAmount(),1,0,'R');
+          $pdf->Cell(0,5,'',1,1,'R');
+          
+          $debit = $debit + $transaction->getAmount();
+          
+      }else{
+          $pdf->Cell(30,5,'',1,0,'R');
+          $pdf->Cell(0,5,$transaction->getAmount(),1,1,'R');
+          
+          $credit = $credit + $transaction->getAmount();
+      }
     }
+    
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(125,5,'Sumatoria',1,0,'L',1);
+       
+    $pdf->Cell(30,5, $debit,1,0,'R',1);
+    $pdf->Cell(0,5, $credit,1,1,'R',1);
     
     return $pdf;
   }
@@ -674,13 +734,14 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Movimientos en Inversiones',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
+    $pdf->SetFont('Arial','B',8);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0);
     
@@ -689,15 +750,40 @@ class Document
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_date'),1,0,'L',1);
     $pdf->Cell(70,5,sfConfig::get('app_'.$i18n.'_investment'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_transaction'),1,0,'L',1);
-    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_amount'),1,1,'R',1);
+    $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_debit'),1,0,'R',1);
+    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_credit'),1,1,'R',1);
+    
+    $pdf->SetFont('Arial','',8);
+    
+    $debit = 0;
+    $credit = 0;
     
     foreach ($transactions as $transaction)
     {
       $pdf->Cell(25,5,$transaction->getCreatedAt('Y-m-d'),1,0,'L');
       $pdf->Cell(70,5,$transaction->getInvestment()->getId().'/'.$transaction->getInvestment()->getAssociate()->getName(),1,0,'L');
       $pdf->Cell(30,5,$transaction->getTransactionType()->getInitials(),1,0,'L');   
-      $pdf->Cell(0,5,$transaction->getAmount(),1,1,'R');
+      
+      if($transaction->isDebit()){
+          $pdf->Cell(30,5,$transaction->getAmount(),1,0,'R');
+          $pdf->Cell(0,5,'',1,1,'R');
+          
+          $debit = $debit + $transaction->getAmount();
+          
+      }else{
+          $pdf->Cell(30,5,'',1,0,'R');
+          $pdf->Cell(0,5,$transaction->getAmount(),1,1,'R');
+          
+          $credit = $credit + $transaction->getAmount();
+      }
+      
     }
+    
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(125,5,'Sumatoria',1,0,'L',1);
+       
+    $pdf->Cell(30,5, $debit,1,0,'R',1);
+    $pdf->Cell(0,5, $credit,1,1,'R',1);
     
     return $pdf;
   }
@@ -716,24 +802,25 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Caja',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->SetFillColor(255,255,255);
-    $pdf->SetTextColor(0);
-    
+    $pdf->SetFont('Arial','B',8);
     $pdf->SetTextColor(0);
     $pdf->SetFillColor(210,210,210);
+    
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_date'),1,0,'L',1);
     $pdf->Cell(45,5,sfConfig::get('app_'.$i18n.'_cash'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_transaction'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_type'),1,0,'L',1);
     $pdf->Cell(30,5,sfConfig::get('app_'.$i18n.'_debit'),1,0,'R',1);
     $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_credit'),1,1,'R',1);
+    
+    $pdf->SetFont('Arial','',8);
     
     $debit = 0;
     $credit = 0;
@@ -761,10 +848,9 @@ class Document
     
     $pdf->SetFillColor(220,220,220);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->Cell(130,5,'',1,0,'R',1);
-    
-    $pdf->SetFont('Arial','',7);
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(130,5,'Sumatoria',1,0,'L',1);
+
     $pdf->Cell(30,5, $debit,1,0,'R',1);
     $pdf->Cell(0,5, $credit,1,1,'R',1);
     
@@ -789,6 +875,7 @@ class Document
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Socios',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
     $pdf->SetFont('Arial','',8);
@@ -829,13 +916,14 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Cuentas',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
+    $pdf->SetFont('Arial','B',8);
     $pdf->SetFillColor(255,255,255);
     $pdf->SetTextColor(0);
     
@@ -848,6 +936,12 @@ class Document
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_blocked_balance'),1,0,'R',1);
     $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_balance'),1,1,'R',1);
     
+    $totalAvailableBalance = 0;
+    $totalBlockedBalance = 0;
+    $totalBalance = 0;
+    
+    $pdf->SetFont('Arial','',8);
+            
     foreach ($accounts as $account)
     {
       $pdf->Cell(70,5,$account->getAssociate()->getNumber().' / '.$account->getAssociate()->getName(),1,0,'L');
@@ -856,7 +950,19 @@ class Document
       $pdf->Cell(25,5,$account->getAvailableBalance(),1,0,'R');
       $pdf->Cell(25,5,$account->getBlockedBalance(),1,0,'R');
       $pdf->Cell(0,5,$account->getBalance(),1,1,'R');
+      
+      $totalAvailableBalance= $totalAvailableBalance + $account->getAvailableBalance();
+      $totalBlockedBalance = $totalBlockedBalance + $account->getBlockedBalance();
+      $totalBalance = $totalBalance + $account->getBalance();
     }
+    
+    //modificado el 15 de octubre del 2022...
+    $pdf->SetFont('Arial','B',8);
+    
+    $pdf->Cell(120,5,'Sumatoria',1,0,'L',1);
+    $pdf->Cell(25,5,$totalAvailableBalance,1,0,'R',1);
+    $pdf->Cell(25,5,$totalBlockedBalance,1,0,'R',1);
+    $pdf->Cell(0,5,$totalBalance,1,1,'R',1);
     
     return $pdf;
   }
@@ -875,34 +981,96 @@ class Document
     $pdf=new PDF();
     $pdf->AddPage();
     
-    $pdf->SetFont('Arial','',12);
+    $pdf->SetFont('Arial','B',12);
     $pdf->SetTextColor(0,0,0);
     
     $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Créditos',0,1,'C',0);
     $pdf->Cell(190,5,'',0,1,'C',0);
     
-    $pdf->SetFont('Arial','',8);
-    $pdf->SetFillColor(255,255,255);
-    $pdf->SetTextColor(0);
-    
-    $pdf->SetTextColor(0);
+    $pdf->SetFont('Arial','B',8);
     $pdf->SetFillColor(210,210,210);
+    $pdf->SetTextColor(0);
+  
     $pdf->Cell(60,5,sfConfig::get('app_'.$i18n.'_associate'),1,0,'L',1);
     $pdf->Cell(15,5,sfConfig::get('app_'.$i18n.'_credit'),1,0,'L',1);
     $pdf->Cell(45,5,sfConfig::get('app_'.$i18n.'_type'),1,0,'L',1);
-    $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_amount'),1,0,'R',1);
+    $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_created_at'),1,0,'R',1);
     $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_term'),1,0,'R',1);
-    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_created_at'),1,1,'R',1);
+    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_amount'),1,1,'R',1);
+    
+    $pdf->SetFont('Arial','',8);
+    $totalAmount = 0;
     
     foreach ($credits as $credit)
     {
       $pdf->Cell(60,5,$credit->getAssociate()->getNumber().' / '.$credit->getAssociate()->getName(),1,0,'L');
       $pdf->Cell(15,5,$credit->getId(),1,0,'L');
       $pdf->Cell(45,5,$credit->getProduct()->getName(),1,0,'L');
-      $pdf->Cell(25,5,$credit->getAmount(),1,0,'R');
+      $pdf->Cell(25,5,$credit->getCreatedAt('Y-m-d'),1,0,'R');
       $pdf->Cell(25,5,$credit->getTimeInMonths(),1,0,'R');
-      $pdf->Cell(0,5,$credit->getCreatedAt('Y-m-d'),1,1,'R');
+      $pdf->Cell(0,5,$credit->getAmount(),1,1,'R');
+      
+      $totalAmount = $totalAmount + $credit->getAmount();
     }
+    
+    $pdf->SetFont('Arial','B',8);
+    $pdf->Cell(170,5,'Total de Monto',1,0,'L',1);
+    $pdf->Cell(0,5,$totalAmount,1,1,'R',1);
+    
+    return $pdf;
+  }
+  
+  public static function pdfInvestments($investments, $i18n)
+  {
+    $titleReport = ConfigurationPeer::retrieveByName(Configuration::TITLE_REPORT);
+    
+    $pdf=new PDF();
+    $pdf->AddPage();
+    
+    $pdf->SetFont('Arial','B',12);
+    $pdf->SetTextColor(0,0,0);
+    
+    $pdf->Cell(190,5,$titleReport->getValue(),0,1,'C',0,'');
+    $pdf->Cell(190,5,'Reporte de Inversiones',0,1,'C',0);
+    $pdf->Cell(190,5,'',0,1,'C',0);
+    
+    $pdf->SetFont('Arial','B',8);
+    $pdf->SetFillColor(255,255,255);
+    $pdf->SetTextColor(0);
+    
+    $pdf->SetTextColor(0);
+    $pdf->SetFillColor(210,210,210);
+    $pdf->Cell(70,5,sfConfig::get('app_'.$i18n.'_associate'),1,0,'L',1);
+    $pdf->Cell(15,5,sfConfig::get('app_'.$i18n.'_investment'),1,0,'L',1);
+    $pdf->Cell(35,5,sfConfig::get('app_'.$i18n.'_type'),1,0,'L',1);
+    $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_created_at'),1,0,'R',1);
+    $pdf->Cell(25,5,sfConfig::get('app_'.$i18n.'_expiration_date'),1,0,'R',1);
+    $pdf->Cell(0,5,sfConfig::get('app_'.$i18n.'_amount'),1,1,'R',1);
+    
+    $totalAmount = 0;
+    
+    $pdf->SetFont('Arial','',8);
+            
+    foreach ($investments as $investment)
+    {
+      $pdf->Cell(70,5,$investment->getAssociate()->getNumber().' / '.$investment->getAssociate()->getName(),1,0,'L');
+      $pdf->Cell(15,5,$investment->getId(),1,0,'L');
+      $pdf->Cell(35,5,$investment->getProduct()->getName(),1,0,'L');
+      $pdf->Cell(25,5,$investment->getCreatedAt('Y-m-d'),1,0,'R');
+      $pdf->Cell(25,5,$investment->getExpirationDate('Y-m-d'),1,0,'R');
+      $pdf->Cell(0,5,$investment->getAmount(),1,1,'R');
+      
+      $totalAmount = $totalAmount + $investment->getAmount();
+    }
+    
+    
+    
+    //modificado el 15 de octubre del 2022...
+    $pdf->SetFont('Arial','B',8);
+    
+    $pdf->Cell(120,5,'Sumatoria',1,0,'L',1);
+    $pdf->Cell(0,5,$totalAmount,1,1,'R',1);
     
     return $pdf;
   }

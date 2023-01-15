@@ -1,3 +1,21 @@
+accounting_account:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountingAccount
+    module:               accounting_account
+    prefix_path:          /accounting_account
+    column:               id
+    with_wildcard_routes: true
+
+accounting_exercise:
+  class: sfPropelRouteCollection
+  options:
+    model:                AccountingExercise
+    module:               accounting_exercise
+    prefix_path:          /accounting_exercise
+    column:               id
+    with_wildcard_routes: true
+
 category:
   class: sfPropelRouteCollection
   options:

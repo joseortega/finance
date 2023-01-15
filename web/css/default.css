@@ -1479,6 +1479,12 @@ h4.section_header
   width: 440px;
 }
 
+.columns.equacols .column_first, .columns.equacols .column_medium, .columns.equacols .column_last
+{
+  width: 33.33%;
+  float: left;
+}
+
 .filterbox 
 {
     margin: 8px 0;

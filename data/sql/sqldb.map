@@ -6,3 +6,4 @@ plugins.sfGuardPlugin.lib.model.schema.sql=propel
 lib.model.basic.schema.sql=propel
 lib.model.investment.schema.sql=propel
 lib.model.credit.schema.sql=propel
+lib.model.accounting.schema.sql=propel

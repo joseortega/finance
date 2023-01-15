@@ -43,7 +43,7 @@ abstract class BaseAssociateForm extends BaseFormPropel
       'category_id'             => new sfValidatorPropelChoice(array('model' => 'Category', 'column' => 'id')),
       'city_hometown_id'        => new sfValidatorPropelChoice(array('model' => 'City', 'column' => 'id', 'required' => false)),
       'city_current_id'         => new sfValidatorPropelChoice(array('model' => 'City', 'column' => 'id', 'required' => false)),
-      'number'                  => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18)),
+      'number'                  => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9223372036854775807)),
       'identification'          => new sfValidatorString(array('max_length' => 15, 'required' => false)),
       'name'                    => new sfValidatorString(array('max_length' => 100)),
       'type'                    => new sfValidatorString(array('max_length' => 30)),

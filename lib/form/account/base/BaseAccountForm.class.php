@@ -32,7 +32,7 @@ abstract class BaseAccountForm extends BaseFormPropel
       'id'                  => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'associate_id'        => new sfValidatorPropelChoice(array('model' => 'Associate', 'column' => 'id')),
       'product_id'          => new sfValidatorPropelChoice(array('model' => 'AccountProduct', 'column' => 'id')),
-      'number'              => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18)),
+      'number'              => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9223372036854775807)),
       'balance'             => new sfValidatorNumber(),
       'blocked_balance'     => new sfValidatorNumber(),
       'available_balance'   => new sfValidatorNumber(),

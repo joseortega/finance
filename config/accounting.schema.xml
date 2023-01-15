@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" defaultIdMethod="native" package="lib.model.accounting">
+  
+    <table name="accounting_exercise">
+        <column name="id" type="integer" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="code" type="varchar" size="60" required="true" />
+        <column name="name" type="varchar" size="60" required="true" phpType="string"/>
+        <unique>
+            <unique-column name="code"/>
+        </unique>
+        <column name="start_date" type="date" required="true" />
+        <column name="end_date" type="date" required="true" />
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="accounting_account">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="accounting_account_id" type="bigint" required="false" />
+        <foreign-key foreignTable="accounting_account" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="AccountingAccountParent">
+            <reference local="accounting_account_id" foreign="id" />
+        </foreign-key>
+        <column name="accounting_exercise_id" type="integer" required="true" />
+        <foreign-key foreignTable="accounting_exercise" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="AccountingExercise">
+            <reference local="accounting_exercise_id" foreign="id" />
+        </foreign-key>
+        <column name="code" type="varchar" size="60" required="true" />
+        <column name="name" type="varchar" size="254" required="true"/>
+        <column name="type" type="varchar" size="30" required="true" />
+        <column name="nature" type="varchar" size="30" required="true" />
+        <column name="debit" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="credit" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <column name="balance" type="decimal" size="18" scale="2" required="true" default="0.00"/>
+        <unique>
+            <unique-column name="accounting_exercise_id"/>
+            <unique-column name="code"/>
+        </unique>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="accounting_voucher">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="code" type="integer" required="true" />
+        <column name="reference" type="varchar" size="60" required="true" phpType="string"/>
+        <column name="date" type="date" required="true" />
+        <column name="observation" type="longvarchar" required="false" />
+        <unique>
+            <unique-column name="code"/>
+        </unique>
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>
+    
+    <table name="accounting_voucher_item">
+        <column name="id" type="bigint" primaryKey="true" autoIncrement="true" required="true"/>
+        <column name="accounting_voucher_id" type="bigint" required="true" />
+        <foreign-key foreignTable="accounting_voucher" onDelete="CASCADE" onUpdate="RESTRICT" phpName="AccountingVoucher">
+            <reference local="accounting_voucher_id" foreign="id" />
+        </foreign-key>
+        <column name="accounting_account_id" type="bigint" required="true" />
+        <foreign-key foreignTable="accounting_account" onDelete="RESTRICT" onUpdate="RESTRICT" phpName="AccountingAccount">
+            <reference local="accounting_account_id" foreign="id" />
+        </foreign-key>
+        <column name="debit" type="decimal" size="18" scale="2" required="true" />
+        <column name="credit" type="decimal" size="18" scale="2" required="true" />
+        <column name="created_at" type="timestamp" required="true" />
+        <column name="updated_at" type="timestamp" required="true" />
+    </table>
+    
+</database>

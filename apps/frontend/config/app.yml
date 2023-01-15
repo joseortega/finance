@@ -65,6 +65,9 @@ all:
   #payment
   en_discount: Discount
   
+  #investment en
+  es_expiration_date: Exp. Date
+  
   #transaction detail es.
   es_id: Código
   es_agency: Agencia
@@ -120,3 +123,6 @@ all:
   
   #payment
   es_discount: Descuento
+  
+  #investment
+  es_expiration_date: F. Vencimiento

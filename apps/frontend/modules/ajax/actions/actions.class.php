@@ -116,6 +116,21 @@ class ajaxActions extends sfActions
 
     return $this->renderText(json_encode($agencies));
   }
+  
+  /**
+   * Execute ajax for find Accounting account
+   * 
+   * @param sfWebRequest $request
+   * @return type 
+   */
+  public function executeAjaxAccountingAccount(sfWebRequest $request)
+  {
+    $this->getResponse()->setContentType('application/json');
+
+    $agencies = AccountingAccountPeer::retrieveForSelect($request->getParameter('q'), $request->getParameter('limit'));
+
+    return $this->renderText(json_encode($agencies));
+  }
 }
 
 ?>

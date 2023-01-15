@@ -11,7 +11,7 @@ class RelationshipForm extends BaseRelationshipForm
 {
   public function configure()
   {
-    $this->useFields(array('name', 'type'));
+    $this->useFields(array('name', 'type', 'phone_number'));
     
     $this->validatorSchema['name']->setOption('required', false);
     $this->validatorSchema['type']->setOption('required', false);

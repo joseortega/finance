@@ -82,6 +82,7 @@ CREATE TABLE `relationship`
 	`associate_id` BIGINT  NOT NULL,
 	`name` VARCHAR(100)  NOT NULL,
 	`type` VARCHAR(100)  NOT NULL,
+	`phone_number` VARCHAR(25),
 	PRIMARY KEY (`id`),
 	INDEX `relationship_FI_1` (`associate_id`),
 	CONSTRAINT `relationship_FK_1`

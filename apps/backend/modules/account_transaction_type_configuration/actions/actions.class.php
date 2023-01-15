@@ -16,8 +16,8 @@ class account_transaction_type_configurationActions extends sfActions
     $transactionType = TransactionTypePeer::retrieveByOperationType($this->operationType);
     
     $this->forward404Unless(
-            $this->operationType == TransactionType::ACCOUNT_TRANSFER_FROM_ACCOUNT ||
-            $this->operationType == TransactionType::ACCOUNT_TRANSFER_TO_ACCOUNT ||
+            $this->operationType == TransactionType::ACCOUNT_TRANSFER_ORIGIN_ACCOUNT ||
+            $this->operationType == TransactionType::ACCOUNT_TRANSFER_DESTINATION_ACCOUNT ||
             $this->operationType == TransactionType::ACCOUNT_TRANSFER_FROM_INVESTMENT ||
             $this->operationType == TransactionType::ACCOUNT_TRANSFER_TO_INVESTMENT ||
             $this->operationType == TransactionType::ACCOUNT_PAYMENT_CREDIT ||

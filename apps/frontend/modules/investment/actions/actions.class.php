@@ -238,6 +238,33 @@ class investmentActions extends sfActions
     
     $this->setLayout(false);  
   }
+  
+    /**
+   * Print the transactions based to current filter
+   * 
+   * @param sfWebRequest $request 
+   */
+  public function executePrintList(sfWebRequest $request)
+  {
+    $orderBy = $request->getParameter('orderBy');
+
+    $criteria = $this->buildCriteria();
+    
+    if($orderBy == Criteria::ASC){
+      $criteria->clearOrderByColumns();
+      $criteria->addAscendingOrderByColumn(InvestmentPeer::ID);
+    }
+    
+    $investments = InvestmentPeer::doSelectJoinAll($criteria);
+    
+    $pdf = Document::pdfInvestments($investments, $this->getUser()->getCulture());
+    
+    $pdf->Output();
+
+    exit();
+
+    $this->setLayout(false);
+  }
 
   /**
    * Get filters

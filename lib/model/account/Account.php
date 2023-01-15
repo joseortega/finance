@@ -236,7 +236,15 @@ class Account extends BaseAccount
     return $this->countTransactions($criteria);
   }
   
-  
+  public function stringFormat() {
+      
+      return $this->getNumber().' / '.$this->getAssociate()->getName();
+      
+  }
+
+
+
+
   /**
    * Method toString
    * 
