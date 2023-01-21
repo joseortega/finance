@@ -8,7 +8,7 @@
 /**
  * Description of ajaxActions
  *
- * @author jose
+ * @author jose Ortega
  */
 class ajaxActions extends sfActions
 {
